@@ -26,8 +26,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['"DM Serif Display"', 'Georgia', 'serif'],
-        sans: ['Inter', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-dm-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-inter)', '-apple-system', 'sans-serif'],
       },
     },
   },
