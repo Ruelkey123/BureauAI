@@ -1,6 +1,7 @@
 import Nav from './_components/Nav'
 import HeroSection from './_components/HeroSection'
 import ProblemSection from './_components/ProblemSection'
+import HowItWorksSection from './_components/HowItWorksSection'
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Nav />
       <HeroSection />
       <ProblemSection />
+      <HowItWorksSection />
     </main>
   )
 }
