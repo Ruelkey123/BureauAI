@@ -3,6 +3,7 @@ import HeroSection from './_components/HeroSection'
 import ProblemSection from './_components/ProblemSection'
 import HowItWorksSection from './_components/HowItWorksSection'
 import CoverageSection from './_components/CoverageSection'
+import SocialProofSection from './_components/SocialProofSection'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <ProblemSection />
       <HowItWorksSection />
       <CoverageSection />
+      <SocialProofSection />
     </main>
   )
 }
