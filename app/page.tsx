@@ -4,6 +4,7 @@ import ProblemSection from './_components/ProblemSection'
 import HowItWorksSection from './_components/HowItWorksSection'
 import CoverageSection from './_components/CoverageSection'
 import SocialProofSection from './_components/SocialProofSection'
+import PricingTeaserSection from './_components/PricingTeaserSection'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HowItWorksSection />
       <CoverageSection />
       <SocialProofSection />
+      <PricingTeaserSection />
     </main>
   )
 }
