@@ -38,6 +38,7 @@ export default function AuditPage() {
   })
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [email, setEmail] = useState('')
   const [emailSubmitted, setEmailSubmitted] = useState(false)
 
@@ -45,23 +46,36 @@ export default function AuditPage() {
     setStep(4)
     setLoading(true)
     setResult('')
+    setError('')
 
-    const response = await fetch('/api/audit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
+    try {
+      const response = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
 
-    const reader = response.body!.getReader()
-    const decoder = new TextDecoder()
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`)
+      }
 
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-      setResult(prev => prev + decoder.decode(value, { stream: true }))
+      if (!response.body) {
+        throw new Error('No response body')
+      }
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        setResult(prev => prev + decoder.decode(value, { stream: true }))
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
   }
 
   return (
@@ -192,6 +206,12 @@ export default function AuditPage() {
             {loading && !result && (
               <p className="text-bureau-muted text-sm animate-pulse">
                 Analyzing NYC regulations for your situation…
+              </p>
+            )}
+
+            {error && (
+              <p className="text-red-600 text-sm border border-red-200 bg-red-50 px-4 py-3 mb-6">
+                {error}
               </p>
             )}
 
