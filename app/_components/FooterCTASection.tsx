@@ -13,12 +13,12 @@ export default function FooterCTASection() {
   }
 
   return (
-    <section id="waitlist" className="py-24 px-6" style={{ backgroundColor: '#0f1e2e' }}>
+    <section id="waitlist" className="py-24 px-6 bg-navy">
       <div className="max-w-xl mx-auto text-center">
         <h2 className="font-serif text-4xl md:text-5xl text-cream mb-4">
           Stop navigating alone.
         </h2>
-        <p className="mb-10" style={{ color: 'rgba(240,240,232,0.65)' }}>
+        <p className="text-cream/65 mb-10">
           Join 400+ NYC restaurant operators on the waitlist.
         </p>
 
@@ -34,14 +34,7 @@ export default function FooterCTASection() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="your@restaurant.com"
-              className="flex-1 px-4 py-3 text-sm outline-none border transition-colors"
-              style={{
-                backgroundColor: '#1a3044',
-                color: '#f0f0e8',
-                borderColor: 'rgba(240,240,232,0.2)',
-              }}
-              onFocus={e => (e.target.style.borderColor = 'rgba(240,240,232,0.5)')}
-              onBlur={e => (e.target.style.borderColor = 'rgba(240,240,232,0.2)')}
+              className="flex-1 px-4 py-3 text-sm outline-none border border-cream/20 focus:border-cream/50 transition-colors bg-navy-mid text-cream placeholder:text-cream/40"
             />
             <button
               type="submit"
