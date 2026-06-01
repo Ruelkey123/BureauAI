@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
-  const { email, source } = await request.json()
+  const { email, source = 'unknown' } = await request.json()
 
   if (!email) {
     return NextResponse.json({ error: 'Email required' }, { status: 400 })
