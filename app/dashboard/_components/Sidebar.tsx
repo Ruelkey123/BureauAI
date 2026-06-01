@@ -1,6 +1,6 @@
 'use client'
 
-type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives'
+type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials'
 
 interface SidebarProps {
   tab: Tab
@@ -56,6 +56,18 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 2l1.5 3.5H13l-2.8 2 1 3.5L8 9l-3.2 2 1-3.5L3 5.5h3.5L8 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    id: 'financials' as Tab,
+    label: 'Financials',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="2" y="10" width="2.5" height="4" rx="0.5" fill="currentColor" />
+        <rect x="6.5" y="7" width="2.5" height="7" rx="0.5" fill="currentColor" />
+        <rect x="11" y="4" width="2.5" height="10" rx="0.5" fill="currentColor" />
+        <path d="M3 6l3.5-3 3 2.5L13 2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },

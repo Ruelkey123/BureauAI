@@ -7,8 +7,9 @@ import Deadlines from './_components/Deadlines'
 import Documents from './_components/Documents'
 import Audit from './_components/Audit'
 import Incentives from './_components/Incentives'
+import Financials from './_components/Financials'
 
-type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives'
+type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials'
 
 const PAGE_TITLES: Record<Tab, string> = {
   overview: 'Overview',
@@ -16,6 +17,7 @@ const PAGE_TITLES: Record<Tab, string> = {
   documents: 'Documents',
   audit: 'AI Audit',
   incentives: 'Incentives & Tax Credits',
+  financials: 'Financials',
 }
 
 export default function DashboardPage() {
@@ -40,6 +42,7 @@ export default function DashboardPage() {
           {tab === 'documents' && <Documents />}
           {tab === 'audit' && <Audit />}
           {tab === 'incentives' && <Incentives />}
+          {tab === 'financials' && <Financials />}
         </div>
       </div>
     </div>
