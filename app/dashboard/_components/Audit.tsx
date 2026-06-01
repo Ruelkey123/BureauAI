@@ -1,5 +1,11 @@
 import Link from 'next/link'
 
+const HISTORY = [
+  { date: 'May 31, 2026', score: 94, summary: '2 urgent actions identified. DOH renewal flagged.' },
+  { date: 'Apr 30, 2026', score: 91, summary: 'FDNY inspection prep added. Score improved +3.' },
+  { date: 'Mar 31, 2026', score: 88, summary: 'DCWP license renewal flagged. 3 actions resolved.' },
+]
+
 const ACTIONS = [
   {
     n: '1',
@@ -37,6 +43,25 @@ export default function Audit() {
         <p className="text-xs text-bureau-text leading-relaxed">
           DOHMH permit renewal annually · FDNY inspection annually · DCWP business license every 2 years · DOB CO review every 5 years
         </p>
+      </div>
+
+      <div className="bg-white border border-bureau-border rounded-lg overflow-hidden">
+        <div className="px-5 py-3 border-b border-bureau-border flex items-center justify-between">
+          <span className="font-semibold text-navy text-sm">Previous Audits</span>
+          <span className="text-[9px] text-bureau-muted">Last 3 months</span>
+        </div>
+        {HISTORY.map(({ date, score, summary }, i) => (
+          <div key={date} className={`px-5 py-3 flex items-center gap-4 ${i < HISTORY.length - 1 ? 'border-b border-[#f0f0ec]' : ''}`}>
+            <div className="w-8 h-8 rounded-full bg-[#f8f8f6] border border-bureau-border flex items-center justify-center font-bold text-xs text-navy flex-shrink-0">
+              {score}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[10px] font-semibold text-navy">{date}</div>
+              <div className="text-[10px] text-bureau-muted mt-0.5 truncate">{summary}</div>
+            </div>
+            <button className="text-[9px] text-bureau-muted hover:text-navy transition-colors flex-shrink-0">View →</button>
+          </div>
+        ))}
       </div>
 
 <div className="bg-[#f8f8f6] border border-bureau-border rounded-lg p-4 flex items-center justify-between">

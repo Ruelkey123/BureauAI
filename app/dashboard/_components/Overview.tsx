@@ -33,6 +33,14 @@ const DEADLINES = [
   { req: 'Business License Renewal', agency: 'DCWP', due: 'Aug 1', status: 'On track', statusClass: 'bg-gray-100 text-bureau-muted' },
 ]
 
+const TIMELINE = [
+  { label: 'Jun 30', agency: 'DOHMH', color: 'bg-red-400', offset: 0 },
+  { label: 'Jul 15', agency: 'FDNY', color: 'bg-amber-400', offset: 21 },
+  { label: 'Aug 1', agency: 'DCWP', color: 'bg-gray-300', offset: 37 },
+  { label: 'Aug 20', agency: 'DOB', color: 'bg-gray-300', offset: 56 },
+  { label: 'Sep 1', agency: 'DCWP', color: 'bg-gray-300', offset: 68 },
+]
+
 export default function Overview() {
   const score = 94
   const r = 30
@@ -97,6 +105,32 @@ export default function Overview() {
             <div key={name} className={`flex justify-between items-center px-3 py-1.5 border rounded ${borderClass}`}>
               <span className="font-semibold text-navy text-[10px]">{name}</span>
               <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${badgeClass}`}>{status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 90-day timeline */}
+      <div className="bg-white border border-bureau-border rounded-lg p-4">
+        <div className="flex items-center justify-between mb-3">
+          <span className="font-semibold text-navy text-sm">Next 90 Days</span>
+          <div className="flex gap-3 text-[9px] text-bureau-muted">
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-400 inline-block" />Urgent</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400 inline-block" />Due soon</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-gray-300 inline-block" />On track</span>
+          </div>
+        </div>
+        <div className="relative h-10">
+          <div className="absolute top-3 left-0 right-0 h-0.5 bg-bureau-border" />
+          <div className="absolute bottom-0 inset-x-0 flex justify-between text-[9px] text-bureau-muted">
+            {['Jun', 'Jul', 'Aug', 'Sep'].map(m => <span key={m}>{m}</span>)}
+          </div>
+          {TIMELINE.map(({ label, agency, color, offset }) => (
+            <div key={label} className="absolute group" style={{ left: `${offset}%`, top: '4px' }}>
+              <div className={`w-3 h-3 rounded-full ${color} border-2 border-white shadow-sm cursor-pointer -translate-x-1/2`} />
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-navy text-cream text-[9px] px-2 py-1 rounded whitespace-nowrap z-10">
+                {agency} · {label}
+              </div>
             </div>
           ))}
         </div>
