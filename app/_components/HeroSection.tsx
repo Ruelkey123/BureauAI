@@ -4,7 +4,7 @@ export default function HeroSection() {
     <section className="flex flex-col items-center justify-center min-h-screen text-center px-6 pt-20 pb-16">
       <div className="inline-flex items-center gap-2 border border-bureau-border bg-white/60 rounded-full px-4 py-2 text-sm text-bureau-muted mb-10">
         <span className="text-green font-semibold">+</span>
-        Now ingesting NYC, LA &amp; London health + building codes
+        Now live for NYC restaurants
       </div>
 
       <h1 className="font-serif text-5xl md:text-7xl text-navy max-w-3xl leading-tight mb-6">
