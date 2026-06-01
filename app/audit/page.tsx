@@ -56,7 +56,8 @@ export default function AuditPage() {
       })
 
       if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`)
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || 'Something went wrong. Please try again.')
       }
 
       if (!response.body) {
@@ -210,9 +211,16 @@ export default function AuditPage() {
             )}
 
             {error && (
-              <p className="text-red-600 text-sm border border-red-200 bg-red-50 px-4 py-3 mb-6">
-                {error}
-              </p>
+              <div className="border border-bureau-border bg-white p-6 mb-6">
+                <p className="font-semibold text-navy text-sm mb-1">Audit unavailable right now</p>
+                <p className="text-bureau-muted text-sm mb-4">{error}</p>
+                <button
+                  onClick={runAudit}
+                  className="bg-navy text-cream px-4 py-2 text-sm font-medium hover:bg-navy-mid transition-colors"
+                >
+                  Try again →
+                </button>
+              </div>
             )}
 
             {result && (

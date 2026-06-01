@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! })
 
@@ -28,14 +28,26 @@ export async function POST(request: NextRequest) {
     .filter(Boolean)
     .join('\n')
 
-  const stream = await ai.models.generateContentStream({
-    model: 'gemini-2.0-flash',
-    contents: userMessage,
-    config: {
-      systemInstruction: SYSTEM_PROMPT,
-      maxOutputTokens: 1024,
-    },
-  })
+  let stream
+  try {
+    stream = await ai.models.generateContentStream({
+      model: 'gemini-2.0-flash',
+      contents: userMessage,
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+        maxOutputTokens: 1024,
+      },
+    })
+  } catch (err) {
+    const msg = String(err)
+    const isQuota = msg.includes('429') || msg.includes('RESOURCE_EXHAUSTED') || msg.includes('quota')
+    return NextResponse.json(
+      { error: isQuota
+          ? 'High demand right now — please try again in a few minutes.'
+          : 'Unable to generate your audit. Please try again.' },
+      { status: 503 }
+    )
+  }
 
   const readable = new ReadableStream({
     async start(controller) {
