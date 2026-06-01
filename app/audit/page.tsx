@@ -236,6 +236,11 @@ export default function AuditPage() {
                     onSubmit={e => {
                       e.preventDefault()
                       setEmailSubmitted(true)
+                      fetch('/api/waitlist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, source: 'audit' }),
+                      }).catch(() => {})
                     }}
                     className="flex gap-2"
                   >
