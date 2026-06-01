@@ -39,15 +39,7 @@ export default function Audit() {
         </p>
       </div>
 
-      <div className="bg-white border border-bureau-border rounded-lg p-5">
-        <div className="text-[9px] text-bureau-muted uppercase tracking-widest mb-3">What This Costs Without BureauAI</div>
-        <p className="text-xs text-bureau-text leading-relaxed">
-          Expeditor: $3,000–$8,000 · Attorney (violations): $5,000–$15,000 · Compliance consultant: $2,000–$5,000/year.{' '}
-          <span className="text-green font-semibold">BureauAI: $149/month.</span>
-        </p>
-      </div>
-
-      <div className="bg-[#f8f8f6] border border-bureau-border rounded-lg p-4 flex items-center justify-between">
+<div className="bg-[#f8f8f6] border border-bureau-border rounded-lg p-4 flex items-center justify-between">
         <div className="text-xs text-bureau-muted">Last run: today, 9:14am · Run a fresh audit with updated info</div>
         <Link
           href="/audit"
