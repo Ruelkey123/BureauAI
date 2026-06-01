@@ -3,17 +3,17 @@ const stats = [
   {
     stat: '8–12',
     label: 'government agencies',
-    sub: 'DOH, DOB, SLA, DCWP, FDNY, and more',
+    sub: 'DOH, DOB, SLA, DCWP, FDNY, and more — depending on your business type',
   },
   {
     stat: '3–18 mo',
-    label: 'average timeline',
-    sub: 'from lease signing to first service',
+    label: 'typical timeline range',
+    sub: 'from application to opening, varies by business type and complexity',
   },
   {
     stat: '$50K+',
-    label: 'in professional fees',
-    sub: 'expeditors, attorneys, consultants',
+    label: 'in potential professional fees',
+    sub: 'expeditors, attorneys, consultants — for complex cases',
   },
 ]
 
@@ -22,7 +22,7 @@ export default function ProblemSection() {
     <section className="py-24 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-serif text-4xl md:text-5xl text-navy mb-4">
-          8 agencies. 18 months. $50,000.
+          The complexity is real.
         </h2>
         <p className="text-bureau-muted text-lg max-w-2xl mx-auto mb-14">
           Running a business in NYC means navigating one of the most complex regulatory
@@ -41,7 +41,7 @@ export default function ProblemSection() {
         </div>
 
         <p className="text-navy font-medium text-lg">
-          We replace the expeditors, the lawyers, and the spreadsheets.
+          We help you understand what you're dealing with — so you can make informed decisions.
         </p>
       </div>
     </section>
