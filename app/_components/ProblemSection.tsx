@@ -25,9 +25,9 @@ export default function ProblemSection() {
           8 agencies. 18 months. $50,000.
         </h2>
         <p className="text-bureau-muted text-lg max-w-2xl mx-auto mb-14">
-          Opening a restaurant in NYC means navigating one of the most complex regulatory
+          Running a business in NYC means navigating one of the most complex regulatory
           environments in the country. Most owners spend their savings and months of their
-          lives on permits before serving a single meal.
+          lives on permits, inspections, and filings before they can focus on actually running their business.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">

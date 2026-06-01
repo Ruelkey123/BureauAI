@@ -6,7 +6,7 @@ export default function SocialProofSection() {
           Built for NYC restaurant owners
         </h2>
         <p className="text-bureau-muted text-lg leading-relaxed mb-10">
-          BureauAI is in early access. We're working directly with a small group of NYC restaurant owners to get this right before we open it up. Try the free audit below — no account, no credit card.
+          BureauAI is in early access. We're working directly with a small group of NYC business owners to get this right before we open it up. Try the free audit below — no account, no credit card.
         </p>
         <a
           href="/audit"

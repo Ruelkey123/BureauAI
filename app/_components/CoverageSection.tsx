@@ -40,7 +40,7 @@ export default function CoverageSection() {
           What BureauAI covers
         </h2>
         <p className="text-bureau-muted text-center mb-16 max-w-xl mx-auto text-lg">
-          Everything a NYC restaurant needs to open, operate, and stay compliant — in one place.
+          Everything a NYC business needs to open, operate, and stay compliant — in one place.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {areas.map(({ title, items }) => (

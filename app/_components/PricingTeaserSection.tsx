@@ -21,7 +21,7 @@ export default function PricingTeaserSection() {
 
         <div className="border border-bureau-border p-10 mb-6">
           <div className="text-bureau-muted text-xs uppercase tracking-widest mb-3">
-            Restaurant plan
+            Business plan
           </div>
           <div className="font-serif text-6xl text-navy mb-1">$299</div>
           <div className="text-bureau-muted text-sm mb-10">per month · cancel anytime</div>
@@ -39,7 +39,7 @@ export default function PricingTeaserSection() {
             href="#waitlist"
             className="inline-block bg-navy text-cream px-8 py-3 font-medium text-sm hover:bg-navy-mid transition-colors"
           >
-            Talk to us about your restaurant →
+            Join the waitlist →
           </a>
         </div>
 

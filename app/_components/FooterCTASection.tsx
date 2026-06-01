@@ -24,7 +24,7 @@ export default function FooterCTASection() {
           Stop navigating alone.
         </h2>
         <p className="text-cream/65 mb-10">
-          Be among the first NYC restaurant owners to get access.
+          Be among the first NYC business owners to get access.
         </p>
 
         {submitted ? (
