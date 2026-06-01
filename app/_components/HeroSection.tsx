@@ -32,7 +32,7 @@ export default function HeroSection() {
       </div>
 
       <p className="text-bureau-muted text-sm">
-        No credit card · SOC 2 Type II · Trusted by 1,200+ operators
+        Free to try · No account needed · NYC restaurants
       </p>
     </section>
   )

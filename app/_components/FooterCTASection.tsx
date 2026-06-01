@@ -24,7 +24,7 @@ export default function FooterCTASection() {
           Stop navigating alone.
         </h2>
         <p className="text-cream/65 mb-10">
-          Join 400+ NYC restaurant operators on the waitlist.
+          Be among the first NYC restaurant owners to get access.
         </p>
 
         {submitted ? (
