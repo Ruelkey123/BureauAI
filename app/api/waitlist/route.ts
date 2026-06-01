@@ -11,19 +11,12 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    await Promise.all([
-      resend.contacts.create({
-        email,
-        audienceId: process.env.RESEND_AUDIENCE_ID!,
-        unsubscribed: false,
-      }),
-      resend.emails.send({
-        from: 'BureauAI <onboarding@resend.dev>',
-        to: 'arulke01@gmail.com',
-        subject: `New BureauAI signup: ${email} (from ${source})`,
-        text: `New waitlist signup!\n\nEmail: ${email}\nSource: ${source}\n\nView all contacts: https://resend.com/audiences`,
-      }),
-    ])
+    await resend.emails.send({
+      from: 'BureauAI <onboarding@resend.dev>',
+      to: 'arulke01@gmail.com',
+      subject: `New BureauAI signup: ${email} (from ${source})`,
+      text: `New waitlist signup!\n\nEmail: ${email}\nSource: ${source}`,
+    })
 
     return NextResponse.json({ success: true })
   } catch (err) {
