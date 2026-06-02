@@ -3,11 +3,11 @@
 import { useEffect } from 'react'
 
 const BADGES = [
-  { label: 'DOH', sub: 'Health', color: '#4dba80', glow: 'rgba(77,186,128,0.4)', x: '-38%', y: '-55%', delay: '0s', dur: '6s' },
-  { label: 'FDNY', sub: 'Fire', color: '#ff7c4d', glow: 'rgba(255,124,77,0.4)', x: '42%', y: '-50%', delay: '1s', dur: '7s' },
-  { label: 'DOB', sub: 'Buildings', color: '#4d9eba', glow: 'rgba(77,158,186,0.4)', x: '-52%', y: '20%', delay: '2s', dur: '8s' },
-  { label: 'DCWP', sub: 'Licenses', color: '#a78bfa', glow: 'rgba(167,139,250,0.4)', x: '50%', y: '15%', delay: '0.5s', dur: '9s' },
-  { label: 'SLA', sub: 'Liquor', color: '#f59e0b', glow: 'rgba(245,158,11,0.4)', x: '10%', y: '-72%', delay: '1.5s', dur: '7.5s' },
+  { label: 'DOH', sub: 'Health', color: '#4dba80', glow: 'rgba(77,186,128,0.5)', style: { top: '-80px', left: '-180px' }, dur: '6s', delay: '0s' },
+  { label: 'FDNY', sub: 'Fire', color: '#ff7c4d', glow: 'rgba(255,124,77,0.5)', style: { top: '-60px', right: '-160px' }, dur: '7s', delay: '0.8s' },
+  { label: 'DOB', sub: 'Buildings', color: '#4d9eba', glow: 'rgba(77,158,186,0.5)', style: { bottom: '-70px', left: '-140px' }, dur: '8s', delay: '1.6s' },
+  { label: 'DCWP', sub: 'Licenses', color: '#a78bfa', glow: 'rgba(167,139,250,0.5)', style: { bottom: '-60px', right: '-130px' }, dur: '9s', delay: '0.4s' },
+  { label: 'SLA', sub: 'Liquor', color: '#f59e0b', glow: 'rgba(245,158,11,0.5)', style: { top: '-110px', left: '50%', transform: 'translateX(-50%)' }, dur: '7.5s', delay: '1.2s' },
 ]
 
 export default function HeroSection() {
@@ -32,127 +32,27 @@ export default function HeroSection() {
           width: '70%', height: '80%',
           background: 'linear-gradient(135deg, rgba(58,122,92,0.07) 0%, transparent 60%)',
           transform: 'perspective(1200px) rotateY(25deg) rotateX(15deg)',
-          border: '1px solid rgba(77,186,128,0.06)',
+          border: '1px solid rgba(77,186,128,0.05)',
         }} />
         <div style={{
           position: 'absolute', bottom: '-20%', right: '-10%',
           width: '65%', height: '75%',
-          background: 'linear-gradient(225deg, rgba(77,158,186,0.06) 0%, transparent 60%)',
+          background: 'linear-gradient(225deg, rgba(77,158,186,0.05) 0%, transparent 60%)',
           transform: 'perspective(1200px) rotateY(-20deg) rotateX(-10deg)',
-          border: '1px solid rgba(77,158,186,0.05)',
+          border: '1px solid rgba(77,158,186,0.04)',
+        }} />
+        {/* Central glow */}
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '900px', height: '600px',
+          background: 'radial-gradient(ellipse, rgba(58,122,92,0.07) 0%, transparent 65%)',
         }} />
       </div>
 
-      {/* Green radial glow centre */}
-      <div className="absolute pointer-events-none" style={{
-        top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '800px', height: '800px',
-        background: 'radial-gradient(circle, rgba(58,122,92,0.08) 0%, transparent 60%)',
-        filter: 'blur(20px)',
-      }} />
-
-      {/* Floating agency badges */}
-      <div className="absolute inset-0 pointer-events-none" style={{ perspective: '1000px' }}>
-        {BADGES.map(({ label, sub, color, glow, x, y, delay, dur }) => (
-          <div
-            key={label}
-            style={{
-              position: 'absolute',
-              top: '50%', left: '50%',
-              transform: `translate(${x}, ${y})`,
-              animation: `floatBadge ${dur} ${delay} ease-in-out infinite`,
-            }}
-          >
-            <div style={{
-              width: '80px', height: '80px',
-              borderRadius: '50%',
-              background: `radial-gradient(circle at 35% 35%, ${color}30, ${color}10)`,
-              border: `1px solid ${color}50`,
-              boxShadow: `0 0 20px ${glow}, inset 0 0 20px ${color}10`,
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center',
-              backdropFilter: 'blur(8px)',
-            }}>
-              <div style={{ fontSize: '13px', fontWeight: '700', color, letterSpacing: '0.05em' }}>{label}</div>
-              <div style={{ fontSize: '9px', color: 'rgba(232,232,224,0.4)', marginTop: '2px', letterSpacing: '0.05em' }}>{sub.toUpperCase()}</div>
-            </div>
-          </div>
-        ))}
-
-        {/* Small floating spheres */}
-        {[
-          { size: 10, x: '-25%', y: '-80%', delay: '0s', color: '#4dba80' },
-          { size: 6, x: '35%', y: '65%', delay: '2s', color: '#a78bfa' },
-          { size: 8, x: '-60%', y: '55%', delay: '1s', color: '#4d9eba' },
-          { size: 5, x: '65%', y: '-25%', delay: '3s', color: '#4dba80' },
-        ].map((s, i) => (
-          <div key={i} style={{
-            position: 'absolute', top: '50%', left: '50%',
-            transform: `translate(${s.x}, ${s.y})`,
-            width: s.size, height: s.size,
-            borderRadius: '50%',
-            background: `radial-gradient(circle at 35% 35%, ${s.color}, ${s.color}50)`,
-            boxShadow: `0 0 10px ${s.color}60`,
-            animation: `floatBadge ${6 + i}s ${s.delay} ease-in-out infinite`,
-          }} />
-        ))}
-      </div>
-
-      {/* Floating compliance card */}
-      <div className="absolute pointer-events-none" style={{
-        bottom: '8%', right: '4%',
-        animation: 'floatCard 8s ease-in-out infinite',
-        transform: 'perspective(800px) rotateY(-12deg) rotateX(6deg)',
-      }}>
-        <div style={{
-          width: '200px',
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '12px',
-          padding: '16px',
-          backdropFilter: 'blur(12px)',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(77,186,128,0.05)',
-        }}>
-          <div style={{ fontSize: '9px', color: 'rgba(232,232,224,0.4)', letterSpacing: '0.1em', marginBottom: '8px' }}>COMPLIANCE SCORE</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#e8e8e0', fontFamily: 'Georgia, serif' }}>94</div>
-            <div style={{ fontSize: '10px', background: 'rgba(77,186,128,0.2)', color: '#4dba80', padding: '2px 8px', borderRadius: '20px', border: '1px solid rgba(77,186,128,0.3)' }}>Good Standing</div>
-          </div>
-          {[
-            { agency: 'DOHMH', status: 'Compliant', color: '#4dba80' },
-            { agency: 'FDNY', status: 'Action needed', color: '#f59e0b' },
-            { agency: 'DCWP', status: 'Compliant', color: '#4dba80' },
-          ].map(({ agency, status, color }) => (
-            <div key={agency} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <span style={{ fontSize: '10px', fontWeight: '600', color: '#e8e8e0' }}>{agency}</span>
-              <span style={{ fontSize: '9px', color }}>{status}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Floating deadline pill */}
-      <div className="absolute pointer-events-none" style={{
-        top: '22%', left: '5%',
-        animation: 'floatCard 10s 2s ease-in-out infinite',
-      }}>
-        <div style={{
-          background: 'rgba(245,158,11,0.1)',
-          border: '1px solid rgba(245,158,11,0.25)',
-          borderRadius: '8px',
-          padding: '10px 14px',
-          backdropFilter: 'blur(8px)',
-          boxShadow: '0 0 20px rgba(245,158,11,0.1)',
-        }}>
-          <div style={{ fontSize: '9px', color: 'rgba(232,232,224,0.4)', marginBottom: '4px', letterSpacing: '0.08em' }}>UPCOMING</div>
-          <div style={{ fontSize: '11px', fontWeight: '600', color: '#e8e8e0' }}>DOH Permit Renewal</div>
-          <div style={{ fontSize: '10px', color: '#f59e0b', marginTop: '2px' }}>Due Jun 30 · 18 days</div>
-        </div>
-      </div>
-
-      {/* Main content */}
+      {/* Main content with orbital badges around it */}
       <div className="relative z-10 max-w-4xl mx-auto">
+
         {/* Badge */}
         <div
           className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm mb-8"
@@ -167,33 +67,133 @@ export default function HeroSection() {
           Now live for NYC businesses
         </div>
 
-        {/* Headline — large, bold, two lines */}
-        <h1
-          style={{
-            fontSize: 'clamp(3rem, 8vw, 6rem)',
+        {/* Headline with agency badges orbiting around it */}
+        <div className="relative inline-block" style={{ animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both' }}>
+
+          {/* Agency badges — positioned around the headline */}
+          {BADGES.map(({ label, sub, color, glow, style, dur, delay }) => (
+            <div
+              key={label}
+              className="absolute pointer-events-none"
+              style={{
+                ...style,
+                animation: `floatBadge ${dur} ${delay} ease-in-out infinite`,
+                zIndex: 20,
+              }}
+            >
+              <div style={{
+                width: '72px', height: '72px',
+                borderRadius: '50%',
+                background: `radial-gradient(circle at 35% 35%, ${color}25, ${color}08)`,
+                border: `1px solid ${color}45`,
+                boxShadow: `0 0 24px ${glow}, 0 0 8px ${color}20`,
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(12px)',
+              }}>
+                <div style={{ fontSize: '12px', fontWeight: '700', color, letterSpacing: '0.05em' }}>{label}</div>
+                <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', marginTop: '2px', letterSpacing: '0.05em' }}>{sub.toUpperCase()}</div>
+              </div>
+            </div>
+          ))}
+
+          {/* Small floating spheres around the headline */}
+          {[
+            { size: 8, style: { top: '-30px', left: '-60px' }, color: '#4dba80', delay: '1s', dur: '5s' },
+            { size: 6, style: { top: '-20px', right: '-50px' }, color: '#a78bfa', delay: '2.5s', dur: '6s' },
+            { size: 7, style: { bottom: '-20px', left: '20%' }, color: '#4d9eba', delay: '0.5s', dur: '7s' },
+            { size: 5, style: { bottom: '-15px', right: '25%' }, color: '#f59e0b', delay: '3s', dur: '5.5s' },
+          ].map((s, i) => (
+            <div key={i} className="absolute pointer-events-none" style={{
+              ...s.style,
+              width: s.size, height: s.size,
+              borderRadius: '50%',
+              background: `radial-gradient(circle at 35% 35%, ${s.color}, ${s.color}60)`,
+              boxShadow: `0 0 10px ${s.color}70`,
+              animation: `floatBadge ${s.dur} ${s.delay} ease-in-out infinite`,
+            }} />
+          ))}
+
+          {/* Floating compliance card — right side */}
+          <div className="absolute pointer-events-none hidden lg:block" style={{
+            top: '0', right: '-280px',
+            animation: 'floatCard 8s ease-in-out infinite',
+            transform: 'perspective(800px) rotateY(-10deg) rotateX(4deg)',
+          }}>
+            <div style={{
+              width: '190px',
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.09)',
+              borderRadius: '12px',
+              padding: '14px',
+              backdropFilter: 'blur(16px)',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(77,186,128,0.06)',
+              textAlign: 'left',
+            }}>
+              <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.1em', marginBottom: '8px' }}>COMPLIANCE SCORE</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                <div style={{ fontSize: '26px', fontWeight: '700', color: '#e8e8e0', fontFamily: 'Georgia, serif' }}>94</div>
+                <div style={{ fontSize: '9px', background: 'rgba(77,186,128,0.15)', color: '#4dba80', padding: '2px 7px', borderRadius: '20px', border: '1px solid rgba(77,186,128,0.25)' }}>Good Standing</div>
+              </div>
+              {[
+                { agency: 'DOHMH', status: 'Compliant', color: '#4dba80' },
+                { agency: 'FDNY', status: 'Action needed', color: '#f59e0b' },
+                { agency: 'DCWP', status: 'Compliant', color: '#4dba80' },
+              ].map(({ agency, status, color }) => (
+                <div key={agency} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <span style={{ fontSize: '10px', fontWeight: '600', color: '#e8e8e0' }}>{agency}</span>
+                  <span style={{ fontSize: '9px', color }}>{status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Floating deadline pill — left side */}
+          <div className="absolute pointer-events-none hidden lg:block" style={{
+            bottom: '10px', left: '-260px',
+            animation: 'floatCard 10s 1.5s ease-in-out infinite',
+          }}>
+            <div style={{
+              background: 'rgba(245,158,11,0.08)',
+              border: '1px solid rgba(245,158,11,0.2)',
+              borderRadius: '10px',
+              padding: '10px 14px',
+              backdropFilter: 'blur(12px)',
+              boxShadow: '0 0 24px rgba(245,158,11,0.08)',
+              textAlign: 'left',
+              whiteSpace: 'nowrap',
+            }}>
+              <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', marginBottom: '4px', letterSpacing: '0.08em' }}>UPCOMING</div>
+              <div style={{ fontSize: '11px', fontWeight: '600', color: '#e8e8e0' }}>DOH Permit Renewal</div>
+              <div style={{ fontSize: '10px', color: '#f59e0b', marginTop: '2px' }}>Due Jun 30 · 18 days</div>
+            </div>
+          </div>
+
+          {/* The actual headline */}
+          <h1 style={{
+            fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
             fontWeight: '800',
-            lineHeight: '1.05',
+            lineHeight: '1.08',
             letterSpacing: '-0.02em',
             color: '#ffffff',
-            marginBottom: '1.5rem',
-            animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both',
             fontFamily: 'Georgia, serif',
-          }}
-        >
-          NYC compliance.<br />
-          <span style={{
-            background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            position: 'relative',
           }}>
-            Finally simple.
-          </span>
-        </h1>
+            NYC compliance.<br />
+            <span style={{
+              background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Finally simple.
+            </span>
+          </h1>
+        </div>
 
         {/* Subtext */}
         <p
-          className="text-lg max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-lg max-w-xl mx-auto mt-8 mb-10 leading-relaxed"
           style={{
             color: 'rgba(232,232,224,0.5)',
             animation: 'fadeUp 0.65s 0.3s cubic-bezier(0.16,1,0.3,1) both',
@@ -235,7 +235,7 @@ export default function HeroSection() {
               fontWeight: '600',
               fontSize: '14px',
               background: 'rgba(255,255,255,0.03)',
-              transition: 'all 0.2s ease',
+              transition: 'border-color 0.2s ease',
             }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)' }}
@@ -251,13 +251,13 @@ export default function HeroSection() {
 
       <style>{`
         @keyframes floatBadge {
-          0%, 100% { transform: translate(var(--tx, 0), var(--ty, 0)) translateY(0px) rotate(0deg); }
-          33% { transform: translate(var(--tx, 0), var(--ty, 0)) translateY(-12px) rotate(3deg); }
-          66% { transform: translate(var(--tx, 0), var(--ty, 0)) translateY(8px) rotate(-2deg); }
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-10px) rotate(2deg); }
+          66% { transform: translateY(6px) rotate(-2deg); }
         }
         @keyframes floatCard {
-          0%, 100% { transform: perspective(800px) rotateY(-12deg) rotateX(6deg) translateY(0px); }
-          50% { transform: perspective(800px) rotateY(-8deg) rotateX(3deg) translateY(-12px); }
+          0%, 100% { transform: perspective(800px) rotateY(-10deg) rotateX(4deg) translateY(0px); }
+          50% { transform: perspective(800px) rotateY(-6deg) rotateX(2deg) translateY(-10px); }
         }
       `}</style>
     </section>
