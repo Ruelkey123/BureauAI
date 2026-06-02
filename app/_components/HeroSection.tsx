@@ -26,9 +26,12 @@ export default function HeroSection() {
         >
           Start a free audit →
         </a>
-        <button className="border border-navy text-navy px-6 py-3 font-medium text-sm hover:bg-navy/5 transition-colors">
-          Watch 90-sec demo
-        </button>
+        <a
+          href="/dashboard"
+          className="border border-navy text-navy px-6 py-3 font-medium text-sm hover:bg-navy/5 transition-colors"
+        >
+          See a demo →
+        </a>
       </div>
 
       <p className="text-bureau-muted text-sm">
