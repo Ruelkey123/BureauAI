@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+
 const stats = [
   { stat: '8–12', label: 'government agencies', sub: 'DOH, DOB, SLA, DCWP, FDNY, and more' },
   { stat: '3–18 mo', label: 'typical timeline range', sub: 'from application to opening, varies by business type' },
@@ -13,8 +17,26 @@ const CARDS = [
 ]
 
 export default function ProblemSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = sectionRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const windowH = window.innerHeight
+      // 0 = section top just entered viewport, 1 = section bottom leaving
+      const p = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH * 0.8 + rect.height * 0.5)))
+      setProgress(p)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <section className="py-24 px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -45,40 +67,40 @@ export default function ProblemSection() {
             </p>
           </div>
 
-          {/* Right: stacked cards */}
-          <div className="flex justify-center items-center" style={{ minHeight: '420px' }}>
-            <div style={{ position: 'relative', width: '300px', height: '380px', perspective: '1000px' }}>
+          {/* Right: scroll-driven stacked cards */}
+          <div className="flex justify-center items-center" style={{ minHeight: '460px' }}>
+            <div style={{ position: 'relative', width: '300px', height: '420px', perspective: '1000px' }}>
               {CARDS.map(({ agency, title, sub, color1, color2, shine }, i) => {
-                const total = CARDS.length
-                const offset = i * 18
-                const rotX = -55 + i * 2
-                const rotY = -8 + i * 1.5
-                const z = i * 12
+                // Each card fans upward as progress increases
+                // Card 0 (DOHMH, back) stays, card 4 (SLA, front) moves most
+                const spreadY = progress * i * 48
+                const baseBottom = i * 18
+                const rotX = -52 + i * 1.5
+                const rotY = -8 + i * 1.2
+                const z = i * 10
+
                 return (
                   <div
                     key={agency}
                     style={{
                       position: 'absolute',
-                      bottom: `${offset}px`,
-                      left: `${i * 3}px`,
+                      bottom: `${baseBottom}px`,
+                      left: `${i * 2}px`,
                       width: '280px',
                       height: '168px',
                       borderRadius: '16px',
-                      transform: `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px)`,
+                      transform: `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px) translateY(${-spreadY}px)`,
                       transformOrigin: 'bottom center',
                       background: `linear-gradient(135deg, ${color1} 0%, ${color2} 50%, ${color1} 100%)`,
                       border: '1px solid rgba(255,255,255,0.08)',
                       boxShadow: `0 ${8 + i * 4}px ${24 + i * 8}px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)`,
                       overflow: 'hidden',
-                      cursor: 'default',
-                      animation: `cardFloat ${6 + i}s ${i * 0.4}s ease-in-out infinite`,
+                      transition: 'transform 0.05s linear',
+                      willChange: 'transform',
                     }}
                   >
-                    {/* Shine overlay */}
-                    <div style={{
-                      position: 'absolute', inset: 0,
-                      background: `radial-gradient(ellipse at 30% 40%, ${shine} 0%, transparent 60%)`,
-                    }} />
+                    {/* Shine */}
+                    <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 30% 40%, ${shine} 0%, transparent 60%)` }} />
                     {/* Grid texture */}
                     <div style={{
                       position: 'absolute', inset: 0, opacity: 0.06,
@@ -90,12 +112,11 @@ export default function ProblemSection() {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <div>
                           <div style={{ fontSize: '9px', letterSpacing: '0.14em', color: 'rgba(232,232,224,0.4)', textTransform: 'uppercase', marginBottom: '4px' }}>{agency}</div>
-                          <div style={{ fontSize: '13px', fontWeight: '600', color: 'rgba(232,232,224,0.9)', lineHeight: 1.3 }}>{title}</div>
+                          <div style={{ fontSize: '15px', fontWeight: '600', color: 'rgba(232,232,224,0.9)' }}>{title}</div>
                         </div>
                         <div style={{
                           width: '28px', height: '28px', borderRadius: '50%',
-                          background: 'rgba(255,255,255,0.06)',
-                          border: '1px solid rgba(255,255,255,0.1)',
+                          background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                         }}>
                           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)' }} />
@@ -104,7 +125,7 @@ export default function ProblemSection() {
                       <div>
                         <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.3)' }}>{sub}</div>
                         <div style={{ marginTop: '8px', height: '2px', borderRadius: '1px', background: 'rgba(255,255,255,0.05)' }}>
-                          <div style={{ width: `${70 - i * 10}%`, height: '100%', borderRadius: '1px', background: 'rgba(255,255,255,0.15)' }} />
+                          <div style={{ width: `${75 - i * 10}%`, height: '100%', borderRadius: '1px', background: 'rgba(255,255,255,0.15)' }} />
                         </div>
                       </div>
                     </div>
@@ -115,13 +136,6 @@ export default function ProblemSection() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes cardFloat {
-          0%, 100% { transform: perspective(1000px) rotateX(var(--rx, -55deg)) rotateY(var(--ry, -8deg)) translateZ(0) translateY(0px); }
-          50% { transform: perspective(1000px) rotateX(var(--rx, -55deg)) rotateY(var(--ry, -8deg)) translateZ(0) translateY(-4px); }
-        }
-      `}</style>
     </section>
   )
 }
