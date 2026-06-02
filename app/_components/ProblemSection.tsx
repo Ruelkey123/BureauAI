@@ -19,20 +19,35 @@ const CARDS = [
 export default function ProblemSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [progress, setProgress] = useState(0)
+  const rafRef = useRef<number>(0)
+  const targetRef = useRef(0)
+  const currentRef = useRef(0)
 
   useEffect(() => {
+    // Smooth lerp loop — no jank
+    const tick = () => {
+      currentRef.current += (targetRef.current - currentRef.current) * 0.08
+      setProgress(currentRef.current)
+      rafRef.current = requestAnimationFrame(tick)
+    }
+    rafRef.current = requestAnimationFrame(tick)
+
     const onScroll = () => {
       const el = sectionRef.current
       if (!el) return
       const rect = el.getBoundingClientRect()
       const windowH = window.innerHeight
-      // 0 = section top just entered viewport, 1 = section bottom leaving
-      const p = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH * 0.8 + rect.height * 0.5)))
-      setProgress(p)
+      // Cards fully spread by the time section centre passes viewport centre
+      const p = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH * 0.55)))
+      targetRef.current = p
     }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (
@@ -73,7 +88,7 @@ export default function ProblemSection() {
               {CARDS.map(({ agency, title, sub, color1, color2, shine }, i) => {
                 // Each card fans upward as progress increases
                 // Card 0 (DOHMH, back) stays, card 4 (SLA, front) moves most
-                const spreadY = progress * i * 48
+                const spreadY = progress * i * 80
                 const baseBottom = i * 18
                 const rotX = -52 + i * 1.5
                 const rotY = -8 + i * 1.2
@@ -95,7 +110,6 @@ export default function ProblemSection() {
                       border: '1px solid rgba(255,255,255,0.08)',
                       boxShadow: `0 ${8 + i * 4}px ${24 + i * 8}px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)`,
                       overflow: 'hidden',
-                      transition: 'transform 0.05s linear',
                       willChange: 'transform',
                     }}
                   >
