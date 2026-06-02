@@ -11,7 +11,7 @@ import Footer from './_components/Footer'
 
 export default function Home() {
   return (
-    <main className="graph-paper">
+    <main className="dark-grid">
       <Nav />
       <HeroSection />
       <ProblemSection />

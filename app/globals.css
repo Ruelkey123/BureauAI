@@ -4,129 +4,64 @@
 
 @layer base {
   body {
-    background-color: #f0f0e8;
-    color: #1a2535;
+    background-color: #06090e;
+    color: #e8e8e0;
     font-family: 'Inter', -apple-system, sans-serif;
   }
 }
 
 @layer utilities {
-  .graph-paper {
-    background-color: #f0f0e8;
+  .dark-grid {
+    background-color: #06090e;
     background-image:
-      linear-gradient(rgba(100,120,100,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(100,120,100,0.07) 1px, transparent 1px);
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 44px 44px;
   }
+  .glass {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(8px);
+  }
+  .glass-hover:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .glow-green {
+    box-shadow: 0 0 30px rgba(77,186,128,0.2);
+  }
+  .glow-green:hover {
+    box-shadow: 0 0 40px rgba(77,186,128,0.35);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #e8e8e0 0%, #4dba80 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
-
-/* ── Entrance animations ───────────────────────────── */
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
 @keyframes floatA {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(30px, -20px) scale(1.05); }
+  33%       { transform: translate(30px, -20px) scale(1.04); }
   66%       { transform: translate(-20px, 15px) scale(0.97); }
 }
-
 @keyframes floatB {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  40%       { transform: translate(-25px, 20px) scale(1.04); }
+  40%       { transform: translate(-25px, 20px) scale(1.03); }
   70%       { transform: translate(20px, -15px) scale(0.98); }
 }
-
 @keyframes scan {
   0%   { top: 0px;   opacity: 0; }
   5%   { opacity: 1; }
   95%  { opacity: 1; }
   100% { top: 320px; opacity: 0; }
 }
-
 @keyframes scrollUp {
   0%   { transform: translateY(0); }
   100% { transform: translateY(-50%); }
-}
-
-@keyframes slideIn {
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* Utility classes */
-.animate-fade-up {
-  opacity: 0;
-  animation: fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
-}
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-
-/* Scroll reveal — add .reveal to elements, JS adds .visible */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 100ms; }
-.reveal-delay-2 { transition-delay: 200ms; }
-.reveal-delay-3 { transition-delay: 300ms; }
-.reveal-delay-4 { transition-delay: 400ms; }
-
-/* Glow on primary buttons */
-.btn-glow {
-  box-shadow: 0 0 0 0 rgba(58,122,92,0);
-  transition: box-shadow 0.3s ease, background-color 0.2s ease;
-}
-.btn-glow:hover {
-  box-shadow: 0 0 24px 4px rgba(58,122,92,0.25);
-}
-
-/* Nav blur on scroll */
-.nav-scrolled {
-  background-color: rgba(240, 240, 232, 0.8) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(58,122,92,0.1);
-}
-
-/* Gradient orbs */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-}
-.orb-navy {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(15,30,46,0.12) 0%, transparent 70%);
-  animation: floatA 12s ease-in-out infinite;
-}
-.orb-green {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(58,122,92,0.1) 0%, transparent 70%);
-  animation: floatB 16s ease-in-out infinite;
 }

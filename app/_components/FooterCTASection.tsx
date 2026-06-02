@@ -1,12 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useReveal } from '../hooks/useReveal'
 
 export default function FooterCTASection() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-  const ref = useReveal()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -19,32 +17,34 @@ export default function FooterCTASection() {
   }
 
   return (
-    <section ref={ref as React.RefObject<HTMLElement>} id="waitlist" className="py-24 px-6 bg-navy">
+    <section id="waitlist" className="py-24 px-6" style={{ background: '#06090e', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div className="max-w-xl mx-auto text-center">
-        <h2 className="reveal font-serif text-4xl md:text-5xl text-cream mb-4">
+        <h2 className="font-serif text-4xl md:text-5xl mb-4" style={{ color: '#e8e8e0' }}>
           Stop navigating alone.
         </h2>
-        <p className="reveal reveal-delay-1 text-cream/65 mb-10">
+        <p className="mb-10" style={{ color: 'rgba(232,232,224,0.45)' }}>
           Be among the first NYC business owners to get access.
         </p>
 
         {submitted ? (
-          <p className="text-green-light text-lg font-medium">
+          <p className="text-lg font-medium" style={{ color: '#4dba80' }}>
             You're on the list. We'll be in touch soon.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="your@restaurant.com"
-              className="flex-1 px-4 py-3 text-sm outline-none border border-cream/20 focus:border-cream/50 transition-colors bg-navy-mid text-cream placeholder:text-cream/40"
+              className="flex-1 px-4 py-3 text-sm outline-none transition-colors placeholder:text-[rgba(232,232,224,0.3)] focus:border-[rgba(255,255,255,0.2)]"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e8e8e0' }}
             />
             <button
               type="submit"
-              className="btn-glow bg-green text-cream px-6 py-3 font-medium text-sm hover:bg-green-light transition-colors whitespace-nowrap"
+              className="glow-green font-medium text-sm px-6 py-3 transition-all whitespace-nowrap"
+              style={{ background: '#4dba80', color: '#06090e' }}
             >
               Get early access
             </button>
