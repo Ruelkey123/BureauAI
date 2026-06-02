@@ -44,17 +44,15 @@ export default function Nav() {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '1px', lineHeight: 1 }}>
           <span style={{
             fontSize: '17px', fontWeight: '400',
-            letterSpacing: '0.06em', color: '#e8e8e0',
-            fontFamily: 'var(--font-dm-serif), "Times New Roman", Georgia, serif',
-            fontStyle: 'italic',
+            letterSpacing: '-0.01em', color: '#e8e8e0',
+            fontFamily: 'var(--font-outfit), sans-serif',
           }}>
             Bureau
           </span>
           <span style={{
-            fontSize: '17px', fontWeight: '400',
-            letterSpacing: '0.06em', color: '#4dba80',
-            fontFamily: 'var(--font-dm-serif), "Times New Roman", Georgia, serif',
-            fontStyle: 'normal',
+            fontSize: '17px', fontWeight: '600',
+            letterSpacing: '-0.01em', color: '#4dba80',
+            fontFamily: 'var(--font-outfit), sans-serif',
           }}>
             AI
           </span>
