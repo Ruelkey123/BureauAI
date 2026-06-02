@@ -38,10 +38,109 @@ export default function HeroSection() {
         }} />
       </div>
 
+      {/* ── Abstract floating artifacts ── */}
+
+      {/* 1. Concentric rings — top left */}
+      <div className="absolute pointer-events-none hidden lg:block" style={{
+        top: '14%', left: '6%',
+        animation: 'driftA 14s ease-in-out infinite',
+      }}>
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" opacity="0.55">
+          <circle cx="60" cy="60" r="54" stroke="#4dba80" strokeWidth="0.5" strokeDasharray="4 6"/>
+          <circle cx="60" cy="60" r="38" stroke="#4dba80" strokeWidth="0.75" strokeDasharray="2 4"/>
+          <circle cx="60" cy="60" r="22" stroke="#4dba80" strokeWidth="1" />
+          <circle cx="60" cy="60" r="3" fill="#4dba80" />
+          <line x1="60" y1="6" x2="60" y2="18" stroke="#4dba80" strokeWidth="0.75"/>
+          <line x1="114" y1="60" x2="102" y2="60" stroke="#4dba80" strokeWidth="0.75"/>
+        </svg>
+      </div>
+
+      {/* 2. Hexagonal seal — top right */}
+      <div className="absolute pointer-events-none hidden lg:block" style={{
+        top: '10%', right: '7%',
+        animation: 'driftB 18s ease-in-out infinite',
+        transform: 'rotate(15deg)',
+      }}>
+        <svg width="100" height="115" viewBox="0 0 100 115" fill="none" opacity="0.45">
+          <polygon points="50,4 96,27 96,88 50,111 4,88 4,27" stroke="#4dba80" strokeWidth="0.75" />
+          <polygon points="50,16 84,34 84,81 50,99 16,81 16,34" stroke="#4dba80" strokeWidth="0.4" strokeDasharray="3 4"/>
+          <polygon points="50,30 72,42 72,73 50,85 28,73 28,42" stroke="#4dba80" strokeWidth="0.4" opacity="0.6"/>
+          <line x1="50" y1="4" x2="50" y2="16" stroke="#4dba80" strokeWidth="0.75"/>
+          <line x1="50" y1="99" x2="50" y2="111" stroke="#4dba80" strokeWidth="0.75"/>
+        </svg>
+      </div>
+
+      {/* 3. Grid coordinate marker — bottom left */}
+      <div className="absolute pointer-events-none hidden lg:block" style={{
+        bottom: '20%', left: '4%',
+        animation: 'driftC 12s ease-in-out infinite',
+      }}>
+        <svg width="110" height="110" viewBox="0 0 110 110" fill="none" opacity="0.4">
+          {/* Grid lines */}
+          {[0,1,2,3,4].map(n => (
+            <line key={`h${n}`} x1="0" y1={n*22+11} x2="110" y2={n*22+11} stroke="rgba(77,186,128,0.4)" strokeWidth="0.5"/>
+          ))}
+          {[0,1,2,3,4].map(n => (
+            <line key={`v${n}`} x1={n*22+11} y1="0" x2={n*22+11} y2="110" stroke="rgba(77,186,128,0.4)" strokeWidth="0.5"/>
+          ))}
+          {/* X marker */}
+          <line x1="44" y1="44" x2="66" y2="66" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round"/>
+          <line x1="66" y1="44" x2="44" y2="66" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="55" cy="55" r="12" stroke="#4dba80" strokeWidth="1"/>
+        </svg>
+      </div>
+
+      {/* 4. Corner bracket / frame — bottom right */}
+      <div className="absolute pointer-events-none hidden lg:block" style={{
+        bottom: '18%', right: '5%',
+        animation: 'driftA 16s 2s ease-in-out infinite',
+        transform: 'rotate(-10deg)',
+      }}>
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" opacity="0.45">
+          {/* Corner brackets */}
+          <path d="M8 30 L8 8 L30 8" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M60 8 L82 8 L82 30" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M8 60 L8 82 L30 82" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M60 82 L82 82 L82 60" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          {/* Centre dot */}
+          <circle cx="45" cy="45" r="3" fill="#4dba80" opacity="0.6"/>
+          <circle cx="45" cy="45" r="8" stroke="#4dba80" strokeWidth="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+
+      {/* 5. Arc / partial ring — right centre */}
+      <div className="absolute pointer-events-none hidden lg:block" style={{
+        top: '40%', right: '3%',
+        animation: 'driftB 20s 4s ease-in-out infinite',
+      }}>
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.35">
+          <path d="M 40 5 A 35 35 0 0 1 75 40" stroke="#4dba80" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M 40 5 A 35 35 0 0 1 75 40" stroke="#4dba80" strokeWidth="0.4" strokeLinecap="round" transform="scale(0.7) translate(17,17)"/>
+          <circle cx="75" cy="40" r="2.5" fill="#4dba80"/>
+          <circle cx="40" cy="5" r="2.5" fill="#4dba80"/>
+        </svg>
+      </div>
+
+      {/* 6. Tiny floating dots */}
+      {[
+        { top: '28%', left: '18%', size: 4, color: '#4dba80', opacity: 0.5, delay: '0s', dur: '7s' },
+        { top: '65%', left: '12%', size: 3, color: '#4d9eba', opacity: 0.4, delay: '2s', dur: '9s' },
+        { top: '22%', right: '22%', size: 5, color: '#4dba80', opacity: 0.35, delay: '1s', dur: '11s' },
+        { top: '72%', right: '14%', size: 3, color: '#a78bfa', opacity: 0.4, delay: '3s', dur: '8s' },
+      ].map((d, i) => (
+        <div key={i} className="absolute pointer-events-none hidden lg:block" style={{
+          top: d.top, left: (d as any).left, right: (d as any).right,
+          width: d.size, height: d.size,
+          borderRadius: '50%',
+          background: d.color,
+          opacity: d.opacity,
+          boxShadow: `0 0 8px ${d.color}`,
+          animation: `driftC ${d.dur} ${d.delay} ease-in-out infinite`,
+        }} />
+      ))}
+
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto">
-
-        {/* Badge */}
         <div
           className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm mb-8"
           style={{
@@ -54,138 +153,29 @@ export default function HeroSection() {
           Now live for NYC businesses
         </div>
 
-        {/* Headline wrapper — floating elements orbit this */}
-        <div className="relative" style={{ animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both' }}>
-
-          {/* ── FLOAT 1: Compliance score — top left ── */}
-          <div className="absolute hidden lg:block pointer-events-none" style={{
-            top: '-20px', left: '-290px',
-            animation: 'floatA 7s ease-in-out infinite',
-            transform: 'rotate(-4deg)',
+        <h1 style={{
+          fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
+          fontWeight: '800', lineHeight: '1.08',
+          letterSpacing: '-0.02em', color: '#ffffff',
+          fontFamily: 'Georgia, serif',
+          animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both',
+          marginBottom: '1.5rem',
+        }}>
+          NYC compliance.<br />
+          <span style={{
+            background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>
-            <div style={{
-              background: 'rgba(15,25,20,0.85)', border: '1px solid rgba(77,186,128,0.18)',
-              borderRadius: '14px', padding: '14px 18px',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(77,186,128,0.1)',
-              textAlign: 'left', minWidth: '160px',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                <span style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Score</span>
-                <span style={{ fontSize: '9px', background: 'rgba(77,186,128,0.15)', color: '#4dba80', padding: '2px 8px', borderRadius: '20px' }}>A Grade</span>
-              </div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: '#e8e8e0', lineHeight: 1, fontFamily: 'Georgia, serif' }}>94<span style={{ fontSize: '14px', color: 'rgba(232,232,224,0.3)', fontWeight: '400' }}>/100</span></div>
-              <div style={{ marginTop: '10px', height: '3px', borderRadius: '2px', background: 'rgba(255,255,255,0.07)' }}>
-                <div style={{ width: '94%', height: '100%', borderRadius: '2px', background: 'linear-gradient(90deg, #3a7a5c, #4dba80)' }} />
-              </div>
-            </div>
-          </div>
+            Finally simple.
+          </span>
+        </h1>
 
-          {/* ── FLOAT 2: Inspection passed — top right ── */}
-          <div className="absolute hidden lg:block pointer-events-none" style={{
-            top: '-30px', right: '-300px',
-            animation: 'floatB 8s ease-in-out infinite',
-            transform: 'rotate(3deg)',
-          }}>
-            <div style={{
-              background: 'rgba(10,18,14,0.85)', border: '1px solid rgba(77,186,128,0.15)',
-              borderRadius: '14px', padding: '12px 16px',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-              textAlign: 'left',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4dba80', boxShadow: '0 0 8px #4dba80' }} />
-                <span style={{ fontSize: '10px', color: '#4dba80', fontWeight: '600', letterSpacing: '0.05em' }}>INSPECTION PASSED</span>
-              </div>
-              <div style={{ fontSize: '13px', fontWeight: '600', color: '#e8e8e0' }}>DOH Annual Review</div>
-              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>May 14, 2026 · Manhattan</div>
-            </div>
-          </div>
-
-          {/* ── FLOAT 3: Action required — bottom left ── */}
-          <div className="absolute hidden lg:block pointer-events-none" style={{
-            bottom: '-40px', left: '-270px',
-            animation: 'floatC 9s ease-in-out infinite',
-            transform: 'rotate(-2deg)',
-          }}>
-            <div style={{
-              background: 'rgba(20,15,8,0.85)', border: '1px solid rgba(245,158,11,0.18)',
-              borderRadius: '14px', padding: '12px 16px',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(245,158,11,0.05)',
-              textAlign: 'left',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 8px #f59e0b' }} />
-                <span style={{ fontSize: '10px', color: '#f59e0b', fontWeight: '600', letterSpacing: '0.05em' }}>ACTION REQUIRED</span>
-              </div>
-              <div style={{ fontSize: '13px', fontWeight: '600', color: '#e8e8e0' }}>FDNY Permit Renewal</div>
-              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>Due in 18 days · $150 fee</div>
-            </div>
-          </div>
-
-          {/* ── FLOAT 4: Savings pill — bottom right ── */}
-          <div className="absolute hidden lg:block pointer-events-none" style={{
-            bottom: '-30px', right: '-260px',
-            animation: 'floatA 6s 1.5s ease-in-out infinite',
-            transform: 'rotate(2deg)',
-          }}>
-            <div style={{
-              background: 'rgba(12,18,25,0.85)', border: '1px solid rgba(77,158,186,0.18)',
-              borderRadius: '14px', padding: '12px 16px',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-              textAlign: 'left',
-            }}>
-              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '5px' }}>Tax Credit Found</div>
-              <div style={{ fontSize: '20px', fontWeight: '700', color: '#4d9eba', fontFamily: 'Georgia, serif' }}>$9,600</div>
-              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>WOTC · Apply now</div>
-            </div>
-          </div>
-
-          {/* ── FLOAT 5: Small glowing orbs ── */}
-          {[
-            { top: '-60px', left: '-60px', color: '#4dba80', size: 7, delay: '0s', dur: '5s' },
-            { top: '-40px', right: '-50px', color: '#a78bfa', size: 5, delay: '2s', dur: '6s' },
-            { bottom: '-50px', left: '15%', color: '#4d9eba', size: 6, delay: '1s', dur: '7s' },
-            { bottom: '-40px', right: '20%', color: '#f59e0b', size: 4, delay: '3s', dur: '5.5s' },
-          ].map((s, i) => (
-            <div key={i} className="absolute pointer-events-none" style={{
-              top: s.top, bottom: s.bottom, left: s.left, right: s.right,
-              width: s.size, height: s.size,
-              borderRadius: '50%',
-              background: `radial-gradient(circle at 35% 35%, ${s.color}, ${s.color}50)`,
-              boxShadow: `0 0 12px ${s.color}`,
-              animation: `floatA ${s.dur} ${s.delay} ease-in-out infinite`,
-            }} />
-          ))}
-
-          {/* The headline */}
-          <h1 style={{
-            fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
-            fontWeight: '800', lineHeight: '1.08',
-            letterSpacing: '-0.02em', color: '#ffffff',
-            fontFamily: 'Georgia, serif', position: 'relative', zIndex: 2,
-          }}>
-            NYC compliance.<br />
-            <span style={{
-              background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            }}>
-              Finally simple.
-            </span>
-          </h1>
-        </div>
-
-        {/* Subtext */}
-        <p className="text-lg max-w-xl mx-auto mt-8 mb-10 leading-relaxed"
+        <p className="text-lg max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ color: 'rgba(232,232,224,0.5)', animation: 'fadeUp 0.65s 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
           BureauAI reads every NYC health, fire, building, and licensing regulation
           so you don't have to — AI audits, deadline alerts, violation guidance.
         </p>
 
-        {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
           style={{ animation: 'fadeUp 0.65s 0.4s cubic-bezier(0.16,1,0.3,1) both' }}>
           <a href="/audit" style={{
@@ -217,19 +207,20 @@ export default function HeroSection() {
       </div>
 
       <style>{`
-        @keyframes floatA {
-          0%, 100% { transform: rotate(var(--r, -4deg)) translateY(0px); }
-          50% { transform: rotate(var(--r, -4deg)) translateY(-10px); }
+        @keyframes driftA {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          40% { transform: translateY(-14px) rotate(3deg); }
+          70% { transform: translateY(8px) rotate(-1deg); }
         }
-        @keyframes floatB {
-          0%, 100% { transform: rotate(3deg) translateY(0px); }
-          40% { transform: rotate(3deg) translateY(-14px); }
-          70% { transform: rotate(3deg) translateY(-5px); }
+        @keyframes driftB {
+          0%, 100% { transform: rotate(15deg) translateY(0px); }
+          35% { transform: rotate(15deg) translateY(-18px); }
+          65% { transform: rotate(15deg) translateY(-6px); }
         }
-        @keyframes floatC {
-          0%, 100% { transform: rotate(-2deg) translateY(0px); }
-          33% { transform: rotate(-2deg) translateY(-8px); }
-          66% { transform: rotate(-2deg) translateY(-16px); }
+        @keyframes driftC {
+          0%, 100% { transform: translateY(0px) translateX(0px); }
+          33% { transform: translateY(-10px) translateX(5px); }
+          66% { transform: translateY(6px) translateX(-4px); }
         }
       `}</style>
     </section>
