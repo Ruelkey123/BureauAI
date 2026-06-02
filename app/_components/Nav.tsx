@@ -5,44 +5,38 @@ export default function Nav() {
 
         {/* Icon — steely Greek frontage */}
         <div style={{
-          width: '36px', height: '36px',
-          background: 'linear-gradient(160deg, #0c1812 0%, #061009 100%)',
-          border: '1px solid rgba(77,186,128,0.25)',
+          width: '38px', height: '38px',
+          background: 'linear-gradient(180deg, #111820 0%, #080d12 100%)',
+          border: '1px solid rgba(160,190,220,0.2)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           position: 'relative', overflow: 'hidden',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(200,220,255,0.06)',
         }}>
-          {/* Cold inner glow from top */}
+          {/* Subtle top sheen */}
           <div style={{
-            position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
-            width: '120%', height: '60%',
-            background: 'radial-gradient(ellipse at 50% 0%, rgba(180,210,255,0.07) 0%, transparent 70%)',
+            position: 'absolute', top: 0, left: 0, right: 0, height: '40%',
+            background: 'linear-gradient(180deg, rgba(160,190,230,0.05) 0%, transparent 100%)',
           }} />
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-            {/* Pediment — sharp steep triangle */}
-            <polygon
-              points="11,1.5 20.5,7.5 1.5,7.5"
-              fill="none"
-              stroke="url(#steelGrad)"
-              strokeWidth="0.9"
-              strokeLinejoin="round"
-            />
-            {/* Entablature — horizontal beam */}
-            <rect x="1.5" y="7.5" width="19" height="1.4" fill="url(#steelGrad)" opacity="0.9"/>
-            {/* 4 columns */}
-            <rect x="3" y="8.9" width="1.4" height="8" fill="url(#steelGrad)" opacity="0.85"/>
-            <rect x="7.2" y="8.9" width="1.4" height="8" fill="url(#steelGrad)" opacity="0.85"/>
-            <rect x="11.4" y="8.9" width="1.4" height="8" fill="url(#steelGrad)" opacity="0.85"/>
-            <rect x="15.6" y="8.9" width="1.4" height="8" fill="url(#steelGrad)" opacity="0.85"/>
-            {/* Stylobate — base steps */}
-            <rect x="0.5" y="16.9" width="21" height="1.1" fill="url(#steelGrad)" opacity="0.7"/>
-            <rect x="0" y="18" width="22" height="1.2" fill="url(#steelGrad)" opacity="0.5"/>
+          <svg width="26" height="24" viewBox="0 0 26 24" fill="none" style={{ position: 'relative', zIndex: 1, display: 'block' }}>
             <defs>
-              <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-                <stop offset="0%" stopColor="#d4e8f0"/>
-                <stop offset="50%" stopColor="#8ab8cc"/>
-                <stop offset="100%" stopColor="#4d7a8a"/>
+              <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#ddeaf5"/>
+                <stop offset="35%" stopColor="#b0c8dc"/>
+                <stop offset="100%" stopColor="#5a7a90"/>
               </linearGradient>
             </defs>
+            {/* Pediment */}
+            <polygon points="13,1 24.5,7 1.5,7" fill="none" stroke="url(#steel)" strokeWidth="1" strokeLinejoin="miter"/>
+            {/* Entablature */}
+            <rect x="1.5" y="7" width="23" height="1.6" fill="url(#steel)"/>
+            {/* 4 columns */}
+            <rect x="3.2" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
+            <rect x="8" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
+            <rect x="14.4" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
+            <rect x="21.2" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
+            {/* Stylobate — 2 steps */}
+            <rect x="1" y="18" width="24" height="1.4" fill="url(#steel)" opacity="0.85"/>
+            <rect x="0" y="19.4" width="26" height="1.4" fill="url(#steel)" opacity="0.6"/>
           </svg>
         </div>
 
