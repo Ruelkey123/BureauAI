@@ -20,23 +20,22 @@ export default function Nav() {
           <svg width="26" height="24" viewBox="0 0 26 24" fill="none" style={{ position: 'relative', zIndex: 1, display: 'block' }}>
             <defs>
               <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#ddeaf5"/>
-                <stop offset="35%" stopColor="#b0c8dc"/>
+                <stop offset="0%" stopColor="#e8f2f8"/>
+                <stop offset="40%" stopColor="#b8cedd"/>
                 <stop offset="100%" stopColor="#5a7a90"/>
               </linearGradient>
             </defs>
             {/* Pediment */}
-            <polygon points="13,1 24.5,7 1.5,7" fill="none" stroke="url(#steel)" strokeWidth="1" strokeLinejoin="miter"/>
+            <polygon points="13,1.5 22.5,7 3.5,7" fill="none" stroke="url(#steel)" strokeWidth="0.9" strokeLinejoin="miter"/>
             {/* Entablature */}
-            <rect x="1.5" y="7" width="23" height="1.6" fill="url(#steel)"/>
-            {/* 4 columns */}
-            <rect x="3.2" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
-            <rect x="8" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
-            <rect x="14.4" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
-            <rect x="21.2" y="8.6" width="1.6" height="9.4" fill="url(#steel)" opacity="0.95"/>
+            <rect x="3.5" y="7" width="19" height="1.5" fill="url(#steel)"/>
+            {/* 3 columns — equally spaced */}
+            <rect x="5" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
+            <rect x="11.75" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
+            <rect x="18.5" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
             {/* Stylobate — 2 steps */}
-            <rect x="1" y="18" width="24" height="1.4" fill="url(#steel)" opacity="0.85"/>
-            <rect x="0" y="19.4" width="26" height="1.4" fill="url(#steel)" opacity="0.6"/>
+            <rect x="3" y="17.5" width="20" height="1.4" fill="url(#steel)" opacity="0.9"/>
+            <rect x="1.5" y="18.9" width="23" height="1.4" fill="url(#steel)" opacity="0.6"/>
           </svg>
         </div>
 
