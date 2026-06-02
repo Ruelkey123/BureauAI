@@ -9,11 +9,11 @@ const stats = [
 ]
 
 const CARDS = [
-  { agency: 'DOHMH', title: 'Food Service Permit', sub: 'Annual renewal · $280', color1: '#0d2218', color2: '#1a4d30', shine: '#4dba8030' },
-  { agency: 'FDNY', title: 'Place of Assembly', sub: 'Annual inspection · $150', color1: '#0f1e2e', color2: '#1a3550', shine: '#4d9eba30' },
-  { agency: 'DOB', title: 'Certificate of Occupancy', sub: 'On changes · $200–2,000', color1: '#0a1a28', color2: '#143040', shine: '#4d9eba25' },
-  { agency: 'DCWP', title: 'Business License', sub: 'Biannual renewal · $110', color1: '#0d1f16', color2: '#183a25', shine: '#4dba8025' },
-  { agency: 'SLA', title: 'Liquor License', sub: 'Biannual · $4,352', color1: '#1a150a', color2: '#2e2010', shine: '#f59e0b20' },
+  { agency: 'DOHMH', title: 'Food Service Permit', sub: 'Annual renewal · $280', color1: '#0d2218', color2: '#1a4d30', shine: '#4dba8030', tx: -155, ty: -110 },
+  { agency: 'FDNY', title: 'Place of Assembly', sub: 'Annual inspection · $150', color1: '#0f1e2e', color2: '#1a3550', shine: '#4d9eba30', tx: 155, ty: -110 },
+  { agency: 'DOB', title: 'Certificate of Occupancy', sub: 'On changes · $200–2,000', color1: '#0a1a28', color2: '#143040', shine: '#4d9eba25', tx: 0, ty: -10 },
+  { agency: 'DCWP', title: 'Business License', sub: 'Biannual renewal · $110', color1: '#0d1f16', color2: '#183a25', shine: '#4dba8025', tx: -155, ty: 115 },
+  { agency: 'SLA', title: 'Liquor License', sub: 'Biannual · $4,352', color1: '#1a150a', color2: '#2e2010', shine: '#f59e0b20', tx: 155, ty: 115 },
 ]
 
 export default function ProblemSection() {
@@ -37,8 +37,8 @@ export default function ProblemSection() {
       if (!el) return
       const rect = el.getBoundingClientRect()
       const windowH = window.innerHeight
-      // Cards fully spread by the time section centre passes viewport centre
-      const p = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH * 0.55)))
+      // Fully spread as soon as section reaches mid-viewport
+      const p = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH * 0.45)))
       targetRef.current = p
     }
 
@@ -52,60 +52,54 @@ export default function ProblemSection() {
 
   return (
     <section ref={sectionRef} className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left: text */}
-          <div>
+      <div className="max-w-6xl mx-auto text-center">
+          {/* Text — centered above */}
+          <div className="lg:col-span-2 text-center mb-4">
             <h2 className="font-serif text-4xl md:text-5xl mb-6" style={{ color: '#e8e8e0' }}>
-              The complexity<br />is real.
+              The complexity is real.
             </h2>
-            <p className="text-lg mb-12 leading-relaxed" style={{ color: 'rgba(232,232,224,0.45)' }}>
-              Running a business in NYC means navigating one of the most complex regulatory environments in the country. Most owners spend their savings and months of their lives before they can focus on actually running their business.
+            <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: 'rgba(232,232,224,0.45)' }}>
+              Running a business in NYC means navigating one of the most complex regulatory environments in the country — across agencies, deadlines, and filings most owners have never heard of.
             </p>
-            <div className="flex flex-col gap-4">
-              {stats.map(({ stat, label, sub }) => (
-                <div key={stat} className="flex items-start gap-5" style={{ borderLeft: '1px solid rgba(77,186,128,0.2)', paddingLeft: '20px' }}>
-                  <div className="font-serif text-3xl font-bold shrink-0" style={{
+            <div className="flex justify-center gap-10 flex-wrap">
+              {stats.map(({ stat, label }) => (
+                <div key={stat} className="text-center">
+                  <div className="font-serif text-3xl font-bold" style={{
                     background: 'linear-gradient(135deg, #4dba80, #a8e6c4)',
                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                   }}>{stat}</div>
-                  <div>
-                    <div className="font-semibold text-sm" style={{ color: '#e8e8e0' }}>{label}</div>
-                    <div className="text-xs mt-0.5" style={{ color: 'rgba(232,232,224,0.35)' }}>{sub}</div>
-                  </div>
+                  <div className="text-xs mt-1" style={{ color: 'rgba(232,232,224,0.4)' }}>{label}</div>
                 </div>
               ))}
             </div>
-            <p className="mt-10 text-sm font-medium" style={{ color: 'rgba(232,232,224,0.5)' }}>
-              We help you understand what you're dealing with — so you can make informed decisions.
-            </p>
           </div>
 
-          {/* Right: scroll-driven stacked cards */}
-          <div className="flex justify-center items-center" style={{ minHeight: '460px' }}>
-            <div style={{ position: 'relative', width: '300px', height: '420px', perspective: '1000px' }}>
-              {CARDS.map(({ agency, title, sub, color1, color2, shine }, i) => {
-                // Each card fans upward as progress increases
-                // Card 0 (DOHMH, back) stays, card 4 (SLA, front) moves most
-                const spreadY = progress * i * 80
-                const baseBottom = i * 18
-                const rotX = -52 + i * 1.5
-                const rotY = -8 + i * 1.2
-                const z = i * 10
+          {/* Right: scroll-driven stacked → grid cards */}
+          <div className="flex justify-center items-center" style={{ minHeight: '480px' }}>
+            <div style={{ position: 'relative', width: '360px', height: '460px', perspective: '1200px' }}>
+              {CARDS.map(({ agency, title, sub, color1, color2, shine, tx, ty }, i) => {
+                const p = progress
+                // Lerp from stacked to grid
+                const translateX = tx * p
+                const translateY = ty * p
+                const scale = 1 - p * 0.3
+                const rotX = (-52 + i * 1.5) * (1 - p) + (-8 * (1 - p))
+                const rotY = (-8 + i * 1.2) * (1 - p)
+                const baseBottom = i * 14 * (1 - p)
 
                 return (
                   <div
                     key={agency}
                     style={{
                       position: 'absolute',
-                      bottom: `${baseBottom}px`,
-                      left: `${i * 2}px`,
+                      bottom: `${baseBottom + 160}px`,
+                      left: '50%',
+                      marginLeft: '-140px',
                       width: '280px',
                       height: '168px',
                       borderRadius: '16px',
-                      transform: `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${z}px) translateY(${-spreadY}px)`,
-                      transformOrigin: 'bottom center',
+                      transform: `rotateX(${rotX}deg) rotateY(${rotY}deg) translateX(${translateX}px) translateY(${translateY}px) scale(${scale})`,
+                      transformOrigin: 'center center',
                       background: `linear-gradient(135deg, ${color1} 0%, ${color2} 50%, ${color1} 100%)`,
                       border: '1px solid rgba(255,255,255,0.08)',
                       boxShadow: `0 ${8 + i * 4}px ${24 + i * 8}px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)`,
