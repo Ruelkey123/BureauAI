@@ -2,14 +2,6 @@
 
 import { useEffect } from 'react'
 
-const BADGES = [
-  { label: 'DOH', sub: 'Health', color: '#4dba80', glow: 'rgba(77,186,128,0.5)', style: { top: '-80px', left: '-180px' }, dur: '6s', delay: '0s' },
-  { label: 'FDNY', sub: 'Fire', color: '#ff7c4d', glow: 'rgba(255,124,77,0.5)', style: { top: '-60px', right: '-160px' }, dur: '7s', delay: '0.8s' },
-  { label: 'DOB', sub: 'Buildings', color: '#4d9eba', glow: 'rgba(77,158,186,0.5)', style: { bottom: '-70px', left: '-140px' }, dur: '8s', delay: '1.6s' },
-  { label: 'DCWP', sub: 'Licenses', color: '#a78bfa', glow: 'rgba(167,139,250,0.5)', style: { bottom: '-60px', right: '-130px' }, dur: '9s', delay: '0.4s' },
-  { label: 'SLA', sub: 'Liquor', color: '#f59e0b', glow: 'rgba(245,158,11,0.5)', style: { top: '-110px', left: '50%', transform: 'translateX(-50%)' }, dur: '7.5s', delay: '1.2s' },
-]
-
 export default function HeroSection() {
   useEffect(() => {
     const nav = document.querySelector('nav')
@@ -28,37 +20,32 @@ export default function HeroSection() {
       {/* Background depth planes */}
       <div className="absolute inset-0 pointer-events-none">
         <div style={{
-          position: 'absolute', top: '-20%', left: '-10%',
-          width: '70%', height: '80%',
-          background: 'linear-gradient(135deg, rgba(58,122,92,0.07) 0%, transparent 60%)',
+          position: 'absolute', top: '-20%', left: '-10%', width: '70%', height: '80%',
+          background: 'linear-gradient(135deg, rgba(58,122,92,0.06) 0%, transparent 60%)',
           transform: 'perspective(1200px) rotateY(25deg) rotateX(15deg)',
-          border: '1px solid rgba(77,186,128,0.05)',
+          border: '1px solid rgba(77,186,128,0.04)',
         }} />
         <div style={{
-          position: 'absolute', bottom: '-20%', right: '-10%',
-          width: '65%', height: '75%',
-          background: 'linear-gradient(225deg, rgba(77,158,186,0.05) 0%, transparent 60%)',
+          position: 'absolute', bottom: '-20%', right: '-10%', width: '65%', height: '75%',
+          background: 'linear-gradient(225deg, rgba(77,158,186,0.04) 0%, transparent 60%)',
           transform: 'perspective(1200px) rotateY(-20deg) rotateX(-10deg)',
-          border: '1px solid rgba(77,158,186,0.04)',
         }} />
-        {/* Central glow */}
         <div style={{
           position: 'absolute', top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '900px', height: '600px',
-          background: 'radial-gradient(ellipse, rgba(58,122,92,0.07) 0%, transparent 65%)',
+          width: '900px', height: '500px',
+          background: 'radial-gradient(ellipse, rgba(58,122,92,0.06) 0%, transparent 65%)',
         }} />
       </div>
 
-      {/* Main content with orbital badges around it */}
+      {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto">
 
         {/* Badge */}
         <div
           className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm mb-8"
           style={{
-            background: 'rgba(77,186,128,0.08)',
-            border: '1px solid rgba(77,186,128,0.2)',
+            background: 'rgba(77,186,128,0.08)', border: '1px solid rgba(77,186,128,0.2)',
             color: 'rgba(232,232,224,0.7)',
             animation: 'fadeUp 0.6s 0.1s cubic-bezier(0.16,1,0.3,1) both',
           }}
@@ -67,124 +54,124 @@ export default function HeroSection() {
           Now live for NYC businesses
         </div>
 
-        {/* Headline with agency badges orbiting around it */}
-        <div className="relative inline-block" style={{ animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both' }}>
+        {/* Headline wrapper — floating elements orbit this */}
+        <div className="relative" style={{ animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both' }}>
 
-          {/* Agency badges — positioned around the headline */}
-          {BADGES.map(({ label, sub, color, glow, style, dur, delay }) => (
-            <div
-              key={label}
-              className="absolute pointer-events-none"
-              style={{
-                ...style,
-                animation: `floatBadge ${dur} ${delay} ease-in-out infinite`,
-                zIndex: 20,
-              }}
-            >
-              <div style={{
-                width: '72px', height: '72px',
-                borderRadius: '50%',
-                background: `radial-gradient(circle at 35% 35%, ${color}25, ${color}08)`,
-                border: `1px solid ${color}45`,
-                boxShadow: `0 0 24px ${glow}, 0 0 8px ${color}20`,
-                display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center',
-                backdropFilter: 'blur(12px)',
-              }}>
-                <div style={{ fontSize: '12px', fontWeight: '700', color, letterSpacing: '0.05em' }}>{label}</div>
-                <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', marginTop: '2px', letterSpacing: '0.05em' }}>{sub.toUpperCase()}</div>
+          {/* ── FLOAT 1: Compliance score — top left ── */}
+          <div className="absolute hidden lg:block pointer-events-none" style={{
+            top: '-20px', left: '-290px',
+            animation: 'floatA 7s ease-in-out infinite',
+            transform: 'rotate(-4deg)',
+          }}>
+            <div style={{
+              background: 'rgba(15,25,20,0.85)', border: '1px solid rgba(77,186,128,0.18)',
+              borderRadius: '14px', padding: '14px 18px',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(77,186,128,0.1)',
+              textAlign: 'left', minWidth: '160px',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <span style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Score</span>
+                <span style={{ fontSize: '9px', background: 'rgba(77,186,128,0.15)', color: '#4dba80', padding: '2px 8px', borderRadius: '20px' }}>A Grade</span>
+              </div>
+              <div style={{ fontSize: '32px', fontWeight: '700', color: '#e8e8e0', lineHeight: 1, fontFamily: 'Georgia, serif' }}>94<span style={{ fontSize: '14px', color: 'rgba(232,232,224,0.3)', fontWeight: '400' }}>/100</span></div>
+              <div style={{ marginTop: '10px', height: '3px', borderRadius: '2px', background: 'rgba(255,255,255,0.07)' }}>
+                <div style={{ width: '94%', height: '100%', borderRadius: '2px', background: 'linear-gradient(90deg, #3a7a5c, #4dba80)' }} />
               </div>
             </div>
-          ))}
+          </div>
 
-          {/* Small floating spheres around the headline */}
+          {/* ── FLOAT 2: Inspection passed — top right ── */}
+          <div className="absolute hidden lg:block pointer-events-none" style={{
+            top: '-30px', right: '-300px',
+            animation: 'floatB 8s ease-in-out infinite',
+            transform: 'rotate(3deg)',
+          }}>
+            <div style={{
+              background: 'rgba(10,18,14,0.85)', border: '1px solid rgba(77,186,128,0.15)',
+              borderRadius: '14px', padding: '12px 16px',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+              textAlign: 'left',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4dba80', boxShadow: '0 0 8px #4dba80' }} />
+                <span style={{ fontSize: '10px', color: '#4dba80', fontWeight: '600', letterSpacing: '0.05em' }}>INSPECTION PASSED</span>
+              </div>
+              <div style={{ fontSize: '13px', fontWeight: '600', color: '#e8e8e0' }}>DOH Annual Review</div>
+              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>May 14, 2026 · Manhattan</div>
+            </div>
+          </div>
+
+          {/* ── FLOAT 3: Action required — bottom left ── */}
+          <div className="absolute hidden lg:block pointer-events-none" style={{
+            bottom: '-40px', left: '-270px',
+            animation: 'floatC 9s ease-in-out infinite',
+            transform: 'rotate(-2deg)',
+          }}>
+            <div style={{
+              background: 'rgba(20,15,8,0.85)', border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '14px', padding: '12px 16px',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(245,158,11,0.05)',
+              textAlign: 'left',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 8px #f59e0b' }} />
+                <span style={{ fontSize: '10px', color: '#f59e0b', fontWeight: '600', letterSpacing: '0.05em' }}>ACTION REQUIRED</span>
+              </div>
+              <div style={{ fontSize: '13px', fontWeight: '600', color: '#e8e8e0' }}>FDNY Permit Renewal</div>
+              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>Due in 18 days · $150 fee</div>
+            </div>
+          </div>
+
+          {/* ── FLOAT 4: Savings pill — bottom right ── */}
+          <div className="absolute hidden lg:block pointer-events-none" style={{
+            bottom: '-30px', right: '-260px',
+            animation: 'floatA 6s 1.5s ease-in-out infinite',
+            transform: 'rotate(2deg)',
+          }}>
+            <div style={{
+              background: 'rgba(12,18,25,0.85)', border: '1px solid rgba(77,158,186,0.18)',
+              borderRadius: '14px', padding: '12px 16px',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+              textAlign: 'left',
+            }}>
+              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '5px' }}>Tax Credit Found</div>
+              <div style={{ fontSize: '20px', fontWeight: '700', color: '#4d9eba', fontFamily: 'Georgia, serif' }}>$9,600</div>
+              <div style={{ fontSize: '10px', color: 'rgba(232,232,224,0.35)', marginTop: '3px' }}>WOTC · Apply now</div>
+            </div>
+          </div>
+
+          {/* ── FLOAT 5: Small glowing orbs ── */}
           {[
-            { size: 8, style: { top: '-30px', left: '-60px' }, color: '#4dba80', delay: '1s', dur: '5s' },
-            { size: 6, style: { top: '-20px', right: '-50px' }, color: '#a78bfa', delay: '2.5s', dur: '6s' },
-            { size: 7, style: { bottom: '-20px', left: '20%' }, color: '#4d9eba', delay: '0.5s', dur: '7s' },
-            { size: 5, style: { bottom: '-15px', right: '25%' }, color: '#f59e0b', delay: '3s', dur: '5.5s' },
+            { top: '-60px', left: '-60px', color: '#4dba80', size: 7, delay: '0s', dur: '5s' },
+            { top: '-40px', right: '-50px', color: '#a78bfa', size: 5, delay: '2s', dur: '6s' },
+            { bottom: '-50px', left: '15%', color: '#4d9eba', size: 6, delay: '1s', dur: '7s' },
+            { bottom: '-40px', right: '20%', color: '#f59e0b', size: 4, delay: '3s', dur: '5.5s' },
           ].map((s, i) => (
             <div key={i} className="absolute pointer-events-none" style={{
-              ...s.style,
+              top: s.top, bottom: s.bottom, left: s.left, right: s.right,
               width: s.size, height: s.size,
               borderRadius: '50%',
-              background: `radial-gradient(circle at 35% 35%, ${s.color}, ${s.color}60)`,
-              boxShadow: `0 0 10px ${s.color}70`,
-              animation: `floatBadge ${s.dur} ${s.delay} ease-in-out infinite`,
+              background: `radial-gradient(circle at 35% 35%, ${s.color}, ${s.color}50)`,
+              boxShadow: `0 0 12px ${s.color}`,
+              animation: `floatA ${s.dur} ${s.delay} ease-in-out infinite`,
             }} />
           ))}
 
-          {/* Floating compliance card — right side */}
-          <div className="absolute pointer-events-none hidden lg:block" style={{
-            top: '0', right: '-280px',
-            animation: 'floatCard 8s ease-in-out infinite',
-            transform: 'perspective(800px) rotateY(-10deg) rotateX(4deg)',
-          }}>
-            <div style={{
-              width: '190px',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.09)',
-              borderRadius: '12px',
-              padding: '14px',
-              backdropFilter: 'blur(16px)',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(77,186,128,0.06)',
-              textAlign: 'left',
-            }}>
-              <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', letterSpacing: '0.1em', marginBottom: '8px' }}>COMPLIANCE SCORE</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                <div style={{ fontSize: '26px', fontWeight: '700', color: '#e8e8e0', fontFamily: 'Georgia, serif' }}>94</div>
-                <div style={{ fontSize: '9px', background: 'rgba(77,186,128,0.15)', color: '#4dba80', padding: '2px 7px', borderRadius: '20px', border: '1px solid rgba(77,186,128,0.25)' }}>Good Standing</div>
-              </div>
-              {[
-                { agency: 'DOHMH', status: 'Compliant', color: '#4dba80' },
-                { agency: 'FDNY', status: 'Action needed', color: '#f59e0b' },
-                { agency: 'DCWP', status: 'Compliant', color: '#4dba80' },
-              ].map(({ agency, status, color }) => (
-                <div key={agency} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <span style={{ fontSize: '10px', fontWeight: '600', color: '#e8e8e0' }}>{agency}</span>
-                  <span style={{ fontSize: '9px', color }}>{status}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Floating deadline pill — left side */}
-          <div className="absolute pointer-events-none hidden lg:block" style={{
-            bottom: '10px', left: '-260px',
-            animation: 'floatCard 10s 1.5s ease-in-out infinite',
-          }}>
-            <div style={{
-              background: 'rgba(245,158,11,0.08)',
-              border: '1px solid rgba(245,158,11,0.2)',
-              borderRadius: '10px',
-              padding: '10px 14px',
-              backdropFilter: 'blur(12px)',
-              boxShadow: '0 0 24px rgba(245,158,11,0.08)',
-              textAlign: 'left',
-              whiteSpace: 'nowrap',
-            }}>
-              <div style={{ fontSize: '8px', color: 'rgba(232,232,224,0.35)', marginBottom: '4px', letterSpacing: '0.08em' }}>UPCOMING</div>
-              <div style={{ fontSize: '11px', fontWeight: '600', color: '#e8e8e0' }}>DOH Permit Renewal</div>
-              <div style={{ fontSize: '10px', color: '#f59e0b', marginTop: '2px' }}>Due Jun 30 · 18 days</div>
-            </div>
-          </div>
-
-          {/* The actual headline */}
+          {/* The headline */}
           <h1 style={{
             fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
-            fontWeight: '800',
-            lineHeight: '1.08',
-            letterSpacing: '-0.02em',
-            color: '#ffffff',
-            fontFamily: 'Georgia, serif',
-            position: 'relative',
+            fontWeight: '800', lineHeight: '1.08',
+            letterSpacing: '-0.02em', color: '#ffffff',
+            fontFamily: 'Georgia, serif', position: 'relative', zIndex: 2,
           }}>
             NYC compliance.<br />
             <span style={{
               background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>
               Finally simple.
             </span>
@@ -192,51 +179,31 @@ export default function HeroSection() {
         </div>
 
         {/* Subtext */}
-        <p
-          className="text-lg max-w-xl mx-auto mt-8 mb-10 leading-relaxed"
-          style={{
-            color: 'rgba(232,232,224,0.5)',
-            animation: 'fadeUp 0.65s 0.3s cubic-bezier(0.16,1,0.3,1) both',
-          }}
-        >
+        <p className="text-lg max-w-xl mx-auto mt-8 mb-10 leading-relaxed"
+          style={{ color: 'rgba(232,232,224,0.5)', animation: 'fadeUp 0.65s 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
           BureauAI reads every NYC health, fire, building, and licensing regulation
           so you don't have to — AI audits, deadline alerts, violation guidance.
         </p>
 
         {/* CTAs */}
-        <div
-          className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
-          style={{ animation: 'fadeUp 0.65s 0.4s cubic-bezier(0.16,1,0.3,1) both' }}
-        >
-          <a
-            href="/audit"
-            style={{
-              background: '#4dba80',
-              color: '#06090e',
-              padding: '14px 28px',
-              fontWeight: '700',
-              fontSize: '14px',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              boxShadow: '0 0 40px rgba(77,186,128,0.3)',
-              transition: 'box-shadow 0.3s ease',
-            }}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
+          style={{ animation: 'fadeUp 0.65s 0.4s cubic-bezier(0.16,1,0.3,1) both' }}>
+          <a href="/audit" style={{
+            background: '#4dba80', color: '#06090e',
+            padding: '14px 28px', fontWeight: '700', fontSize: '14px',
+            letterSpacing: '0.05em', textTransform: 'uppercase',
+            boxShadow: '0 0 40px rgba(77,186,128,0.3)', transition: 'box-shadow 0.3s ease',
+          }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 60px rgba(77,186,128,0.5)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(77,186,128,0.3)' }}
           >
             Start free audit →
           </a>
-          <a
-            href="/dashboard"
-            style={{
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: '#e8e8e0',
-              padding: '14px 28px',
-              fontWeight: '600',
-              fontSize: '14px',
-              background: 'rgba(255,255,255,0.03)',
-              transition: 'border-color 0.2s ease',
-            }}
+          <a href="/dashboard" style={{
+            border: '1px solid rgba(255,255,255,0.15)', color: '#e8e8e0',
+            padding: '14px 28px', fontWeight: '600', fontSize: '14px',
+            background: 'rgba(255,255,255,0.03)', transition: 'border-color 0.2s ease',
+          }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.3)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)' }}
           >
@@ -250,14 +217,19 @@ export default function HeroSection() {
       </div>
 
       <style>{`
-        @keyframes floatBadge {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-10px) rotate(2deg); }
-          66% { transform: translateY(6px) rotate(-2deg); }
+        @keyframes floatA {
+          0%, 100% { transform: rotate(var(--r, -4deg)) translateY(0px); }
+          50% { transform: rotate(var(--r, -4deg)) translateY(-10px); }
         }
-        @keyframes floatCard {
-          0%, 100% { transform: perspective(800px) rotateY(-10deg) rotateX(4deg) translateY(0px); }
-          50% { transform: perspective(800px) rotateY(-6deg) rotateX(2deg) translateY(-10px); }
+        @keyframes floatB {
+          0%, 100% { transform: rotate(3deg) translateY(0px); }
+          40% { transform: rotate(3deg) translateY(-14px); }
+          70% { transform: rotate(3deg) translateY(-5px); }
+        }
+        @keyframes floatC {
+          0%, 100% { transform: rotate(-2deg) translateY(0px); }
+          33% { transform: rotate(-2deg) translateY(-8px); }
+          66% { transform: rotate(-2deg) translateY(-16px); }
         }
       `}</style>
     </section>
