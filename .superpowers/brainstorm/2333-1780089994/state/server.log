@@ -1,0 +1,4 @@
+{"type":"server-started","port":62283,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:62283","screen_dir":"/Users/ruelkey/BureauAI/.superpowers/brainstorm/2333-1780089994/content","state_dir":"/Users/ruelkey/BureauAI/.superpowers/brainstorm/2333-1780089994/state"}
+{"type":"screen-added","file":"/Users/ruelkey/BureauAI/.superpowers/brainstorm/2333-1780089994/content/what-are-we-building.html"}
+{"source":"user-event","type":"click","text":"B\n    \n      Product UI\n      The actual compliance checker a NYC restaurant owner would use — upload a DOH notice, get an AI-powered explanation and action plan. This is the core value prop built out as a working tool.","choice":"product","id":null,"timestamp":1780090190919}
+{"type":"server-stopped","reason":"idle timeout"}

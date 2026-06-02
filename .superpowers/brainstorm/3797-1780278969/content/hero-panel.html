@@ -1,0 +1,88 @@
+<h2>What's the hero moment when they log in?</h2>
+<p class="subtitle">The first thing they see sets the whole tone. Pick the panel that makes the biggest impression.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#fff;padding:16px;font-family:system-ui;font-size:11px;border-bottom:1px solid #e5e5e0;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:conic-gradient(#3a7a5c 0deg 338deg,#e5e5e0 338deg 360deg);display:flex;align-items:center;justify-content:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#0f1e2e;">94</div>
+        </div>
+        <div>
+          <div style="font-weight:700;color:#0f1e2e;font-size:13px;">Compliance Score</div>
+          <div style="color:#3a7a5c;font-size:10px;">Good Standing</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+        <div style="border:1px solid #e5e5e0;padding:8px;border-radius:3px;text-align:center;">
+          <div style="font-size:14px;font-weight:700;color:#c97a1a;">3</div>
+          <div style="font-size:9px;color:#888;">Due Soon</div>
+        </div>
+        <div style="border:1px solid #e5e5e0;padding:8px;border-radius:3px;text-align:center;">
+          <div style="font-size:14px;font-weight:700;color:#0f1e2e;">0</div>
+          <div style="font-size:9px;color:#888;">Violations</div>
+        </div>
+        <div style="border:1px solid #e5e5e0;padding:8px;border-radius:3px;text-align:center;">
+          <div style="font-size:14px;font-weight:700;color:#0f1e2e;">7</div>
+          <div style="font-size:9px;color:#888;">Docs Ready</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Compliance Score</h3>
+      <p>Lead with a score (0–100). Instantly tells them where they stand. Satisfying and gamified — owners want to hit 100.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#fff;padding:16px;font-family:system-ui;font-size:11px;border-bottom:1px solid #e5e5e0;">
+      <div style="font-weight:700;color:#0f1e2e;font-size:12px;margin-bottom:10px;">Action Required</div>
+      <div style="border-left:3px solid #e85c2c;background:#fff8f6;padding:10px 12px;border-radius:0 4px 4px 0;margin-bottom:8px;">
+        <div style="font-weight:600;color:#0f1e2e;font-size:11px;">DOH Permit Renewal</div>
+        <div style="color:#e85c2c;font-size:10px;margin-top:2px;">Due Jun 30 · 18 days</div>
+        <div style="color:#666;font-size:9px;margin-top:4px;">File online at DOHMH portal. Takes 2–3 weeks to process.</div>
+      </div>
+      <div style="border-left:3px solid #f5a623;background:#fffbf0;padding:10px 12px;border-radius:0 4px 4px 0;margin-bottom:8px;">
+        <div style="font-weight:600;color:#0f1e2e;font-size:11px;">FDNY Inspection Prep</div>
+        <div style="color:#f5a623;font-size:10px;margin-top:2px;">Due Jul 15 · 33 days</div>
+        <div style="color:#666;font-size:9px;margin-top:4px;">3 checklist items still open.</div>
+      </div>
+      <div style="border-left:3px solid #e5e5e0;background:#f9f9f7;padding:8px 12px;border-radius:0 4px 4px 0;color:#888;font-size:10px;">+ 2 more deadlines this quarter</div>
+    </div>
+    <div class="card-body">
+      <h3>B — Priority Action Feed</h3>
+      <p>Lead with what they need to DO, not a score. Colour-coded urgency. Feels like an inbox — clear, actionable, no ambiguity.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#fff;padding:16px;font-family:system-ui;font-size:11px;border-bottom:1px solid #e5e5e0;">
+      <div style="font-weight:700;color:#0f1e2e;font-size:12px;margin-bottom:10px;">Your NYC Agencies</div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid #e5e5e0;border-radius:3px;">
+          <span style="font-weight:600;font-size:10px;color:#0f1e2e;">DOHMH</span>
+          <span style="font-size:9px;background:#dcf0e7;color:#1a6040;padding:2px 7px;border-radius:2px;">Compliant</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid #ffd49e;border-radius:3px;background:#fffbf5;">
+          <span style="font-weight:600;font-size:10px;color:#0f1e2e;">FDNY</span>
+          <span style="font-size:9px;background:#fde9c4;color:#c97a1a;padding:2px 7px;border-radius:2px;">Action Needed</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid #e5e5e0;border-radius:3px;">
+          <span style="font-weight:600;font-size:10px;color:#0f1e2e;">DOB</span>
+          <span style="font-size:9px;background:#dcf0e7;color:#1a6040;padding:2px 7px;border-radius:2px;">Compliant</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border:1px solid #e5e5e0;border-radius:3px;">
+          <span style="font-weight:600;font-size:10px;color:#0f1e2e;">DCWP</span>
+          <span style="font-size:9px;background:#dcf0e7;color:#1a6040;padding:2px 7px;border-radius:2px;">Compliant</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Agency Status Board</h3>
+      <p>Show compliance status agency-by-agency. Unique to BureauAI — no other tool maps your business to NYC agencies this clearly. Great for demos.</p>
+    </div>
+  </div>
+
+</div>
+<p class="subtitle" style="margin-top:16px;">Click one and let me know in the chat.</p>

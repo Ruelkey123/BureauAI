@@ -1,0 +1,190 @@
+<h2>Sidebar pages — all 5 tabs</h2>
+<p class="subtitle">Click each tab below to preview what opens. These are the 5 sections in the icon sidebar.</p>
+
+<div style="font-family:system-ui;font-size:11px;border:1px solid #e5e5e0;border-radius:6px;overflow:hidden;height:520px;display:flex;">
+
+  <!-- Sidebar -->
+  <div style="width:52px;background:#0f1e2e;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:6px;flex-shrink:0;">
+    <div style="width:26px;height:26px;background:#3a7a5c;border-radius:5px;margin-bottom:10px;"></div>
+    <div id="tab-overview" onclick="showTab('overview')" style="width:36px;height:36px;border-radius:6px;background:#ffffff18;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #ffffff30;" title="Overview">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="white"/><rect x="9" y="2" width="5" height="5" rx="1" fill="white" opacity="0.4"/><rect x="2" y="9" width="5" height="5" rx="1" fill="white" opacity="0.4"/><rect x="9" y="9" width="5" height="5" rx="1" fill="white" opacity="0.4"/></svg>
+    </div>
+    <div id="tab-deadlines" onclick="showTab('deadlines')" style="width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;" title="Deadlines">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="white" stroke-opacity="0.4" stroke-width="1.5"/><path d="M5 2v2M11 2v2M2 7h12" stroke="white" stroke-opacity="0.4" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div id="tab-documents" onclick="showTab('documents')" style="width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;" title="Documents">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 2h5.5L12 4.5V14H4V2z" stroke="white" stroke-opacity="0.4" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 2v3h3" stroke="white" stroke-opacity="0.4" stroke-width="1.5"/></svg>
+    </div>
+    <div id="tab-audit" onclick="showTab('audit')" style="width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;" title="AI Audit">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="white" stroke-opacity="0.4" stroke-width="1.5"/><path d="M6 8l1.5 1.5L10 6" stroke="white" stroke-opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div id="tab-incentives" onclick="showTab('incentives')" style="width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;" title="Incentives">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 3.5H13l-2.8 2 1 3.5L8 9l-3.2 2 1-3.5L3 5.5h3.5L8 2z" stroke="white" stroke-opacity="0.4" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    </div>
+    <div style="margin-top:auto;width:28px;height:28px;border-radius:50%;background:#3a7a5c55;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;">JD</div>
+  </div>
+
+  <!-- Content area -->
+  <div style="flex:1;background:#f8f8f6;display:flex;flex-direction:column;overflow:hidden;">
+
+    <!-- OVERVIEW -->
+    <div id="page-overview" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+      <div style="background:#fff;border-bottom:1px solid #e5e5e0;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="font-weight:600;color:#0f1e2e;">Overview</div>
+        <div style="background:#dcf0e7;color:#1a6040;font-size:9px;padding:3px 10px;border-radius:12px;font-weight:600;">Good Standing</div>
+      </div>
+      <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;overflow:auto;">
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <div style="width:60px;height:60px;border-radius:50%;background:conic-gradient(#3a7a5c 0deg 338deg,#e5e5e0 338deg 360deg);display:flex;align-items:center;justify-content:center;">
+            <div style="width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#0f1e2e;">94</div>
+          </div>
+          <div style="font-weight:600;font-size:10px;color:#0f1e2e;">Compliance Score</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;">
+            <div style="text-align:center;background:#f8f8f6;border-radius:4px;padding:5px;"><div style="font-weight:700;color:#c97a1a;font-size:12px;">3</div><div style="font-size:8px;color:#888;">Due Soon</div></div>
+            <div style="text-align:center;background:#f8f8f6;border-radius:4px;padding:5px;"><div style="font-weight:700;color:#0f1e2e;font-size:12px;">0</div><div style="font-size:8px;color:#888;">Violations</div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-weight:600;font-size:10px;color:#0f1e2e;margin-bottom:2px;">Action Required</div>
+          <div style="border-left:3px solid #e85c2c;background:#fff8f6;padding:7px 9px;border-radius:0 3px 3px 0;"><div style="font-weight:600;font-size:9px;color:#0f1e2e;">DOH Permit Renewal</div><div style="color:#e85c2c;font-size:8px;margin-top:1px;">Due Jun 30 · 18 days</div></div>
+          <div style="border-left:3px solid #f5a623;background:#fffbf0;padding:7px 9px;border-radius:0 3px 3px 0;"><div style="font-weight:600;font-size:9px;color:#0f1e2e;">FDNY Inspection Prep</div><div style="color:#f5a623;font-size:8px;margin-top:1px;">Due Jul 15 · 33 days</div></div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:5px;">
+          <div style="font-weight:600;font-size:10px;color:#0f1e2e;margin-bottom:2px;">NYC Agency Status</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border:1px solid #e5e5e0;border-radius:3px;"><span style="font-size:9px;font-weight:600;color:#0f1e2e;">DOHMH</span><span style="font-size:8px;background:#dcf0e7;color:#1a6040;padding:1px 7px;border-radius:8px;">Compliant</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border:1px solid #ffd49e;border-radius:3px;background:#fffbf5;"><span style="font-size:9px;font-weight:600;color:#0f1e2e;">FDNY</span><span style="font-size:8px;background:#fde9c4;color:#c97a1a;padding:1px 7px;border-radius:8px;">Action Needed</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border:1px solid #e5e5e0;border-radius:3px;"><span style="font-size:9px;font-weight:600;color:#0f1e2e;">DOB</span><span style="font-size:8px;background:#dcf0e7;color:#1a6040;padding:1px 7px;border-radius:8px;">Compliant</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border:1px solid #e5e5e0;border-radius:3px;"><span style="font-size:9px;font-weight:600;color:#0f1e2e;">DCWP</span><span style="font-size:8px;background:#dcf0e7;color:#1a6040;padding:1px 7px;border-radius:8px;">Compliant</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEADLINES -->
+    <div id="page-deadlines" style="flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <div style="background:#fff;border-bottom:1px solid #e5e5e0;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="font-weight:600;color:#0f1e2e;">Deadlines</div>
+        <div style="font-size:9px;color:#888;">Next 90 days</div>
+      </div>
+      <div style="padding:14px;overflow:auto;">
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;background:#f8f8f6;border-bottom:1px solid #e5e5e0;padding:8px 16px;font-size:9px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.05em;">
+            <div>Requirement</div><div>Agency</div><div>Due Date</div><div>Days Left</div><div>Status</div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;padding:10px 16px;font-size:10px;border-bottom:1px solid #f0f0ec;align-items:center;">
+            <div style="color:#0f1e2e;font-weight:500;">Food Service Permit Renewal</div><div style="color:#666;">DOHMH</div><div style="color:#e85c2c;font-weight:500;">Jun 30</div><div style="color:#e85c2c;font-weight:500;">18 days</div><div><span style="background:#fde9c4;color:#c97a1a;padding:2px 8px;border-radius:8px;font-size:9px;">Urgent</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;padding:10px 16px;font-size:10px;border-bottom:1px solid #f0f0ec;align-items:center;">
+            <div style="color:#0f1e2e;font-weight:500;">Annual Fire Inspection</div><div style="color:#666;">FDNY</div><div style="color:#c97a1a;font-weight:500;">Jul 15</div><div style="color:#c97a1a;">33 days</div><div><span style="background:#fde9c4;color:#c97a1a;padding:2px 8px;border-radius:8px;font-size:9px;">Prep needed</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;padding:10px 16px;font-size:10px;border-bottom:1px solid #f0f0ec;align-items:center;">
+            <div style="color:#0f1e2e;font-weight:500;">Business License Renewal</div><div style="color:#666;">DCWP</div><div style="color:#666;">Aug 1</div><div style="color:#666;">50 days</div><div><span style="background:#f0f0ec;color:#888;padding:2px 8px;border-radius:8px;font-size:9px;">On track</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;padding:10px 16px;font-size:10px;border-bottom:1px solid #f0f0ec;align-items:center;">
+            <div style="color:#0f1e2e;font-weight:500;">DOB Certificate of Occupancy Review</div><div style="color:#666;">DOB</div><div style="color:#666;">Aug 20</div><div style="color:#666;">69 days</div><div><span style="background:#dcf0e7;color:#1a6040;padding:2px 8px;border-radius:8px;font-size:9px;">Compliant</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 90px 90px 90px;padding:10px 16px;font-size:10px;align-items:center;">
+            <div style="color:#0f1e2e;font-weight:500;">Sidewalk Café Permit Renewal</div><div style="color:#666;">DCWP</div><div style="color:#666;">Sep 1</div><div style="color:#666;">82 days</div><div><span style="background:#dcf0e7;color:#1a6040;padding:2px 8px;border-radius:8px;font-size:9px;">Compliant</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div id="page-documents" style="flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <div style="background:#fff;border-bottom:1px solid #e5e5e0;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="font-weight:600;color:#0f1e2e;">Documents</div>
+        <div style="font-size:9px;background:#0f1e2e;color:#fff;padding:3px 10px;border-radius:4px;cursor:pointer;">+ Request document</div>
+      </div>
+      <div style="padding:14px;overflow:auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;">
+          <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Ready to use</div>
+          <div style="font-weight:600;font-size:11px;color:#0f1e2e;margin-bottom:4px;">DOH Permit Renewal Form</div>
+          <div style="font-size:9px;color:#666;margin-bottom:10px;">Pre-filled with your business info. Submit directly to DOHMH.</div>
+          <div style="font-size:9px;color:#3a7a5c;font-weight:600;cursor:pointer;">Download PDF →</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;">
+          <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Ready to use</div>
+          <div style="font-weight:600;font-size:11px;color:#0f1e2e;margin-bottom:4px;">FDNY Inspection Checklist</div>
+          <div style="font-size:9px;color:#666;margin-bottom:10px;">Inspector-ready checklist for your location type.</div>
+          <div style="font-size:9px;color:#3a7a5c;font-weight:600;cursor:pointer;">Download PDF →</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;">
+          <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Ready to use</div>
+          <div style="font-weight:600;font-size:11px;color:#0f1e2e;margin-bottom:4px;">DCWP License Application</div>
+          <div style="font-size:9px;color:#666;margin-bottom:10px;">Business license renewal, pre-filled for your borough.</div>
+          <div style="font-size:9px;color:#3a7a5c;font-weight:600;cursor:pointer;">Download PDF →</div>
+        </div>
+        <div style="background:#f8f8f6;border:1px dashed #e5e5e0;border-radius:6px;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+          <div style="font-size:9px;color:#888;text-align:center;">Need a different document?</div>
+          <div style="font-size:9px;color:#0f1e2e;font-weight:600;cursor:pointer;">Request a template →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI AUDIT -->
+    <div id="page-audit" style="flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <div style="background:#fff;border-bottom:1px solid #e5e5e0;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="font-weight:600;color:#0f1e2e;">AI Audit</div>
+        <div style="font-size:9px;color:#888;">Last run: today, 9:14am</div>
+      </div>
+      <div style="padding:14px;overflow:auto;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#0f1e2e;border-radius:6px;padding:16px;color:#fff;">
+          <div style="font-size:9px;color:#ffffff66;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Immediate Actions · Next 30 days</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:16px;height:16px;background:#e85c2c;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;margin-top:1px;">1</div><div style="font-size:10px;color:#fff;line-height:1.5;">Renew your DOHMH food service permit before Jun 30. File online at the DOHMH eFoodservice portal. Processing takes 2–3 weeks — start now.</div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:16px;height:16px;background:#f5a623;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;margin-top:1px;">2</div><div style="font-size:10px;color:#fff;line-height:1.5;">Schedule your FDNY annual inspection. Contact FDNY Bureau of Fire Prevention to book — inspectors are booking 3–4 weeks out.</div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;">
+          <div style="font-size:9px;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;">Upcoming Deadlines</div>
+          <div style="font-size:10px;color:#0f1e2e;line-height:1.8;">DOHMH permit renewal annually · FDNY inspection annually · DCWP business license every 2 years · DOB CO review every 5 years</div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;">
+          <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">What This Costs Without BureauAI</div>
+          <div style="font-size:10px;color:#0f1e2e;line-height:1.6;">Expeditor: $3,000–$8,000 · Attorney (violations): $5,000–$15,000 · Compliance consultant: $2,000–$5,000/year. <span style="color:#3a7a5c;font-weight:600;">BureauAI: $149/month.</span></div>
+        </div>
+        <div style="background:#f8f8f6;border:1px solid #e5e5e0;border-radius:6px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:10px;color:#666;">Run a fresh audit with updated info</div>
+          <div style="background:#0f1e2e;color:#fff;font-size:9px;padding:5px 14px;border-radius:4px;cursor:pointer;">Run new audit →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INCENTIVES -->
+    <div id="page-incentives" style="flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <div style="background:#fff;border-bottom:1px solid #e5e5e0;padding:0 20px;height:44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+        <div style="font-weight:600;color:#0f1e2e;">Incentives & Tax Credits</div>
+        <div style="font-size:9px;color:#3a7a5c;font-weight:600;">$14,200 identified</div>
+      </div>
+      <div style="padding:14px;overflow:auto;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div style="font-weight:600;font-size:11px;color:#0f1e2e;margin-bottom:3px;">Work Opportunity Tax Credit (WOTC)</div><div style="font-size:9px;color:#666;max-width:360px;line-height:1.5;">Federal tax credit for hiring from certain target groups. Up to $9,600 per eligible employee. You likely qualify based on your borough and business type.</div></div>
+          <div style="text-align:right;flex-shrink:0;margin-left:20px;"><div style="font-weight:700;font-size:14px;color:#3a7a5c;">$9,600</div><div style="font-size:8px;color:#888;margin-top:2px;">per employee</div><div style="background:#3a7a5c;color:#fff;font-size:9px;padding:4px 10px;border-radius:4px;margin-top:8px;cursor:pointer;">Learn more →</div></div>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e5e0;border-radius:6px;padding:14px;display:flex;justify-content:space-between;align-items:flex-start;">
+          <div><div style="font-weight:600;font-size:11px;color:#0f1e2e;margin-bottom:3px;">NYC Small Business Energy Efficiency Program</div><div style="font-size:9px;color:#666;max-width:360px;line-height:1.5;">Rebates for energy-efficient equipment upgrades. HVAC, refrigeration, and lighting qualify. Available to Manhattan businesses under 50 employees.</div></div>
+          <div style="text-align:right;flex-shrink:0;margin-left:20px;"><div style="font-weight:700;font-size:14px;color:#3a7a5c;">$4,600</div><div style="font-size:8px;color:#888;margin-top:2px;">estimated rebate</div><div style="background:#3a7a5c;color:#fff;font-size:9px;padding:4px 10px;border-radius:4px;margin-top:8px;cursor:pointer;">Learn more →</div></div>
+        </div>
+        <div style="background:#f8f8f6;border:1px dashed #e5e5e0;border-radius:6px;padding:12px;text-align:center;font-size:9px;color:#888;">BureauAI scans 40+ NYC and federal incentive programs monthly. Credits update automatically.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(name) {
+  ['overview','deadlines','documents','audit','incentives'].forEach(t => {
+    document.getElementById('page-'+t).style.display = 'none';
+    var tab = document.getElementById('tab-'+t);
+    tab.style.background = 'transparent';
+    tab.style.border = 'none';
+  });
+  document.getElementById('page-'+name).style.display = 'flex';
+  var active = document.getElementById('tab-'+name);
+  active.style.background = '#ffffff18';
+  active.style.border = '1px solid #ffffff30';
+}
+</script>
+
+<p class="subtitle" style="margin-top:14px;">Click the sidebar icons to switch between pages. Let me know what to change or say "good" and I'll write the spec and build it.</p>

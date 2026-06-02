@@ -1,11 +1,12 @@
-// app/_components/FooterCTASection.tsx
 'use client'
 
 import { useState } from 'react'
+import { useReveal } from '../hooks/useReveal'
 
 export default function FooterCTASection() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const ref = useReveal()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -18,12 +19,12 @@ export default function FooterCTASection() {
   }
 
   return (
-    <section id="waitlist" className="py-24 px-6 bg-navy">
+    <section ref={ref as React.RefObject<HTMLElement>} id="waitlist" className="py-24 px-6 bg-navy">
       <div className="max-w-xl mx-auto text-center">
-        <h2 className="font-serif text-4xl md:text-5xl text-cream mb-4">
+        <h2 className="reveal font-serif text-4xl md:text-5xl text-cream mb-4">
           Stop navigating alone.
         </h2>
-        <p className="text-cream/65 mb-10">
+        <p className="reveal reveal-delay-1 text-cream/65 mb-10">
           Be among the first NYC business owners to get access.
         </p>
 
@@ -32,7 +33,7 @@ export default function FooterCTASection() {
             You're on the list. We'll be in touch soon.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input
               type="email"
               required
@@ -43,7 +44,7 @@ export default function FooterCTASection() {
             />
             <button
               type="submit"
-              className="bg-green text-cream px-6 py-3 font-medium text-sm hover:bg-green-light transition-colors whitespace-nowrap"
+              className="btn-glow bg-green text-cream px-6 py-3 font-medium text-sm hover:bg-green-light transition-colors whitespace-nowrap"
             >
               Get early access
             </button>

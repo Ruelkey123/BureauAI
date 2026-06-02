@@ -1,4 +1,7 @@
-// app/_components/ProblemSection.tsx
+'use client'
+
+import { useReveal } from '../hooks/useReveal'
+
 const stats = [
   {
     stat: '8–12',
@@ -18,21 +21,26 @@ const stats = [
 ]
 
 export default function ProblemSection() {
+  const ref = useReveal()
+
   return (
-    <section className="py-24 px-6">
+    <section ref={ref as React.RefObject<HTMLElement>} className="py-24 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-serif text-4xl md:text-5xl text-navy mb-4">
+        <h2 className="reveal font-serif text-4xl md:text-5xl text-navy mb-4">
           The complexity is real.
         </h2>
-        <p className="text-bureau-muted text-lg max-w-2xl mx-auto mb-14">
+        <p className="reveal reveal-delay-1 text-bureau-muted text-lg max-w-2xl mx-auto mb-14">
           Running a business in NYC means navigating one of the most complex regulatory
           environments in the country. Most owners spend their savings and months of their
           lives on permits, inspections, and filings before they can focus on actually running their business.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-          {stats.map(({ stat, label, sub }) => (
-            <div key={stat} className="border border-bureau-border p-6 text-left">
+          {stats.map(({ stat, label, sub }, i) => (
+            <div
+              key={stat}
+              className={`reveal reveal-delay-${i + 1} border border-bureau-border p-6 text-left hover:border-navy/30 hover:shadow-sm transition-all duration-300`}
+            >
               <div className="font-serif text-5xl text-navy mb-1">{stat}</div>
               <div className="font-medium text-navy text-sm mb-1">{label}</div>
               <div className="text-bureau-muted text-sm">{sub}</div>
@@ -40,7 +48,7 @@ export default function ProblemSection() {
           ))}
         </div>
 
-        <p className="text-navy font-medium text-lg">
+        <p className="reveal reveal-delay-4 text-navy font-medium text-lg">
           We help you understand what you're dealing with — so you can make informed decisions.
         </p>
       </div>

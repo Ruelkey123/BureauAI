@@ -1,0 +1,99 @@
+<h2>Which dashboard layout feels right?</h2>
+<p class="subtitle">Both are Stripe/Resend-style. Pick the structure that feels most natural for a compliance tool.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8f8f6;padding:16px;font-family:system-ui;font-size:11px;">
+      <div style="display:flex;height:220px;border:1px solid #e5e5e0;border-radius:4px;overflow:hidden;">
+        <!-- Sidebar -->
+        <div style="width:56px;background:#0f1e2e;display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:16px;flex-shrink:0;">
+          <div style="width:24px;height:24px;background:#3a7a5c;border-radius:4px;"></div>
+          <div style="width:20px;height:2px;background:#fff;opacity:0.6;border-radius:2px;margin-top:8px;"></div>
+          <div style="width:20px;height:2px;background:#fff3;border-radius:2px;"></div>
+          <div style="width:20px;height:2px;background:#fff3;border-radius:2px;"></div>
+          <div style="width:20px;height:2px;background:#fff3;border-radius:2px;"></div>
+          <div style="width:20px;height:2px;background:#fff3;border-radius:2px;"></div>
+        </div>
+        <!-- Main content -->
+        <div style="flex:1;padding:14px;background:#fff;overflow:hidden;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div style="font-weight:600;color:#0f1e2e;font-size:12px;">Compliance Overview</div>
+            <div style="background:#3a7a5c;color:#fff;font-size:9px;padding:2px 8px;border-radius:3px;">Good Standing</div>
+          </div>
+          <!-- Stat cards -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;">
+            <div style="border:1px solid #e5e5e0;border-radius:3px;padding:8px;">
+              <div style="font-size:16px;font-weight:700;color:#0f1e2e;">94</div>
+              <div style="font-size:9px;color:#888;">Compliance Score</div>
+            </div>
+            <div style="border:1px solid #e5e5e0;border-radius:3px;padding:8px;">
+              <div style="font-size:16px;font-weight:700;color:#c97a1a;">3</div>
+              <div style="font-size:9px;color:#888;">Due This Month</div>
+            </div>
+            <div style="border:1px solid #e5e5e0;border-radius:3px;padding:8px;">
+              <div style="font-size:16px;font-weight:700;color:#0f1e2e;">0</div>
+              <div style="font-size:9px;color:#888;">Open Violations</div>
+            </div>
+          </div>
+          <!-- Table -->
+          <div style="border:1px solid #e5e5e0;border-radius:3px;overflow:hidden;">
+            <div style="background:#f8f8f6;padding:6px 8px;font-size:9px;font-weight:600;color:#555;border-bottom:1px solid #e5e5e0;">UPCOMING DEADLINES</div>
+            <div style="padding:6px 8px;font-size:9px;color:#333;border-bottom:1px solid #f0f0ec;display:flex;justify-content:space-between;"><span>DOH Permit Renewal</span><span style="color:#c97a1a;">Jun 30</span></div>
+            <div style="padding:6px 8px;font-size:9px;color:#333;border-bottom:1px solid #f0f0ec;display:flex;justify-content:space-between;"><span>FDNY Inspection</span><span style="color:#333;">Jul 15</span></div>
+            <div style="padding:6px 8px;font-size:9px;color:#333;display:flex;justify-content:space-between;"><span>DCWP License Renewal</span><span style="color:#333;">Aug 1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Icon Sidebar</h3>
+      <p>Stripe-style collapsed icon nav. Dense, always-visible sidebar. Main area focuses on data and tables. Best if the dashboard grows complex with many sections.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8f8f6;padding:16px;font-family:system-ui;font-size:11px;">
+      <div style="display:flex;height:220px;border:1px solid #e5e5e0;border-radius:4px;overflow:hidden;flex-direction:column;">
+        <!-- Top nav -->
+        <div style="height:36px;background:#fff;border-bottom:1px solid #e5e5e0;display:flex;align-items:center;padding:0 16px;gap:20px;flex-shrink:0;">
+          <div style="font-weight:700;color:#0f1e2e;font-size:11px;">BureauAI</div>
+          <div style="font-size:10px;color:#0f1e2e;font-weight:600;border-bottom:2px solid #0f1e2e;padding-bottom:2px;">Overview</div>
+          <div style="font-size:10px;color:#888;">Deadlines</div>
+          <div style="font-size:10px;color:#888;">Documents</div>
+          <div style="font-size:10px;color:#888;">Audit</div>
+          <div style="margin-left:auto;background:#3a7a5c;color:#fff;font-size:9px;padding:2px 8px;border-radius:3px;">Good Standing</div>
+        </div>
+        <!-- Content -->
+        <div style="flex:1;padding:14px;background:#fff;overflow:hidden;">
+          <div style="font-weight:600;color:#0f1e2e;font-size:12px;margin-bottom:10px;">Good morning — here's your compliance snapshot</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="border:1px solid #e5e5e0;border-radius:3px;padding:10px;">
+              <div style="font-size:9px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Score</div>
+              <div style="font-size:22px;font-weight:700;color:#0f1e2e;">94<span style="font-size:11px;color:#888;">/100</span></div>
+            </div>
+            <div style="border:1px solid #f5a623;border-radius:3px;padding:10px;background:#fffbf5;">
+              <div style="font-size:9px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Action Needed</div>
+              <div style="font-size:13px;font-weight:600;color:#c97a1a;">DOH renewal due Jun 30</div>
+            </div>
+            <div style="border:1px solid #e5e5e0;border-radius:3px;padding:10px;grid-column:span 2;">
+              <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Next 3 deadlines</div>
+              <div style="display:flex;gap:12px;">
+                <span style="font-size:9px;background:#f0f0ec;padding:2px 6px;border-radius:2px;">Jun 30 · DOH</span>
+                <span style="font-size:9px;background:#f0f0ec;padding:2px 6px;border-radius:2px;">Jul 15 · FDNY</span>
+                <span style="font-size:9px;background:#f0f0ec;padding:2px 6px;border-radius:2px;">Aug 1 · DCWP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Top Nav</h3>
+      <p>Resend-style horizontal nav. Cleaner, more spacious. Feels modern and light. Better for a focused demo — fewer nav items, more breathing room on the main panel.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Click to select, then let me know in the chat.</p>
