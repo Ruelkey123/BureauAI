@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials'
 
 interface SidebarProps {
@@ -76,9 +78,9 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
 export default function Sidebar({ tab, setTab }: SidebarProps) {
   return (
     <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0">
-      <div className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3">
+      <Link href="/" title="Back to BureauAI" className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3 hover:bg-green-light transition-colors">
         <div className="w-3 h-3 border-2 border-cream rounded-sm" />
-      </div>
+      </Link>
       {navItems.map(({ id, label, icon }) => (
         <button
           key={id}
