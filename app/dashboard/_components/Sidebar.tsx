@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials' | 'rights'
+type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials' | 'prepare' | 'rights'
 
 interface SidebarProps {
   tab: Tab
@@ -70,6 +70,16 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
         <rect x="6.5" y="7" width="2.5" height="7" rx="0.5" fill="currentColor" />
         <rect x="11" y="4" width="2.5" height="10" rx="0.5" fill="currentColor" />
         <path d="M3 6l3.5-3 3 2.5L13 2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    id: 'prepare' as Tab,
+    label: 'Prepare',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 2h10v12H3z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/>
+        <path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
       </svg>
     ),
   },

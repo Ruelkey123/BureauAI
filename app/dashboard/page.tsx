@@ -9,8 +9,9 @@ import Audit from './_components/Audit'
 import Incentives from './_components/Incentives'
 import Financials from './_components/Financials'
 import Rights from './_components/Rights'
+import Prepare from './_components/Prepare'
 
-type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials' | 'rights'
+type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials' | 'prepare' | 'rights'
 
 const PAGE_TITLES: Record<Tab, string> = {
   overview: 'Overview',
@@ -19,6 +20,7 @@ const PAGE_TITLES: Record<Tab, string> = {
   audit: 'AI Audit',
   incentives: 'Incentives & Tax Credits',
   financials: 'Financials',
+  prepare: 'Prepare',
   rights: 'Your Rights',
 }
 
@@ -45,6 +47,7 @@ export default function DashboardPage() {
           {tab === 'audit' && <Audit />}
           {tab === 'incentives' && <Incentives />}
           {tab === 'financials' && <Financials />}
+          {tab === 'prepare' && <Prepare />}
           {tab === 'rights' && <Rights />}
         </div>
       </div>

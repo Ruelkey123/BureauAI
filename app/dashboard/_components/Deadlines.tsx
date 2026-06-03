@@ -1,14 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-
-const ROWS = [
-  { req: 'Food Service Permit Renewal', agency: 'DOHMH', due: 'Jun 30', days: 18, status: 'Urgent', statusClass: 'bg-amber-100 text-amber-700' },
-  { req: 'Annual Fire Inspection', agency: 'FDNY', due: 'Jul 15', days: 33, status: 'Prep needed', statusClass: 'bg-amber-100 text-amber-700' },
-  { req: 'Business License Renewal', agency: 'DCWP', due: 'Aug 1', days: 50, status: 'On track', statusClass: 'bg-gray-100 text-bureau-muted' },
-  { req: 'DOB Certificate of Occupancy Review', agency: 'DOB', due: 'Aug 20', days: 69, status: 'Compliant', statusClass: 'bg-green/10 text-green' },
-  { req: 'Sidewalk Café Permit Renewal', agency: 'DCWP', due: 'Sep 1', days: 82, status: 'Compliant', statusClass: 'bg-green/10 text-green' },
-]
+import { DEADLINES } from '../_data/deadlines'
 
 export default function Deadlines() {
   const [completed, setCompleted] = useState<Set<string>>(new Set())
@@ -30,12 +23,12 @@ export default function Deadlines() {
               {h}
             </div>
           ))}
-          {ROWS.map(({ req, agency, due, days, status, statusClass }, i) => {
-            const done = completed.has(req)
-            const border = i < ROWS.length - 1 ? 'border-b border-[#f0f0ec]' : ''
+          {DEADLINES.map(({ id, req, agency, due, days, status }, i) => {
+            const done = completed.has(id)
+            const border = i < DEADLINES.length - 1 ? 'border-b border-[#f0f0ec]' : ''
             const dueColor = days <= 33 && !done ? 'text-amber-600 font-medium' : 'text-bureau-muted'
             return (
-              <React.Fragment key={req}>
+              <React.Fragment key={id}>
                 <div className={`px-4 py-3 text-xs font-medium ${border} ${done ? 'line-through text-bureau-muted' : 'text-navy'}`}>{req}</div>
                 <div className={`px-4 py-3 text-xs text-bureau-muted ${border}`}>{agency}</div>
                 <div className={`px-4 py-3 text-xs ${dueColor} ${border}`}>{due}</div>
@@ -43,16 +36,11 @@ export default function Deadlines() {
                 <div className={`px-4 py-3 ${border}`}>
                   {done
                     ? <span className="text-[9px] px-2 py-0.5 rounded-full font-medium bg-green/10 text-green">Done</span>
-                    : <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${statusClass}`}>{status}</span>
+                    : <span className="text-[9px] px-2 py-0.5 rounded-full font-medium" style={{ background: days <= 33 ? 'rgba(245,158,11,0.15)' : 'rgba(255,255,255,0.06)', color: days <= 33 ? '#f59e0b' : 'rgba(232,232,224,0.5)' }}>{status}</span>
                   }
                 </div>
                 <div className={`px-4 py-3 ${border}`}>
-                  <button
-                    onClick={() => toggle(req)}
-                    className={`text-[9px] font-medium px-2 py-1 rounded transition-colors ${
-                      done ? 'text-bureau-muted hover:text-navy' : 'text-green hover:text-green-light'
-                    }`}
-                  >
+                  <button onClick={() => toggle(id)} className={`text-[9px] font-medium px-2 py-1 rounded transition-colors ${done ? 'text-bureau-muted hover:text-navy' : 'text-green hover:text-green-light'}`}>
                     {done ? 'Undo' : '✓ Complete'}
                   </button>
                 </div>
