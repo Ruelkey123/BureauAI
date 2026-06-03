@@ -1,5 +1,10 @@
 import React from 'react'
 
+const BG = '#0d1520'
+const TEXT = '#e8e8e0'
+const MUTED = 'rgba(232,232,224,0.55)'
+const DIM = 'rgba(232,232,224,0.3)'
+
 const SECTIONS = [
   {
     situation: 'During an Inspection',
@@ -108,28 +113,29 @@ const SECTIONS = [
 
 export default function Rights() {
   return (
-    <div className="p-4 flex flex-col gap-4">
-      <div className="flex items-start justify-between mb-1">
+    <div style={{ background: BG, minHeight: '100%', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '4px' }}>
         <div>
-          <h2 className="font-semibold text-sm mb-1" style={{ color: '#e8e8e0' }}>Your Legal Rights</h2>
-          <p className="text-xs" style={{ color: 'rgba(232,232,224,0.4)' }}>
+          <h2 style={{ fontWeight: '600', fontSize: '13px', color: TEXT, margin: '0 0 4px 0' }}>Your Legal Rights</h2>
+          <p style={{ fontSize: '12px', color: MUTED, margin: 0 }}>
             Plain-English summaries of your rights as an NYC business owner. Always consult an attorney for specific legal advice.
           </p>
         </div>
       </div>
 
       {SECTIONS.map(({ situation, agency, color, rights }) => (
-        <div key={situation} className="bg-white border border-bureau-border rounded-lg overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+        <div key={situation} style={{ background: 'rgba(255,255,255,0.055)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', overflow: 'hidden' }}>
           {/* Section header */}
-          <div className="px-5 py-3 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
-            <div className="flex items-center gap-3">
+          <div style={{ padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '3px', height: '20px', background: color, borderRadius: '2px' }} />
               <div>
-                <div className="font-semibold text-sm" style={{ color: '#e8e8e0' }}>{situation}</div>
-                <div className="text-[10px] mt-0.5" style={{ color: 'rgba(232,232,224,0.35)', letterSpacing: '0.06em' }}>{agency}</div>
+                <div style={{ fontWeight: '600', fontSize: '12px', color: TEXT }}>{situation}</div>
+                <div style={{ fontSize: '10px', marginTop: '2px', color: DIM, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{agency}</div>
               </div>
             </div>
-            <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: `${color}15`, color, border: `1px solid ${color}30` }}>
+            <span style={{ fontSize: '10px', padding: '2px 8px', borderRadius: '999px', background: `${color}15`, color, border: `1px solid ${color}30` }}>
               {rights.length} rights
             </span>
           </div>
@@ -137,17 +143,17 @@ export default function Rights() {
           {/* Rights list */}
           <div>
             {rights.map(({ title, body, cite }, i) => (
-              <div key={title} className="px-5 py-4" style={{ borderBottom: i < rights.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                <div className="flex items-start gap-3">
+              <div key={title} style={{ padding: '16px 20px', borderBottom: i < rights.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: `${color}15`, border: `1px solid ${color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                       <path d="M1.5 4L3.5 6L6.5 2" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-xs mb-1.5" style={{ color: '#e8e8e0' }}>{title}</div>
-                    <p className="text-xs leading-relaxed" style={{ color: 'rgba(232,232,224,0.5)' }}>{body}</p>
-                    <div className="mt-2 text-[10px]" style={{ color: 'rgba(232,232,224,0.25)', fontFamily: 'monospace' }}>{cite}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: '600', fontSize: '12px', color: TEXT, marginBottom: '6px' }}>{title}</div>
+                    <p style={{ fontSize: '12px', lineHeight: '1.6', color: MUTED, margin: 0 }}>{body}</p>
+                    <div style={{ marginTop: '8px', fontSize: '10px', color: DIM, fontFamily: 'monospace' }}>{cite}</div>
                   </div>
                 </div>
               </div>
@@ -156,7 +162,7 @@ export default function Rights() {
         </div>
       ))}
 
-      <div className="text-center text-[10px] py-2" style={{ color: 'rgba(232,232,224,0.2)' }}>
+      <div style={{ textAlign: 'center', fontSize: '10px', padding: '8px 0', color: 'rgba(232,232,224,0.2)' }}>
         This is general information, not legal advice. Rights may vary by situation. Consult a licensed NYC attorney for your specific case.
       </div>
     </div>

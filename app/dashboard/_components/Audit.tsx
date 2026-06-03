@@ -1,5 +1,13 @@
 import Link from 'next/link'
 
+const BG = '#0d1520'
+const CARD = 'rgba(255,255,255,0.055)'
+const BORDER = 'rgba(255,255,255,0.1)'
+const TEXT = '#e8e8e0'
+const MUTED = 'rgba(232,232,224,0.55)'
+const DIM = 'rgba(232,232,224,0.3)'
+const GREEN = '#4dba80'
+
 const HISTORY = [
   { date: 'May 31, 2026', score: 94, summary: '2 urgent actions identified. DOH renewal flagged.' },
   { date: 'Apr 30, 2026', score: 91, summary: 'FDNY inspection prep added. Score improved +3.' },
@@ -9,66 +17,71 @@ const HISTORY = [
 const ACTIONS = [
   {
     n: '1',
-    color: 'bg-red-500',
+    bg: '#ef4444',
     text: 'Renew your DOHMH food service permit before Jun 30. File online at the DOHMH eFoodservice portal. Processing takes 2–3 weeks — start now.',
   },
   {
     n: '2',
-    color: 'bg-amber-500',
+    bg: '#f59e0b',
     text: 'Schedule your FDNY annual inspection. Contact FDNY Bureau of Fire Prevention to book — inspectors are typically booked 3–4 weeks out.',
   },
 ]
 
 export default function Audit() {
   return (
-    <div className="p-4 flex flex-col gap-3">
-      <div className="bg-navy rounded-lg p-5">
-        <div className="text-[9px] text-white/50 uppercase tracking-widest mb-4">
+    <div style={{ background: BG, minHeight: '100%', padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+
+      {/* Immediate Actions panel */}
+      <div style={{ background: 'rgba(15,30,46,0.8)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '20px' }}>
+        <div style={{ fontSize: '9px', color: DIM, letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>
           Immediate Actions · Next 30 days
         </div>
-        <div className="flex flex-col gap-3">
-          {ACTIONS.map(({ n, color, text }) => (
-            <div key={n} className="flex gap-3 items-start">
-              <div className={`w-5 h-5 ${color} rounded flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0 mt-0.5`}>
-                {n}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {ACTIONS.map(({ n, bg, text }) => (
+            <div key={n} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+              <div style={{ width: '20px', height: '20px', background: bg, borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px' }}>
+                <span style={{ color: '#fff', fontSize: '10px', fontWeight: '700' }}>{n}</span>
               </div>
-              <p className="text-white/80 text-xs leading-relaxed">{text}</p>
+              <p style={{ fontSize: '13px', color: TEXT, lineHeight: '1.6' }}>{text}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-white border border-bureau-border rounded-lg p-5">
-        <div className="text-[9px] text-bureau-muted uppercase tracking-widest mb-3">Upcoming Deadlines</div>
-        <p className="text-xs text-bureau-text leading-relaxed">
+      {/* Upcoming Deadlines panel */}
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', padding: '20px' }}>
+        <div style={{ fontSize: '9px', color: DIM, letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', marginBottom: '12px' }}>Upcoming Deadlines</div>
+        <p style={{ fontSize: '13px', color: MUTED, lineHeight: '1.6' }}>
           DOHMH permit renewal annually · FDNY inspection annually · DCWP business license every 2 years · DOB CO review every 5 years
         </p>
       </div>
 
-      <div className="bg-white border border-bureau-border rounded-lg overflow-hidden">
-        <div className="px-5 py-3 border-b border-bureau-border flex items-center justify-between">
-          <span className="font-semibold text-navy text-sm">Previous Audits</span>
-          <span className="text-[9px] text-bureau-muted">Last 3 months</span>
+      {/* Previous Audits */}
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', overflow: 'hidden' }}>
+        <div style={{ padding: '12px 20px', borderBottom: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: '600', fontSize: '13px', color: TEXT }}>Previous Audits</span>
+          <span style={{ fontSize: '9px', color: MUTED }}>Last 3 months</span>
         </div>
         {HISTORY.map(({ date, score, summary }, i) => (
-          <div key={date} className={`px-5 py-3 flex items-center gap-4 ${i < HISTORY.length - 1 ? 'border-b border-[#f0f0ec]' : ''}`}>
-            <div className="w-8 h-8 rounded-full bg-[#f8f8f6] border border-bureau-border flex items-center justify-center font-bold text-xs text-navy flex-shrink-0">
+          <div key={date} style={{ padding: '12px 20px', display: 'flex', alignItems: 'center', gap: '16px', borderBottom: i < HISTORY.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', border: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', fontSize: '12px', color: TEXT, flexShrink: 0 }}>
               {score}
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-semibold text-navy">{date}</div>
-              <div className="text-[10px] text-bureau-muted mt-0.5 truncate">{summary}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '11px', fontWeight: '600', color: TEXT }}>{date}</div>
+              <div style={{ fontSize: '10px', color: MUTED, marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{summary}</div>
             </div>
-            <button className="text-[9px] text-bureau-muted hover:text-navy transition-colors flex-shrink-0">View →</button>
+            <button style={{ fontSize: '9px', color: DIM, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>View →</button>
           </div>
         ))}
       </div>
 
-<div className="bg-[#f8f8f6] border border-bureau-border rounded-lg p-4 flex items-center justify-between">
-        <div className="text-xs text-bureau-muted">Last run: today, 9:14am · Run a fresh audit with updated info</div>
+      {/* Run new audit bar */}
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ fontSize: '12px', color: MUTED }}>Last run: today, 9:14am · Run a fresh audit with updated info</div>
         <Link
           href="/audit"
-          className="bg-navy text-cream text-xs font-medium px-4 py-2 rounded hover:bg-navy-mid transition-colors"
+          style={{ background: GREEN, color: '#06090e', fontSize: '12px', fontWeight: '600', padding: '8px 16px', borderRadius: '6px', textDecoration: 'none' }}
         >
           Run new audit →
         </Link>
