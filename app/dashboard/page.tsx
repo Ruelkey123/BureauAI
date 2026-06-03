@@ -10,6 +10,7 @@ import Incentives from './_components/Incentives'
 import Financials from './_components/Financials'
 import Rights from './_components/Rights'
 import Prepare from './_components/Prepare'
+import BusinessProfile from './_components/BusinessProfile'
 
 type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'financials' | 'prepare' | 'rights'
 
@@ -26,10 +27,12 @@ const PAGE_TITLES: Record<Tab, string> = {
 
 export default function DashboardPage() {
   const [tab, setTab] = useState<Tab>('overview')
+  const [profileOpen, setProfileOpen] = useState(false)
 
   return (
     <div className="flex h-screen overflow-hidden" style={{ background: '#06090e' }}>
-      <Sidebar tab={tab} setTab={setTab} />
+      <Sidebar tab={tab} setTab={setTab} onProfileClick={() => setProfileOpen(true)} />
+      <BusinessProfile open={profileOpen} onClose={() => setProfileOpen(false)} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="px-6 h-11 flex items-center justify-between flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}>
           <span className="font-semibold text-sm" style={{ color: '#e8e8e0' }}>{PAGE_TITLES[tab]}</span>

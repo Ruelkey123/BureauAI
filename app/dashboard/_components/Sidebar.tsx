@@ -7,6 +7,7 @@ type Tab = 'overview' | 'deadlines' | 'documents' | 'audit' | 'incentives' | 'fi
 interface SidebarProps {
   tab: Tab
   setTab: (tab: Tab) => void
+  onProfileClick: () => void
 }
 
 const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
@@ -95,7 +96,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
 ]
 
-export default function Sidebar({ tab, setTab }: SidebarProps) {
+export default function Sidebar({ tab, setTab, onProfileClick }: SidebarProps) {
   return (
     <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
       <Link href="/" className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3 hover:bg-green-light transition-colors relative group/logo">
@@ -122,9 +123,16 @@ export default function Sidebar({ tab, setTab }: SidebarProps) {
           </span>
         </button>
       ))}
-      <div className="mt-auto w-7 h-7 rounded-full bg-green/30 flex items-center justify-center text-cream text-[10px] font-bold">
-        JD
-      </div>
+      {/* Business profile button */}
+      <button onClick={onProfileClick} className="mt-auto relative group/profile flex flex-col items-center gap-1 w-full py-1 transition-opacity hover:opacity-100 opacity-70">
+        <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'linear-gradient(135deg, #0d2218, #1a4d30)', border: '1px solid rgba(77,186,128,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: '700', color: '#4dba80', fontFamily: 'Georgia, serif' }}>
+          J
+        </div>
+        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/profile:opacity-100 transition-all duration-150 translate-x-1 group-hover/profile:translate-x-0 z-50"
+          style={{ background: '#0f1e2e', color: '#e8e8e0', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 4px 12px rgba(0,0,0,0.4)', bottom: '4px' }}>
+          Business Profile
+        </span>
+      </button>
     </aside>
   )
 }
