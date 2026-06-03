@@ -97,22 +97,29 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
 
 export default function Sidebar({ tab, setTab }: SidebarProps) {
   return (
-    <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0">
-      <Link href="/" title="Back to BureauAI" className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3 hover:bg-green-light transition-colors">
+    <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+      <Link href="/" className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3 hover:bg-green-light transition-colors relative group/logo">
         <div className="w-3 h-3 border-2 border-cream rounded-sm" />
+        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/logo:opacity-100 transition-all duration-150 translate-x-1 group-hover/logo:translate-x-0 z-50"
+          style={{ background: '#0f1e2e', color: '#e8e8e0', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>
+          Back to BureauAI
+        </span>
       </Link>
       {navItems.map(({ id, label, icon }) => (
         <button
           key={id}
           onClick={() => setTab(id)}
-          title={label}
-          className={`w-9 h-9 rounded-md flex items-center justify-center transition-colors text-cream ${
+          className={`relative group/nav w-9 h-9 rounded-md flex items-center justify-center transition-colors text-cream ${
             tab === id
               ? 'bg-white/10 border border-white/20'
-              : 'opacity-40 hover:opacity-70'
+              : 'opacity-40 hover:opacity-80'
           }`}
         >
           {icon}
+          <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-all duration-150 translate-x-1 group-hover/nav:translate-x-0 z-50"
+            style={{ background: '#0f1e2e', color: tab === id ? '#4dba80' : '#e8e8e0', border: `1px solid ${tab === id ? 'rgba(77,186,128,0.3)' : 'rgba(255,255,255,0.1)'}`, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>
+            {label}
+          </span>
         </button>
       ))}
       <div className="mt-auto w-7 h-7 rounded-full bg-green/30 flex items-center justify-center text-cream text-[10px] font-bold">
