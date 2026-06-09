@@ -20,7 +20,7 @@ const card: React.CSSProperties = {
 
 const AGENCIES = [
   { name: 'DOHMH', status: 'Compliant', ok: true },
-  { name: 'FDNY', status: 'Action needed', ok: false },
+  { name: 'FDNY', status: 'In progress', ok: false },
   { name: 'DOB', status: 'Compliant', ok: true },
   { name: 'DCWP', status: 'Compliant', ok: true },
   { name: 'SLA', status: 'N/A', ok: null },
@@ -38,6 +38,11 @@ export default function Overview() {
   return (
     <div style={{ background: BG, minHeight: '100%', padding: '24px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+        {/* Team status bar */}
+        <div style={{ fontSize: '12px', color: 'rgba(77,186,128,0.8)', letterSpacing: '0.04em' }}>
+          ● Your compliance team is active — last updated today
+        </div>
 
         {/* ── Row 1: Score + stats ── */}
         <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '12px' }}>
@@ -63,10 +68,10 @@ export default function Overview() {
           {/* 4 stat tiles */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
             {[
-              { value: String(urgentDeadlines.length), label: 'Urgent deadlines', accent: AMBER },
-              { value: '0', label: 'Open violations', accent: GREEN },
-              { value: '$14,200', label: 'Credits identified', accent: GREEN },
-              { value: '4 / 6', label: 'Docs uploaded', accent: TEXT },
+              { value: String(urgentDeadlines.length), label: "We're handling soon", accent: AMBER },
+              { value: '0', label: "Violations we're managing", accent: GREEN },
+              { value: '$14,200', label: "Credits we've found", accent: GREEN },
+              { value: '4 / 6', label: 'Docs filed', accent: TEXT },
             ].map(({ value, label, accent }) => (
               <div key={label} style={{ ...card, padding: '18px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '90px' }}>
                 <div style={{ fontSize: '26px', fontWeight: '700', color: accent, fontFamily: 'Georgia, serif', lineHeight: 1 }}>{value}</div>
