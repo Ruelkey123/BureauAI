@@ -25,7 +25,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'deadlines',
-    label: 'Deadlines',
+    label: "We're Managing",
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
@@ -35,7 +35,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'documents',
-    label: 'Documents',
+    label: 'Filed & Tracked',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M4 2h5.5L12 4.5V14H4V2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -45,7 +45,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'audit',
-    label: 'AI Audit',
+    label: 'Our Latest Audit',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5" />
@@ -55,7 +55,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'incentives',
-    label: 'Incentives',
+    label: 'Your Credits',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 2l1.5 3.5H13l-2.8 2 1 3.5L8 9l-3.2 2 1-3.5L3 5.5h3.5L8 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -76,7 +76,7 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'prepare' as Tab,
-    label: 'Prepare',
+    label: 'Action Items',
     icon: (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M3 2h10v12H3z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/>
