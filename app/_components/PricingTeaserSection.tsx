@@ -1,45 +1,45 @@
 const plans = [
   {
-    label: 'Beta Access',
-    price: 'Free',
-    sub: 'limited spots · no credit card',
-    highlight: true,
-    features: [
-      'Full AI compliance audit',
-      'Personalized to your business & borough',
-      'Early access to the full dashboard',
-      'Direct feedback line to the BureauAI team',
-    ],
-    cta: 'Apply for beta access',
-    href: '#waitlist',
-  },
-  {
-    label: 'Solo Operator',
-    price: '$149',
+    label: 'Essentials',
+    price: '$99',
     sub: 'per month · cancel anytime',
     highlight: false,
     features: [
-      'AI compliance audit',
-      'Deadline calendar & alerts',
-      'Inspector-ready document templates',
-      'Violation response guidance',
+      'Compliance monitoring across all NYC agencies',
+      'Deadline management & alerts',
+      'Violation detection & guidance',
       '1 business location',
     ],
-    cta: 'Join the waitlist',
+    cta: 'Get started',
     href: '#waitlist',
   },
   {
-    label: 'Business',
+    label: 'Full-Service',
     price: '$299',
     sub: 'per month · cancel anytime',
+    highlight: true,
+    features: [
+      'Everything in Essentials',
+      'Permit filing & license renewals — we handle it',
+      'Violation response & agency communication',
+      'Inspector-ready documents prepared for you',
+      '1 business location',
+    ],
+    cta: 'Get started',
+    href: '#waitlist',
+  },
+  {
+    label: 'Enterprise',
+    price: '$599+',
+    sub: 'per month · contact us',
     highlight: false,
     features: [
-      'Everything in Solo Operator',
-      'Up to 3 business locations',
-      'Incentive & tax credit screening',
-      'Priority support',
+      'Everything in Full-Service',
+      'Multiple locations',
+      'Complex case & violation history handling',
+      'Dedicated compliance agent',
     ],
-    cta: 'Join the waitlist',
+    cta: 'Contact us',
     href: '#waitlist',
   },
 ]
@@ -49,7 +49,7 @@ export default function PricingTeaserSection() {
     <section className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-serif text-4xl md:text-5xl text-center mb-4" style={{ color: '#e8e8e0' }}>
-          Straightforward pricing
+          Replace your compliance consultant
         </h2>
         <p className="text-lg mb-14 text-center max-w-xl mx-auto" style={{ color: 'rgba(232,232,224,0.45)' }}>
           A fraction of what professional services cost — with no surprises.
