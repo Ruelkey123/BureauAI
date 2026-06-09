@@ -1,7 +1,7 @@
 const steps = [
-  { n: '01', title: 'Tell us about your business', body: 'Address, business type, and where you are — opening, operating, or responding to a violation.' },
-  { n: '02', title: 'We read the regulations', body: 'AI maps every requirement, deadline, and filing for your specific situation across every NYC agency.' },
-  { n: '03', title: 'You get a living checklist', body: 'Organised by urgency, updated when rules change, with inspector-ready documents attached.' },
+  { n: '01', title: 'Tell us about your business', body: 'Share your business type, borough, and current situation. That\'s all we need to get started.' },
+  { n: '02', title: 'We take over your compliance', body: 'BureauAI maps every permit, license, and filing requirement for your business — then begins managing them on your behalf across all NYC agencies.' },
+  { n: '03', title: 'You get a compliance team', body: 'Real-time status of everything we\'re handling — filings submitted, violations defended, renewals managed. Zero action required from you.' },
 ]
 
 export default function HowItWorksSection() {
