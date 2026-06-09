@@ -25,6 +25,9 @@ export default function Deadlines() {
 
   return (
     <div style={{ background: BG, minHeight: '100%', padding: '20px' }}>
+      <div style={{ fontSize: '12px', color: 'rgba(77,186,128,0.8)', letterSpacing: '0.04em', marginBottom: '12px' }}>
+        ● We're managing all of these on your behalf
+      </div>
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', overflow: 'hidden' }}>
         <div className="grid" style={{ gridTemplateColumns: '2fr 100px 90px 80px 110px 100px' }}>
           {['Requirement', 'Agency', 'Due Date', 'Days Left', 'Status', ''].map(h => (
