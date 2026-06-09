@@ -150,7 +150,7 @@ export default function HeroSection() {
           }}
         >
           <span style={{ color: '#4dba80' }}>◆</span>
-          Now live for NYC businesses
+          AI compliance department for NYC businesses
         </div>
 
         <h1 style={{
@@ -161,19 +161,18 @@ export default function HeroSection() {
           animation: 'fadeUp 0.65s 0.2s cubic-bezier(0.16,1,0.3,1) both',
           marginBottom: '1.5rem',
         }}>
-          NYC compliance.<br />
+          Your NYC compliance team.<br />
           <span style={{
             background: 'linear-gradient(135deg, #4dba80 0%, #a8e6c4 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>
-            Finally simple.
+            Fully automated.
           </span>
         </h1>
 
         <p className="text-lg max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ color: 'rgba(232,232,224,0.5)', animation: 'fadeUp 0.65s 0.3s cubic-bezier(0.16,1,0.3,1) both' }}>
-          BureauAI reads every NYC health, fire, building, and licensing regulation
-          so you don't have to — AI audits, deadline alerts, violation guidance.
+          BureauAI handles your permits, renewals, and violations across every NYC agency — so you never have to think about compliance again.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
@@ -187,7 +186,7 @@ export default function HeroSection() {
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 60px rgba(77,186,128,0.5)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 40px rgba(77,186,128,0.3)' }}
           >
-            Start free audit →
+            Meet your compliance team →
           </a>
           <a href="/dashboard" style={{
             border: '1px solid rgba(255,255,255,0.15)', color: '#e8e8e0',
