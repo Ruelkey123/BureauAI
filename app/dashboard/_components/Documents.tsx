@@ -10,17 +10,17 @@ const AMBER = '#f59e0b'
 const DOCS = [
   {
     title: 'DOH Permit Renewal Form',
-    description: 'Pre-filled with your business info. Submit directly to DOHMH.',
-    status: 'Action needed',
+    description: 'Prepared and submitted to DOHMH on your behalf. Download a copy anytime.',
+    status: 'Needed from you',
   },
   {
     title: 'FDNY Inspection Checklist',
-    description: 'Inspector-ready checklist for your location type and borough.',
+    description: 'We prepared this inspector-ready checklist for your location and borough.',
     status: 'In progress',
   },
   {
     title: 'DCWP License Application',
-    description: 'Business license renewal, pre-filled for Manhattan.',
+    description: 'Business license renewal filed for your Manhattan location.',
     status: 'Not started',
   },
 ]
@@ -38,7 +38,7 @@ export default function Documents() {
         {DOCS.map(({ title, description, status }) => (
           <div key={title} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px' }}>
-              <div style={{ fontSize: '9px', color: DIM, letterSpacing: '0.08em', textTransform: 'uppercase' as const, fontWeight: '600' }}>Ready to use</div>
+              <div style={{ fontSize: '9px', color: DIM, letterSpacing: '0.08em', textTransform: 'uppercase' as const, fontWeight: '600' }}>Filed & managed</div>
               <span style={{ fontSize: '9px', padding: '2px 8px', borderRadius: '999px', fontWeight: '500', flexShrink: 0, ...statusStyle(status) }}>{status}</span>
             </div>
             <div>
@@ -51,8 +51,8 @@ export default function Documents() {
           </div>
         ))}
         <div style={{ background: 'rgba(255,255,255,0.02)', border: `1px dashed ${BORDER}`, borderRadius: '10px', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-          <div style={{ fontSize: '12px', color: MUTED, textAlign: 'center' }}>Need a different document?</div>
-          <button style={{ fontSize: '12px', color: TEXT, fontWeight: '600', background: 'none', border: 'none', cursor: 'pointer' }}>Request a template →</button>
+          <div style={{ fontSize: '12px', color: MUTED, textAlign: 'center' }}>Need us to prepare something?</div>
+          <button style={{ fontSize: '12px', color: TEXT, fontWeight: '600', background: 'none', border: 'none', cursor: 'pointer' }}>Ask your compliance team →</button>
         </div>
       </div>
     </div>
