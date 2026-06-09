@@ -56,10 +56,10 @@ export default function ProblemSection() {
           {/* Text — centered above */}
           <div className="lg:col-span-2 text-center mb-4">
             <h2 className="font-serif text-4xl md:text-5xl mb-6" style={{ color: '#e8e8e0' }}>
-              The complexity is real.
+              This used to cost $50K+. We do it for $99/mo.
             </h2>
             <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: 'rgba(232,232,224,0.45)' }}>
-              Running a business in NYC means navigating one of the most complex regulatory environments in the country — across agencies, deadlines, and filings most owners have never heard of.
+              Until now, navigating NYC's DOH, FDNY, DOB, DCWP, and SLA required hiring expeditors, attorneys, and consultants. BureauAI replaces them all.
             </p>
             <div className="flex justify-center gap-10 flex-wrap">
               {stats.map(({ stat, label }) => (
