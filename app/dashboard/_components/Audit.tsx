@@ -9,21 +9,21 @@ const DIM = 'rgba(232,232,224,0.3)'
 const GREEN = '#4dba80'
 
 const HISTORY = [
-  { date: 'May 31, 2026', score: 94, summary: '2 urgent actions identified. DOH renewal flagged.' },
-  { date: 'Apr 30, 2026', score: 91, summary: 'FDNY inspection prep added. Score improved +3.' },
-  { date: 'Mar 31, 2026', score: 88, summary: 'DCWP license renewal flagged. 3 actions resolved.' },
+  { date: 'May 31, 2026', score: 94, summary: 'We identified 2 urgent items. DOH renewal in progress.' },
+  { date: 'Apr 30, 2026', score: 91, summary: 'FDNY inspection scheduled. Score improved +3.' },
+  { date: 'Mar 31, 2026', score: 88, summary: 'DCWP license renewal filed. 3 items resolved.' },
 ]
 
 const ACTIONS = [
   {
     n: '1',
     bg: '#ef4444',
-    text: 'Renew your DOHMH food service permit before Jun 30. File online at the DOHMH eFoodservice portal. Processing takes 2–3 weeks — start now.',
+    text: 'Renewing your DOHMH food service permit — due Jun 30. Filing online at the DOHMH eFoodservice portal. Processing takes 2–3 weeks — in progress.',
   },
   {
     n: '2',
     bg: '#f59e0b',
-    text: 'Schedule your FDNY annual inspection. Contact FDNY Bureau of Fire Prevention to book — inspectors are typically booked 3–4 weeks out.',
+    text: 'Scheduling your FDNY annual inspection. Coordinating with FDNY Bureau of Fire Prevention — inspectors are typically booked 3–4 weeks out.',
   },
 ]
 
@@ -34,7 +34,7 @@ export default function Audit() {
       {/* Immediate Actions panel */}
       <div style={{ background: 'rgba(15,30,46,0.8)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '20px' }}>
         <div style={{ fontSize: '9px', color: DIM, letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>
-          Immediate Actions · Next 30 days
+          What We're Handling · Next 30 days
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {ACTIONS.map(({ n, bg, text }) => (
@@ -59,7 +59,7 @@ export default function Audit() {
       {/* Previous Audits */}
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: '10px', overflow: 'hidden' }}>
         <div style={{ padding: '12px 20px', borderBottom: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: '600', fontSize: '13px', color: TEXT }}>Previous Audits</span>
+          <span style={{ fontWeight: '600', fontSize: '13px', color: TEXT }}>Our Audit History</span>
           <span style={{ fontSize: '9px', color: MUTED }}>Last 3 months</span>
         </div>
         {HISTORY.map(({ date, score, summary }, i) => (
