@@ -35,7 +35,7 @@ export default function Prepare() {
 
       {/* Left: deadline selector */}
       <div style={{ width: '224px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <div style={{ fontSize: '9px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: DIM, marginBottom: '4px' }}>Upcoming items</div>
+        <div style={{ fontSize: '9px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: DIM, marginBottom: '4px' }}>What we're preparing</div>
         {DEADLINES.map(({ id, req, agency, due, days }) => {
           const isActive = selected === id
           const urgent = days <= 33
