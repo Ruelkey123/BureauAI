@@ -198,7 +198,7 @@ export default function AuditPage() {
             <button onClick={runAudit}
               style={{ background: '#4dba80', color: '#06090e', padding: '13px 28px', fontWeight: '700', fontSize: '14px', letterSpacing: '0.04em', boxShadow: '0 0 30px rgba(77,186,128,0.25)', border: 'none', cursor: 'pointer' }}
             >
-              Generate my compliance audit →
+              Get my free audit →
             </button>
           </div>
         )}
@@ -207,13 +207,13 @@ export default function AuditPage() {
         {step === 4 && (
           <div>
             <div style={{ marginBottom: '24px' }}>
-              <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '6px', lineHeight: 1.2 }}>Your compliance snapshot</h1>
+              <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '6px', lineHeight: 1.2 }}>Your compliance audit</h1>
               <p style={{ ...MUTED, fontSize: '13px' }}>{form.businessType} · {form.borough} · {form.stage}</p>
             </div>
 
             {loading && !result && (
               <p style={{ ...MUTED, fontSize: '13px', animation: 'pulse 2s infinite' }}>
-                Analyzing NYC regulations for your situation…
+                Our team is auditing your business…
               </p>
             )}
 
@@ -241,8 +241,8 @@ export default function AuditPage() {
 
             {!loading && result && (
               <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '32px' }}>
-                <h2 className="font-serif" style={{ fontSize: '1.4rem', ...TEXT, marginBottom: '8px' }}>Get your full dashboard</h2>
-                <p style={{ ...MUTED, fontSize: '13px', marginBottom: '20px' }}>Join the waitlist for your complete compliance dashboard.</p>
+                <h2 className="font-serif" style={{ fontSize: '1.4rem', ...TEXT, marginBottom: '8px' }}>Let us handle everything</h2>
+                <p style={{ ...MUTED, fontSize: '13px', marginBottom: '20px' }}>Get a compliance team that files, manages, and defends your business — starting at $99/mo.</p>
                 {emailSubmitted ? (
                   <p style={{ color: '#4dba80', fontSize: '14px', fontWeight: '500' }}>You're on the list. We'll be in touch.</p>
                 ) : (
