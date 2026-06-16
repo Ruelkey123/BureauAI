@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BureauAI — Antler Application 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #08080f;
+  --panel:        #0f0f1a;
+  --border:       rgba(255,255,255,0.07);
+  --border-s:     rgba(255,255,255,0.12);
+  --muted:        #4a4a62;
+  --body:         #7c7c9a;
+  --sub:          #b0b0c8;
+  --text:         #e2e2ee;
+  --white:        #f0f0fa;
+  --green:        #4dba80;
+  --green-dim:    rgba(77,186,128,0.07);
+  --green-b:      rgba(77,186,128,0.2);
+  --amber:        #f4a440;
+  --amber-dim:    rgba(244,164,64,0.08);
+  --amber-b:      rgba(244,164,64,0.22);
+  --red:          #e86050;
+  --red-dim:      rgba(232,96,80,0.08);
+  --red-b:        rgba(232,96,80,0.2);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  user-select: none;
+}
+
+.deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 4vh 7vw;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+  pointer-events: none;
+}
+.slide.active  { opacity: 1; transform: translateY(0); pointer-events: all; }
+.slide.exit    { opacity: 0; transform: translateY(-20px); transition: opacity .25s ease, transform .25s ease; }
+
+/* Nav */
+.nav { position: fixed; bottom: 2.2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+.nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); transition: background .25s, transform .25s; cursor: pointer; }
+.nav-dot.active { background: var(--green); transform: scale(1.6); }
+.nav-arrows { position: fixed; bottom: 1.8rem; right: 2rem; display: flex; gap: 8px; z-index: 100; }
+.nav-btn { width: 36px; height: 36px; border: 1px solid var(--border-s); border-radius: 50%; background: transparent; color: var(--muted); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; font-family: 'DM Sans', sans-serif; }
+.nav-btn:hover { border-color: var(--green); color: var(--green); }
+.slide-counter { position: fixed; top: 1.8rem; right: 2rem; font-size: 11px; color: var(--muted); letter-spacing: .12em; z-index: 100; }
+.logo-mark { position: fixed; top: 1.8rem; left: 2rem; font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--muted); z-index: 100; letter-spacing: .05em; }
+.logo-mark .g { color: var(--green); }
+.progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--green); transition: width .4s cubic-bezier(.16,1,.3,1); z-index: 200; opacity: .6; }
+
+/* Typography */
+.overline { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+.serif { font-family: 'DM Serif Display', serif; }
+.pill { display: inline-flex; align-items: center; padding: 4px 13px; border: 1px solid var(--border-s); border-radius: 100px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.badge { padding: 2px 7px; border-radius: 3px; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; flex-shrink: 0; }
+.badge-c { background: var(--red-dim);   color: var(--red);   border: 1px solid var(--red-b); }
+.badge-n { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber-b); }
+
+/* Animations */
+@keyframes fu { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+.slide.active .a1 { animation: fu .45s .06s both; }
+.slide.active .a2 { animation: fu .5s  .14s both; }
+.slide.active .a3 { animation: fu .5s  .22s both; }
+.slide.active .a4 { animation: fu .55s .30s both; }
+.slide.active .a5 { animation: fu .55s .38s both; }
+
+/* ── S1: COVER ── */
+#s1 .inner { text-align: center; max-width: 860px; }
+#s1 .name { font-family: 'DM Serif Display', serif; font-size: clamp(72px, 11vw, 150px); line-height: 1; color: var(--white); margin-bottom: 1.4rem; }
+#s1 .name .g { color: var(--green); }
+#s1 .tagline { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--body); line-height: 1.65; margin-bottom: 2.5rem; max-width: 580px; margin-left: auto; margin-right: auto; }
+#s1 .agency-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+/* ── S2: PROBLEM ── */
+#s2 .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; max-width: 1100px; width: 100%; align-items: center; }
+#s2 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; color: var(--white); margin-bottom: 1rem; }
+#s2 .headline em { color: var(--red); font-style: normal; }
+#s2 .body-text { font-size: 14px; font-weight: 300; color: var(--body); line-height: 1.7; margin-bottom: 1.2rem; }
+#s2 .pain-list { display: flex; flex-direction: column; gap: 8px; }
+#s2 .pain-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; font-weight: 300; color: var(--sub); line-height: 1.5; }
+#s2 .pain-item::before { content: '—'; color: var(--green); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+#s2 .icard { background: var(--panel); border: 1px solid var(--border-s); padding: 1.75rem; position: relative; overflow: hidden; }
+#s2 .icard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--red), transparent 70%); }
+#s2 .ilabel { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+#s2 .iname { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 2px; }
+#s2 .iaddr { font-size: 11px; color: var(--muted); margin-bottom: 1.2rem; }
+#s2 .vrow { display: flex; align-items: flex-start; gap: 9px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--body); line-height: 1.4; }
+#s2 .vrow:last-of-type { border-bottom: none; }
+#s2 .notice { margin-top: 1rem; padding: 10px 13px; background: var(--red-dim); border: 1px solid var(--red-b); font-size: 12px; font-weight: 300; color: var(--sub); line-height: 1.5; }
+#s2 .notice strong { color: var(--red); font-weight: 400; }
+
+/* ── S3: SCALE ── */
+#s3 .layout { max-width: 1100px; width: 100%; }
+#s3 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(34px, 4.5vw, 58px); line-height: 1.1; color: var(--white); margin-bottom: .5rem; }
+#s3 .subhead { font-size: 14px; font-weight: 300; color: var(--body); margin-bottom: 2rem; max-width: 640px; }
+#s3 .sgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+.sblock { background: var(--panel); border: 1px solid var(--border); padding: 1.75rem 1.5rem; }
+.sn { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 4vw, 56px); line-height: 1; margin-bottom: .4rem; }
+.sn.red { color: var(--red); } .sn.amb { color: var(--amber); } .sn.wh { color: var(--white); } .sn.gr { color: var(--green); }
+.sl { font-size: 12px; color: var(--muted); line-height: 1.4; margin-bottom: .6rem; }
+.ss { font-size: 9px; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+#s3 .fn { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6; padding-left: 1rem; border-left: 2px solid var(--border-s); }
+#s3 .fn em { color: var(--sub); font-style: normal; }
+
+/* ── S4: COST ── */
+#s4 .layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5vw; max-width: 1100px; width: 100%; align-items: start; }
+#s4 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 3.5vw, 50px); line-height: 1.1; color: var(--white); margin-bottom: .8rem; }
+#s4 .headline em { color: var(--amber); font-style: normal; }
+#s4 .bt { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.7; margin-bottom: 1.2rem; }
+.cline { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.cline:last-of-type { border-bottom: none; }
+.clbl { font-size: 12px; font-weight: 300; color: var(--body); }
+.cval { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--amber); }
+.ctotal { margin-top: 1rem; padding: 12px 16px; background: var(--amber-dim); border: 1px solid var(--amber-b); display: flex; justify-content: space-between; align-items: center; }
+.ctlbl { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); }
+.ctval { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--amber); }
+#s4 .right { display: flex; flex-direction: column; gap: 10px; }
+.ic { background: var(--panel); border: 1px solid var(--border); padding: 1.3rem 1.5rem; }
+.ic-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+.ic-body { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.6; }
+.ic-body strong { color: var(--sub); font-weight: 400; }
+
+/* ── S5: WHY NOW ── */
+#s5 .layout { max-width: 1050px; width: 100%; }
+#s5 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(30px, 4vw, 54px); line-height: 1.1; color: var(--white); margin-bottom: .8rem; max-width: 700px; }
+#s5 .headline em { color: var(--green); font-style: italic; }
+#s5 .subhead { font-size: 14px; font-weight: 300; color: var(--body); line-height: 1.7; max-width: 640px; margin-bottom: 2rem; }
+#s5 .pts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+.pt { background: var(--panel); border: 1px solid var(--border); padding: 1.5rem; }
+.pt-n { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--border-s); line-height: 1; margin-bottom: .6rem; }
+.pt-h { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: .4rem; line-height: 1.3; }
+.pt-b { font-size: 12px; font-weight: 300; color: var(--body); line-height: 1.6; }
+#s5 .thesis { border-left: 2px solid var(--green); background: var(--green-dim); padding: 1rem 1.5rem; }
+#s5 .thesis .q { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--text); line-height: 1.5; }
+
+/* ── S6: SOLUTION ── */
+#s6 .layout { max-width: 1050px; width: 100%; text-align: center; }
+#s6 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 70px); line-height: .98; color: var(--white); margin-bottom: .8rem; }
+#s6 .headline em { color: var(--green); font-style: normal; }
+#s6 .sub { font-size: 15px; font-weight: 300; color: var(--body); margin-bottom: 2.5rem; line-height: 1.65; max-width: 520px; margin-left: auto; margin-right: auto; }
+#s6 .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.pillar { background: var(--panel); border: 1px solid var(--border); padding: 2rem 1.75rem; text-align: left; position: relative; overflow: hidden; }
+.pillar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--green); opacity: 0; transition: opacity .25s; }
+.pillar:hover::before { opacity: 1; }
+.p-num { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--border-s); line-height: 1; margin-bottom: .6rem; }
+.p-head { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--green); margin-bottom: .5rem; }
+.p-body { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.65; }
+
+/* ── S7: HOW IT WORKS + PRICING ── */
+#s7 .layout { max-width: 1100px; width: 100%; }
+#s7 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; color: var(--white); margin-bottom: .4rem; }
+#s7 .sub { font-size: 14px; font-weight: 300; color: var(--body); margin-bottom: 1.8rem; }
+#s7 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+.step { background: var(--panel); border: 1px solid var(--border); padding: 1.6rem; }
+.step-n { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--green); line-height: 1; margin-bottom: .5rem; }
+.step-h { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: .4rem; }
+.step-b { font-size: 12px; font-weight: 300; color: var(--body); line-height: 1.6; }
+#s7 .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.price { background: var(--panel); border: 1px solid var(--border); padding: 1.3rem 1.6rem; display: flex; justify-content: space-between; align-items: center; }
+.price.ft { background: var(--green-dim); border-color: var(--green-b); }
+.ptier { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+.price.ft .ptier { color: var(--green); }
+.pval { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); }
+.price.ft .pval { color: var(--green); }
+.pdesc { font-size: 12px; font-weight: 300; color: var(--muted); max-width: 200px; text-align: right; line-height: 1.4; }
+
+/* ── S8: MARKET ── */
+#s8 .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; max-width: 1100px; width: 100%; align-items: center; }
+#s8 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 58px); line-height: 1.05; color: var(--white); margin-bottom: 1rem; }
+#s8 .headline em { color: var(--green); font-style: normal; }
+#s8 .bt { font-size: 14px; font-weight: 300; color: var(--body); line-height: 1.7; margin-bottom: 1.8rem; }
+#s8 .mbars { display: flex; flex-direction: column; gap: 11px; }
+.mrow { display: flex; align-items: center; gap: 1.2rem; }
+.mlbl { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); width: 32px; flex-shrink: 0; }
+.mtrack { flex: 1; height: 8px; background: var(--panel); border-radius: 100px; overflow: hidden; }
+.mbar { height: 100%; border-radius: 100px; }
+.tam { background: rgba(77,186,128,.2); width: 100%; }
+.sam { background: rgba(77,186,128,.5); width: 38%; }
+.som { background: var(--green); width: 9%; }
+.mval { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); width: 58px; text-align: right; flex-shrink: 0; }
+#s8 .right { display: flex; flex-direction: column; gap: 8px; }
+.mc { background: var(--panel); border: 1px solid var(--border); padding: 1.1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.mc-abbr { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem; }
+.mc-name { font-size: 12px; font-weight: 300; color: var(--body); line-height: 1.4; max-width: 200px; }
+.mc-val { font-family: 'DM Serif Display', serif; font-size: 32px; flex-shrink: 0; text-align: right; }
+.mc-val.t { color: rgba(77,186,128,.35); } .mc-val.s { color: rgba(77,186,128,.65); } .mc-val.o { color: var(--green); }
+#s8 .moat { margin-top: 2px; background: var(--green-dim); border: 1px solid var(--green-b); padding: .9rem 1.4rem; }
+#s8 .moat .ml { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: .25rem; }
+#s8 .moat .mb { font-size: 12px; font-weight: 300; color: var(--body); line-height: 1.5; }
+
+/* ── S9: TRACTION ── */
+#s9 .layout { max-width: 1000px; width: 100%; }
+#s9 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.0; color: var(--white); margin-bottom: .6rem; }
+#s9 .headline em { color: var(--green); font-style: italic; }
+#s9 .sub { font-size: 14px; font-weight: 300; color: var(--body); margin-bottom: 2rem; line-height: 1.65; max-width: 620px; }
+#s9 .tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+.tc { background: var(--panel); border: 1px solid var(--border); padding: 1.6rem 1.4rem; }
+.tn { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 3.5vw, 48px); line-height: 1; color: var(--green); margin-bottom: .4rem; }
+.tl { font-size: 12px; color: var(--muted); line-height: 1.4; }
+#s9 .qcard { background: var(--panel); border: 1px solid var(--border); border-left: 2px solid var(--green); padding: 1.4rem 1.75rem; }
+#s9 .qt { font-size: 14px; font-weight: 300; font-style: italic; color: var(--sub); line-height: 1.65; margin-bottom: .6rem; }
+#s9 .qa { font-size: 11px; color: var(--muted); letter-spacing: .06em; }
+
+/* ── S10: ASK ── */
+#s10 .layout { max-width: 880px; width: 100%; text-align: center; }
+#s10 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(48px, 7.5vw, 100px); line-height: .92; color: var(--white); margin-bottom: 1.1rem; }
+#s10 .headline em { color: var(--green); font-style: normal; }
+#s10 .sub { font-size: 15px; font-weight: 300; color: var(--body); line-height: 1.65; max-width: 540px; margin: 0 auto 2.2rem; }
+#s10 .agrid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 1.8rem; text-align: left; }
+.ac { background: var(--panel); border: 1px solid var(--border); padding: 1.6rem 1.75rem; }
+.al { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+.av { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--white); margin-bottom: .3rem; line-height: 1; }
+.ad { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.5; }
+#s10 .contact { font-size: 13px; color: var(--muted); letter-spacing: .06em; }
+#s10 .contact a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border-s); padding-bottom: 1px; transition: color .2s, border-color .2s; }
+#s10 .contact a:hover { color: var(--green); border-color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div class="logo-mark">Bureau<span class="g">AI</span></div>
+<div class="slide-counter" id="counter">01 / 10</div>
+
+<div class="deck" id="deck">
+
+<!-- S1: COVER -->
+<div class="slide active" id="s1">
+  <div class="inner">
+    <div class="pill a1" style="margin-bottom:1.8rem">Antler Application · Pre-Seed 2026</div>
+    <div class="name a2">Bureau<span class="g">AI</span></div>
+    <p class="tagline a3">
+      The AI compliance department for NYC businesses.<br>
+      We file permits. Manage renewals. Handle violations.<br>
+      Across every agency — completely automatically.
+    </p>
+    <div class="agency-row a4">
+      <span class="pill">DOH</span>
+      <span class="pill">DOB</span>
+      <span class="pill">FDNY</span>
+      <span class="pill">DCWP</span>
+      <span class="pill">SLA</span>
+      <span class="pill">+ more</span>
+    </div>
+  </div>
+</div>
+
+<!-- S2: PROBLEM -->
+<div class="slide" id="s2">
+  <div class="layout">
+    <div>
+      <div class="overline a1">The Problem</div>
+      <h2 class="headline a2">Every NYC business navigates a compliance maze. <em>Alone.</em></h2>
+      <p class="body-text a3">When a DOH inspector leaves, an owner receives a paper notice listing violations. After that — nothing. No guidance, no deadlines, no roadmap. And DOH is just one of the agencies most businesses must navigate.</p>
+      <div class="pain-list a4">
+        <div class="pain-item">Re-inspection can happen within days — owners don't know when</div>
+        <div class="pain-item">Critical violations carry fines up to $1,000 each, and they stack</div>
+        <div class="pain-item">Missing a remediation deadline escalates the fine automatically</div>
+        <div class="pain-item">No service handles this end-to-end for a small business</div>
+        <div class="pain-item">DOH charges $400 for their own consultation just to explain a notice</div>
+      </div>
+    </div>
+    <div class="icard a3">
+      <div class="ilabel">Real inspection · Chomp Chomp Thai · Manhattan · May 28 2026</div>
+      <div class="iname">Chomp Chomp</div>
+      <div class="iaddr">78 East 1st Street, East Village, NY 10009</div>
+      <div class="vrow"><span class="badge badge-c">Critical</span>Live roaches in facility's food or non-food area</div>
+      <div class="vrow"><span class="badge badge-c">Critical</span>Hot TCS food item not held at or above 140°F</div>
+      <div class="vrow"><span class="badge badge-c">Critical</span>Cold TCS food held above 41°F; processed fish above 38°F</div>
+      <div class="vrow"><span class="badge badge-c">Critical</span>Food contact surface not properly sanitized</div>
+      <div class="vrow"><span class="badge badge-n">Non-crit</span>Conditions conducive to rodents, insects, pests</div>
+      <div class="notice">Owner receives a paper notice. <strong>No deadline. No action plan. No follow-up.</strong> Re-inspection could come in 7 days.</div>
+    </div>
+  </div>
+</div>
+
+<!-- S3: SCALE -->
+<div class="slide" id="s3">
+  <div class="layout">
+    <div class="overline a1">The Scale · NYC 2025 · Live Data</div>
+    <h2 class="headline a2">This isn't a niche problem. It's the whole city.</h2>
+    <p class="subhead a3">Every business in New York City answers to multiple regulatory agencies. The figures below are from DOH alone — one of eight or more agencies most businesses must simultaneously navigate.</p>
+    <div class="sgrid a4">
+      <div class="sblock">
+        <div class="sn red">131K</div>
+        <div class="sl">DOH violation citations issued in 2025 YTD</div>
+        <div class="ss">NYC Open Data · DOHMH</div>
+      </div>
+      <div class="sblock">
+        <div class="sn amb">69K</div>
+        <div class="sl">Critical violations flagged — 52% of total</div>
+        <div class="ss">NYC Open Data · DOHMH</div>
+      </div>
+      <div class="sblock">
+        <div class="sn wh">200K+</div>
+        <div class="sl">NYC businesses regulated across 8+ agencies</div>
+        <div class="ss">NYC Dept. of Small Business Services</div>
+      </div>
+      <div class="sblock">
+        <div class="sn gr">5,269</div>
+        <div class="sl">Businesses that received a closure order this year</div>
+        <div class="ss">NYC Open Data · DOHMH</div>
+      </div>
+    </div>
+    <p class="fn a5">Add DOB permits, FDNY inspections, DCWP license renewals, SLA filings — <em>the same businesses are navigating all of this simultaneously, with zero infrastructure support.</em></p>
+  </div>
+</div>
+
+<!-- S4: COST -->
+<div class="slide" id="s4">
+  <div class="layout">
+    <div>
+      <div class="overline a1">The Financial Impact</div>
+      <h2 class="headline a2">A single inspection can cost <em>thousands.</em> A consultant costs more.</h2>
+      <p class="bt a3">Fines stack. Each critical violation is a separate charge. Add re-inspection fees, emergency vendors, and days of closure — a surprise inspection easily becomes a $10,000+ event.</p>
+      <div class="a4">
+        <div class="cline"><span class="clbl">Critical violation fine (per violation)</span><span class="cval">$200–$1,000</span></div>
+        <div class="cline"><span class="clbl">Average critical violations per inspection</span><span class="cval">2.8×</span></div>
+        <div class="cline"><span class="clbl">Re-inspection fee (DOH)</span><span class="cval">$150–$350</span></div>
+        <div class="cline"><span class="clbl">Emergency remediation (pest / HVAC)</span><span class="cval">$800–$3,000</span></div>
+        <div class="cline"><span class="clbl">Revenue lost per day of closure</span><span class="cval">$2,000–$8,000</span></div>
+        <div class="ctotal"><span class="ctlbl">Typical total event cost</span><span class="ctval">$5K–$15K+</span></div>
+      </div>
+    </div>
+    <div class="right a3">
+      <div class="ic">
+        <div class="ic-lbl">Revenue Impact</div>
+        <div class="ic-body">Harvard research on 15,000+ NYC restaurants found A grades drive <strong>measurably higher revenue</strong>. One Yelp star = 5–9% revenue shift. C grades increase closure probability significantly.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-lbl">Reputation</div>
+        <div class="ic-body">Operators report <strong>months</strong> to regain customer trust after a public health violation. Negative hygiene reviews reduce seat fill rate for weeks after posting.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-lbl">Annual Consultant Cost</div>
+        <div class="ic-body">Hiring a compliance expeditor for ongoing multi-agency management costs <strong>$5,000–$20,000/year.</strong> Most small businesses can't afford it — so they wing it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5: WHY NOW -->
+<div class="slide" id="s5">
+  <div class="layout">
+    <div class="overline a1">The Moment</div>
+    <h2 class="headline a2">AI is replacing compliance consultants — the same way software replaced <em>bookkeepers.</em></h2>
+    <p class="subhead a3">The last decade was about tools that help humans do compliance faster. The next category is companies that skip the human entirely and just do the work. Compliance is ready — it's already outsourced, heavily rule-based, and deeply painful.</p>
+    <div class="pts a4">
+      <div class="pt">
+        <div class="pt-n">10×</div>
+        <div class="pt-h">Services market dwarfs software</div>
+        <div class="pt-b">Total spend on compliance services is 10× larger than spend on compliance software. We're replacing a service, not improving a tool.</div>
+      </div>
+      <div class="pt">
+        <div class="pt-n">→</div>
+        <div class="pt-h">Already outsourced</div>
+        <div class="pt-b">Compliance is already delegated to consultants and expeditors. Replacing an incumbent service is structurally simpler than replacing entrenched software.</div>
+      </div>
+      <div class="pt">
+        <div class="pt-n">Now</div>
+        <div class="pt-h">AI can do the full workflow</div>
+        <div class="pt-b">For the first time, AI can read agency notices, draft responses, file forms, and track deadlines — at human level, at a fraction of the cost.</div>
+      </div>
+    </div>
+    <div class="thesis a5">
+      <div class="q">"We're not building a tool that helps owners manage compliance. We're building the compliance team."</div>
+    </div>
+  </div>
+</div>
+
+<!-- S6: SOLUTION -->
+<div class="slide" id="s6">
+  <div class="layout">
+    <div class="overline a1">The Solution</div>
+    <h2 class="headline a2">BureauAI handles your compliance — <em>completely.</em></h2>
+    <p class="sub a3">Three service tiers. No consultants. No missed deadlines. No surprises. Starting at $99/mo — a fraction of what a compliance expeditor costs.</p>
+    <div class="pillars a4">
+      <div class="pillar">
+        <div class="p-num">01</div>
+        <div class="p-head">We File</div>
+        <div class="p-body">Permits, license applications, and renewals submitted directly to NYC agencies on your behalf. DOH, DOB, FDNY, DCWP, SLA — we handle all of it. You never touch a form.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">02</div>
+        <div class="p-head">We Respond</div>
+        <div class="p-body">Violation notices handled the same day. We draft responses, coordinate re-inspections, and manage appeals with the relevant agency on your behalf.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">03</div>
+        <div class="p-head">We Watch</div>
+        <div class="p-body">Proactive monitoring across every agency. Alerts before deadlines hit. Inspection prep delivered automatically. Nothing falls through the cracks.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S7: HOW IT WORKS -->
+<div class="slide" id="s7">
+  <div class="layout">
+    <div class="overline a1">How It Works</div>
+    <h2 class="headline a2">Five minutes to set up. Then we handle everything.</h2>
+    <p class="sub a3">You tell us about your business once. We map every compliance obligation across every relevant agency. Then we own it.</p>
+    <div class="steps a4">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-h">Tell Us</div>
+        <div class="step-b">Business name, type, and borough. We pull your full agency history from NYC Open Data and map every outstanding obligation.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-h">We Map It</div>
+        <div class="step-b">Our AI reads every permit, license, and filing requirement across DOH, DOB, FDNY, DCWP, SLA, and more. A full compliance picture in seconds.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-h">We Handle It</div>
+        <div class="step-b">Filings submitted. Violations responded to. Renewals filed. Your dashboard shows exactly what we're handling in real time.</div>
+      </div>
+    </div>
+    <div class="pricing a5">
+      <div class="price">
+        <div><div class="ptier">Essentials</div><div class="pval">$99<span style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
+        <div class="pdesc">Monitoring, deadline alerts, violation guidance — 1 location</div>
+      </div>
+      <div class="price ft">
+        <div><div class="ptier">Full-Service</div><div class="pval">$299<span style="font-size:13px;font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
+        <div class="pdesc" style="color:var(--green);opacity:.7">Active filing, renewals, violation response — 1 location</div>
+      </div>
+      <div class="price">
+        <div><div class="ptier">Enterprise</div><div class="pval">$599+<span style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
+        <div class="pdesc">Multi-location, dedicated compliance agent, complex cases</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S8: MARKET -->
+<div class="slide" id="s8">
+  <div class="layout">
+    <div>
+      <div class="overline a1">Market Size</div>
+      <h2 class="headline a2">Every business in every city. Starting with <em>NYC.</em></h2>
+      <p class="bt a3">New York City has 200,000+ businesses regulated by multiple agencies. It's the most-inspected, most-fined business environment in the country — and the ideal proving ground for national expansion.</p>
+      <div class="mbars a4">
+        <div class="mrow"><span class="mlbl">TAM</span><div class="mtrack"><div class="mbar tam"></div></div><span class="mval">$8B</span></div>
+        <div class="mrow"><span class="mlbl">SAM</span><div class="mtrack"><div class="mbar sam"></div></div><span class="mval">$1.1B</span></div>
+        <div class="mrow"><span class="mlbl">SOM</span><div class="mtrack"><div class="mbar som"></div></div><span class="mval">$72M</span></div>
+      </div>
+    </div>
+    <div class="right a3">
+      <div class="mc">
+        <div><div class="mc-abbr">TAM — Total Addressable Market</div><div class="mc-name">US small business regulatory compliance services — legal, consulting, expediting</div></div>
+        <div class="mc-val t">$8B</div>
+      </div>
+      <div class="mc">
+        <div><div class="mc-abbr">SAM — Serviceable Addressable Market</div><div class="mc-name">NYC metro + 12 major US cities with open regulatory data and active enforcement</div></div>
+        <div class="mc-val s">$1.1B</div>
+      </div>
+      <div class="mc">
+        <div><div class="mc-abbr">SOM — Serviceable Obtainable Market</div><div class="mc-name">NYC independent businesses across all sectors — Year 1 service target</div></div>
+        <div class="mc-val o">$72M</div>
+      </div>
+      <div class="moat">
+        <div class="ml">The Moat</div>
+        <div class="mb">Proprietary NYC violation data + remediation outcomes + operator feedback loop. The richest regulatory data environment in the US — and it compounds every inspection cycle.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S9: TRACTION -->
+<div class="slide" id="s9">
+  <div class="layout">
+    <div class="overline a1">Early Traction</div>
+    <h2 class="headline a2">We found our customers before building the <em>product.</em></h2>
+    <p class="sub a3">Using live DOH violation data, we built a targeted outreach list of NYC businesses with active critical violations — and started conversations with real operators before a single sales hire.</p>
+    <div class="tgrid a4">
+      <div class="tc"><div class="tn">65+</div><div class="tl">Verified email leads enriched from live DOH violation data</div></div>
+      <div class="tc"><div class="tn">185</div><div class="tl">Independent businesses in active outreach pipeline</div></div>
+      <div class="tc"><div class="tn">~50%</div><div class="tl">Email-findable rate on targeted violation leads</div></div>
+      <div class="tc"><div class="tn">Live</div><div class="tl">Product at bureauai.vercel.app — free audit available today</div></div>
+    </div>
+    <div class="qcard a5">
+      <div class="qt">"I noticed your restaurant received a critical DOH violation on May 30th. I'm building BureauAI — it handles NYC compliance so you don't have to. Up for a 15-min call? No pitch."</div>
+      <div class="qa">— Cold outreach message generating active replies</div>
+    </div>
+  </div>
+</div>
+
+<!-- S10: ASK -->
+<div class="slide" id="s10">
+  <div class="layout">
+    <div class="overline a1">The Ask</div>
+    <h2 class="headline a2">Join us<br>before the<br><em>C grade.</em></h2>
+    <p class="sub a3">We're raising a pre-seed round to build the compliance infrastructure every NYC business needs — and nobody has built yet.</p>
+    <div class="agrid a4">
+      <div class="ac"><div class="al">Raise</div><div class="av">$350K</div><div class="ad">Pre-seed · SAFE note · 18-month runway for product build and first 500 customers</div></div>
+      <div class="ac"><div class="al">Use of Funds</div><div class="av">3 Hires</div><div class="ad">Full-stack engineer · Founding sales rep · Compliance advisor (former DOH inspector)</div></div>
+      <div class="ac"><div class="al">12-Month Target</div><div class="av">500</div><div class="ad">Paying businesses in NYC · avg $149/mo ARPU · ~$890K ARR run rate · proof of unit economics</div></div>
+      <div class="ac"><div class="al">The Moat</div><div class="av">Data</div><div class="ad">Proprietary NYC regulatory database + remediation outcomes. Every inspection cycle makes it stronger.</div></div>
+    </div>
+    <div class="contact a5">Get in touch &nbsp;·&nbsp; <a href="mailto:arulke01@gmail.com">arulke01@gmail.com</a> &nbsp;·&nbsp; <a href="https://bureauai.vercel.app">bureauai.vercel.app</a></div>
+  </div>
+</div>
+
+</div>
+
+<div class="nav" id="nav"></div>
+<div class="nav-arrows">
+  <button class="nav-btn" id="prev">←</button>
+  <button class="nav-btn" id="next">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('nav');
+const prog = document.getElementById('progress');
+const ctr = document.getElementById('counter');
+let cur = 0;
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goTo(i));
+  nav.appendChild(d);
+});
+
+function goTo(n) {
+  if (n === cur) return;
+  const prev = cur;
+  slides[prev].classList.remove('active');
+  slides[prev].classList.add('exit');
+  setTimeout(() => slides[prev].classList.remove('exit'), 300);
+  cur = ((n % slides.length) + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  prog.style.width = ((cur + 1) / slides.length * 100) + '%';
+  ctr.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+}
+
+document.getElementById('next').addEventListener('click', () => goTo(cur + 1));
+document.getElementById('prev').addEventListener('click', () => goTo(cur - 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') goTo(cur + 1);
+  if (e.key === 'ArrowLeft') goTo(cur - 1);
+});
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) goTo(dx < 0 ? cur + 1 : cur - 1);
+});
+prog.style.width = (1 / slides.length * 100) + '%';
+</script>
+</body>
+</html>
