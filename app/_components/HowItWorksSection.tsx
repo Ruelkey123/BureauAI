@@ -1,25 +1,63 @@
-const steps = [
-  { n: '01', title: 'Tell us about your business', body: 'Share your business type, borough, and current situation. That\'s all we need to get started.' },
-  { n: '02', title: 'We take over your compliance', body: 'BureauAI maps every permit, license, and filing requirement for your business — then begins managing them on your behalf across all NYC agencies.' },
-  { n: '03', title: 'You get a compliance team', body: 'Real-time status of everything we\'re handling — filings submitted, violations defended, renewals managed. Zero action required from you.' },
+const STAGES = [
+  {
+    when: 'Day one',
+    title: 'You describe the business once',
+    body: 'Type, borough, stage, and whatever is currently on fire. Four questions, no account, no document upload.',
+    you: 'Ten minutes',
+  },
+  {
+    when: 'Week one',
+    title: 'We map every obligation you have',
+    body: 'Which agencies you answer to, which instruments you hold, what has lapsed, what is due, and what a past violation is still costing you.',
+    you: 'Nothing',
+  },
+  {
+    when: 'Ongoing',
+    title: 'We hold the calendar and file the work',
+    body: 'Renewals go in before the window closes. Inspections get prepared for. Notices get answered. You hear from us when a decision is genuinely yours to make.',
+    you: 'Nothing',
+  },
 ]
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.015)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-serif text-4xl md:text-5xl text-center mb-16" style={{ color: '#e8e8e0' }}>
-          How it works
+    <section className="border-t border-hair px-5 py-20 sm:px-8 lg:py-28">
+      <div className="mx-auto max-w-sheet">
+        <h2 className="display max-w-3xl text-balance text-head uppercase text-ink">
+          What the engagement actually looks like.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {steps.map(({ n, title, body }) => (
-            <div key={n}>
-              <div className="font-serif text-6xl mb-4" style={{ color: '#4dba80' }}>{n}</div>
-              <h3 className="font-semibold mb-2" style={{ color: '#e8e8e0' }}>{title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'rgba(232,232,224,0.45)' }}>{body}</p>
-            </div>
+
+        <ol className="mt-12 grid gap-px bg-hair sm:grid-cols-3">
+          {STAGES.map(({ when, title, body, you }) => (
+            <li key={when} className="flex flex-col bg-void p-6 sm:p-7">
+              {/* No label above the heading — the heading carries itself. The
+                  stage and the effort read together as data underneath it. */}
+              <span aria-hidden="true" className="h-px w-full bg-signal-hair" />
+
+              <h3 className="display mt-6 text-lg uppercase leading-tight text-ink">
+                {title}
+              </h3>
+              <p className="mt-3.5 flex-1 text-sm font-light leading-relaxed text-ink-2">
+                {body}
+              </p>
+
+              <dl className="mt-7 border-t border-hair pt-3.5">
+                <div className="flex items-baseline justify-between gap-3">
+                  <dt className="font-mono text-micro uppercase tracking-[0.12em] text-ink-3">
+                    When
+                  </dt>
+                  <dd className="font-mono text-xs text-signal">{when}</dd>
+                </div>
+                <div className="mt-2 flex items-baseline justify-between gap-3">
+                  <dt className="font-mono text-micro uppercase tracking-[0.12em] text-ink-3">
+                    Your effort
+                  </dt>
+                  <dd className="font-mono text-xs text-ink">{you}</dd>
+                </div>
+              </dl>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

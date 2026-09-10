@@ -1,77 +1,85 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Tokens resolve to the CSS custom properties in globals.css so there is one
+ * source of truth. Nothing in this project should ship a raw hex value.
+ */
 const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  safelist: [
-    'opacity-0',
-    'opacity-100',
-    'translate-y-0',
-    'translate-y-6',
-    'transition-all',
-    'duration-700',
-    'ease-out',
-    'delay-100',
-    'delay-200',
-    'delay-300',
-    'delay-400',
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        cream: '#f0f0e8',
-        green: {
-          DEFAULT: '#3a7a5c',
-          light: '#4a9a72',
-          bg: '#e8f0ea',
+        void: 'var(--void)',
+        panel: {
+          DEFAULT: 'var(--panel)',
+          hi: 'var(--panel-hi)',
         },
-        navy: {
-          DEFAULT: '#0f1e2e',
-          mid: '#1a3044',
+        hair: {
+          DEFAULT: 'var(--hair)',
+          bright: 'var(--hair-bright)',
         },
-        bureau: {
-          text: '#1a2535',
-          muted: '#6b7a8d',
-          border: '#dde0d8',
+        ink: {
+          DEFAULT: 'var(--ink)',
+          2: 'var(--ink-2)',
+          3: 'var(--ink-3)',
+        },
+        signal: {
+          DEFAULT: 'var(--signal)',
+          deep: 'var(--signal-deep)',
+          wash: 'var(--signal-wash)',
+          hair: 'var(--signal-hair)',
+        },
+        flag: {
+          DEFAULT: 'var(--flag)',
+          wash: 'var(--flag-wash)',
+          hair: 'var(--flag-hair)',
+        },
+        warn: {
+          DEFAULT: 'var(--warn)',
+          wash: 'var(--warn-wash)',
+          hair: 'var(--warn-hair)',
         },
       },
       fontFamily: {
-        serif: ['var(--font-dm-serif)', 'Georgia', 'serif'],
-        sans: ['var(--font-inter)', '-apple-system', 'sans-serif'],
+        display: ['var(--font-archivo)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-public-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
-      keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        floatA: {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-          '33%': { transform: 'translate(30px, -20px) scale(1.04)' },
-          '66%': { transform: 'translate(-20px, 15px) scale(0.97)' },
-        },
-        floatB: {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-          '40%': { transform: 'translate(-25px, 20px) scale(1.03)' },
-          '70%': { transform: 'translate(20px, -15px) scale(0.98)' },
-        },
+      /**
+       * One ramp, eight steps. Overrides Tailwind's defaults deliberately so
+       * `text-sm` means this project's small, not Tailwind's. Arbitrary
+       * `text-[…rem]` values are off-system — DESIGN.md is the authority and
+       * the detector checks against it.
+       */
+      fontSize: {
+        // Display
+        plate: ['clamp(8rem, 23vw, 19rem)', { lineHeight: '0.72', letterSpacing: '-0.055em' }],
+        lede: ['clamp(2.3rem, 5.4vw, 4.6rem)', { lineHeight: '0.96', letterSpacing: '-0.042em' }],
+        head: ['clamp(1.9rem, 4vw, 3.1rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
+        figure: ['var(--text-figure)', { lineHeight: '1', letterSpacing: '-0.03em' }],
+        // Text — values live in globals.css so inline styles can share them.
+        xl: ['var(--text-xl)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        lg: ['var(--text-lg)', { lineHeight: '1.3', letterSpacing: '-0.015em' }],
+        md: ['var(--text-md)', { lineHeight: '1.55' }],
+        base: ['var(--text-base)', { lineHeight: '1.6' }],
+        sm: ['var(--text-sm)', { lineHeight: '1.6' }],
+        xs: ['var(--text-xs)', { lineHeight: '1.5' }],
+        '2xs': ['var(--text-2xs)', { lineHeight: '1.4' }],
+        // The label voice: mono, uppercase, tracked.
+        micro: ['var(--text-micro)', { lineHeight: '1.2', letterSpacing: '0.1em' }],
+      },
+      boxShadow: {
+        'lift-1': 'var(--lift-1)',
+        'lift-2': 'var(--lift-2)',
+        'lift-3': 'var(--lift-3)',
+      },
+      maxWidth: {
+        sheet: '80rem',
       },
       animation: {
-        'fade-up': 'fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-up-1': 'fadeUp 0.65s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-up-2': 'fadeUp 0.65s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-up-3': 'fadeUp 0.65s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-up-4': 'fadeUp 0.65s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-up-5': 'fadeUp 0.65s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-in': 'fadeIn 1s ease forwards',
-        'float-a': 'floatA 14s ease-in-out infinite',
-        'float-b': 'floatB 18s ease-in-out infinite',
+        strike: 'strike 0.75s cubic-bezier(0.16, 1, 0.3, 1) both',
+        settle: 'settle 0.55s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'ink-in': 'inkIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both',
       },
     },
   },

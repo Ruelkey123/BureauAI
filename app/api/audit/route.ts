@@ -77,15 +77,19 @@ export async function POST(request: NextRequest) {
   let stream
   try {
     stream = await ai.models.generateContentStream({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3.6-flash',
       contents: userMessage,
       config: {
         systemInstruction: SYSTEM_PROMPT,
         maxOutputTokens: 1024,
       },
     })
-  } catch {
-    // API unavailable — stream a realistic seeded response
+  } catch (err) {
+    // API unavailable — stream a realistic seeded response so the visitor still
+    // gets something useful. Log loudly: a retired model or a bad key otherwise
+    // looks identical to a working audit, and this fallback once masked a dead
+    // model in production for every visitor.
+    console.error('[audit] Gemini call failed, serving seeded fallback:', err)
     return new Response(
       streamSeeded(seededResponse(businessType, borough, stage, situation)),
       { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }

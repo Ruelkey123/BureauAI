@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-color",
+        "value": "rgba(255,255,255,0.07)",
+        "createdAt": "2026-08-26T14:20:17.567Z",
+        "reason": "Claude decided: engraving highlight on the grade plate character, recorded in .impeccable/design.json extensions.materials.engraving; a material token the detector reads only from frontmatter"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0,0,0,0.5)",
+        "createdAt": "2026-08-26T14:20:17.629Z",
+        "reason": "Claude decided: engraving shadow paired with the highlight above; same sidecar material token"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "68px",
+        "createdAt": "2026-08-26T17:43:41.202Z",
+        "reason": "Claude decided: the dashboard grade-plate figure, a deliberate display one-off between --text-figure and the landing plate scale; documented inline and in DESIGN.md rather than inventing a ramp step used once"
+      }
+    ]
+  }
+}

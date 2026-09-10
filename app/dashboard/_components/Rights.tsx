@@ -1,15 +1,15 @@
 import React from 'react'
 
-const BG = '#0d1520'
-const TEXT = '#e8e8e0'
-const MUTED = 'rgba(232,232,224,0.55)'
-const DIM = 'rgba(232,232,224,0.3)'
+const BG = 'var(--panel)'
+const TEXT = 'var(--ink)'
+const MUTED = 'var(--ink-2)'
+const DIM = 'var(--ink-3)'
 
 const SECTIONS = [
   {
     situation: 'During an Inspection',
     agency: 'DOHMH · FDNY · DOB',
-    color: '#4d9eba',
+    color: 'var(--ink-2)',
     rights: [
       {
         title: 'Right to see inspector credentials',
@@ -36,7 +36,7 @@ const SECTIONS = [
   {
     situation: 'After Receiving a Violation',
     agency: 'ECB · DOHMH · FDNY',
-    color: '#f59e0b',
+    color: 'var(--warn)',
     rights: [
       {
         title: 'Right to a hearing before paying any fine',
@@ -63,7 +63,7 @@ const SECTIONS = [
   {
     situation: 'License Applications & Renewals',
     agency: 'DCWP · DOHMH · SLA',
-    color: '#4dba80',
+    color: 'var(--signal)',
     rights: [
       {
         title: 'Right to a decision within 55 business days',
@@ -90,7 +90,7 @@ const SECTIONS = [
   {
     situation: 'Health & Safety Closures',
     agency: 'DOHMH',
-    color: '#ff7c4d',
+    color: 'var(--flag)',
     rights: [
       {
         title: 'Right to an immediate hearing after emergency closure',
@@ -117,25 +117,25 @@ export default function Rights() {
 
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '4px' }}>
         <div>
-          <h2 style={{ fontWeight: '600', fontSize: '13px', color: TEXT, margin: '0 0 4px 0' }}>Your Legal Rights</h2>
-          <p style={{ fontSize: '12px', color: MUTED, margin: 0 }}>
+          <h2 style={{ fontWeight: '600', fontSize: 'var(--text-xs)', color: TEXT, margin: '0 0 4px 0' }}>Your Legal Rights</h2>
+          <p style={{ fontSize: 'var(--text-xs)', color: MUTED, margin: 0 }}>
             Plain-English summaries of your rights as an NYC business owner. Always consult an attorney for specific legal advice.
           </p>
         </div>
       </div>
 
       {SECTIONS.map(({ situation, agency, color, rights }) => (
-        <div key={situation} style={{ background: 'rgba(255,255,255,0.055)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', overflow: 'hidden' }}>
+        <div key={situation} style={{ background: 'var(--panel-hi)', border: '1px solid var(--hair)', borderRadius: '0', overflow: 'hidden' }}>
           {/* Section header */}
-          <div style={{ padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
+          <div style={{ padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--hair)', background: 'var(--panel)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '3px', height: '20px', background: color, borderRadius: '2px' }} />
+              <div style={{ width: '3px', height: '20px', background: color, borderRadius: '0' }} />
               <div>
-                <div style={{ fontWeight: '600', fontSize: '12px', color: TEXT }}>{situation}</div>
-                <div style={{ fontSize: '10px', marginTop: '2px', color: DIM, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{agency}</div>
+                <div style={{ fontWeight: '600', fontSize: 'var(--text-xs)', color: TEXT }}>{situation}</div>
+                <div style={{ fontSize: 'var(--text-micro)', marginTop: '2px', color: DIM, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{agency}</div>
               </div>
             </div>
-            <span style={{ fontSize: '10px', padding: '2px 8px', borderRadius: '999px', background: `${color}15`, color, border: `1px solid ${color}30` }}>
+            <span style={{ fontSize: 'var(--text-micro)', padding: '2px 8px', borderRadius: '0', background: `${color}15`, color, border: `1px solid ${color}30` }}>
               {rights.length} rights
             </span>
           </div>
@@ -143,7 +143,7 @@ export default function Rights() {
           {/* Rights list */}
           <div>
             {rights.map(({ title, body, cite }, i) => (
-              <div key={title} style={{ padding: '16px 20px', borderBottom: i < rights.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+              <div key={title} style={{ padding: '16px 20px', borderBottom: i < rights.length - 1 ? '1px solid var(--panel-hi)' : 'none' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
                   <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: `${color}15`, border: `1px solid ${color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
@@ -151,9 +151,9 @@ export default function Rights() {
                     </svg>
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: '600', fontSize: '12px', color: TEXT, marginBottom: '6px' }}>{title}</div>
-                    <p style={{ fontSize: '12px', lineHeight: '1.6', color: MUTED, margin: 0 }}>{body}</p>
-                    <div style={{ marginTop: '8px', fontSize: '10px', color: DIM, fontFamily: 'monospace' }}>{cite}</div>
+                    <div style={{ fontWeight: '600', fontSize: 'var(--text-xs)', color: TEXT, marginBottom: '6px' }}>{title}</div>
+                    <p style={{ fontSize: 'var(--text-xs)', lineHeight: '1.6', color: MUTED, margin: 0 }}>{body}</p>
+                    <div style={{ marginTop: '8px', fontSize: 'var(--text-micro)', color: DIM, fontFamily: 'monospace' }}>{cite}</div>
                   </div>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function Rights() {
         </div>
       ))}
 
-      <div style={{ textAlign: 'center', fontSize: '10px', padding: '8px 0', color: 'rgba(232,232,224,0.2)' }}>
+      <div style={{ textAlign: 'center', fontSize: 'var(--text-micro)', padding: '8px 0', color: 'var(--ink-3)' }}>
         This is general information, not legal advice. Rights may vary by situation. Consult a licensed NYC attorney for your specific case.
       </div>
     </div>

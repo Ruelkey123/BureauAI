@@ -98,11 +98,11 @@ const navItems: { id: Tab; label: string; icon: React.ReactNode }[] = [
 
 export default function Sidebar({ tab, setTab, onProfileClick }: SidebarProps) {
   return (
-    <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0" style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}>
-      <Link href="/" className="w-7 h-7 bg-green rounded-md flex items-center justify-center mb-3 hover:bg-green-light transition-colors relative group/logo">
-        <div className="w-3 h-3 border-2 border-cream rounded-sm" />
-        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/logo:opacity-100 transition-all duration-150 translate-x-1 group-hover/logo:translate-x-0 z-50"
-          style={{ background: '#0f1e2e', color: '#e8e8e0', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>
+    <aside className="w-14 bg-navy flex flex-col items-center py-4 gap-1 flex-shrink-0" style={{ borderRight: '1px solid var(--hair)' }}>
+      <Link href="/" className="w-7 h-7 bg-green rounded-none flex items-center justify-center mb-3 hover:bg-green-light transition-colors relative group/logo">
+        <div className="w-3 h-3 border-2 border-cream rounded-none" />
+        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-none whitespace-nowrap pointer-events-none opacity-0 group-hover/logo:opacity-100 transition-all duration-150 translate-x-1 group-hover/logo:translate-x-0 z-50"
+          style={{ background: 'var(--panel)', color: 'var(--ink)', border: '1px solid var(--hair)', boxShadow: 'var(--lift-pop)' }}>
           Back to BureauAI
         </span>
       </Link>
@@ -110,26 +110,26 @@ export default function Sidebar({ tab, setTab, onProfileClick }: SidebarProps) {
         <button
           key={id}
           onClick={() => setTab(id)}
-          className={`relative group/nav w-9 h-9 rounded-md flex items-center justify-center transition-colors text-cream ${
+          className={`relative group/nav w-9 h-9 rounded-none flex items-center justify-center transition-colors text-cream ${
             tab === id
               ? 'bg-white/10 border border-white/20'
               : 'opacity-40 hover:opacity-80'
           }`}
         >
           {icon}
-          <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-all duration-150 translate-x-1 group-hover/nav:translate-x-0 z-50"
-            style={{ background: '#0f1e2e', color: tab === id ? '#4dba80' : '#e8e8e0', border: `1px solid ${tab === id ? 'rgba(77,186,128,0.3)' : 'rgba(255,255,255,0.1)'}`, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>
+          <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-none whitespace-nowrap pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-all duration-150 translate-x-1 group-hover/nav:translate-x-0 z-50"
+            style={{ background: 'var(--panel)', color: tab === id ? 'var(--signal)' : 'var(--ink)', border: `1px solid ${tab === id ? 'var(--signal-hair)' : 'var(--hair)'}`, boxShadow: 'var(--lift-pop)' }}>
             {label}
           </span>
         </button>
       ))}
       {/* Business profile button */}
       <button onClick={onProfileClick} className="mt-auto relative group/profile flex flex-col items-center gap-1 w-full py-1 transition-opacity hover:opacity-100 opacity-70">
-        <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'linear-gradient(135deg, #0d2218, #1a4d30)', border: '1px solid rgba(77,186,128,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: '700', color: '#4dba80', fontFamily: 'Georgia, serif' }}>
+        <div style={{ width: '30px', height: '30px', borderRadius: '0', background: 'linear-gradient(135deg, var(--panel), var(--panel-hi))', border: '1px solid var(--signal-hair)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 'var(--text-xs)', fontWeight: '700', color: 'var(--signal)', fontFamily: 'var(--font-archivo), sans-serif' }}>
           J
         </div>
-        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-md whitespace-nowrap pointer-events-none opacity-0 group-hover/profile:opacity-100 transition-all duration-150 translate-x-1 group-hover/profile:translate-x-0 z-50"
-          style={{ background: '#0f1e2e', color: '#e8e8e0', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 4px 12px rgba(0,0,0,0.4)', bottom: '4px' }}>
+        <span className="absolute left-full ml-3 px-2.5 py-1.5 text-xs font-medium rounded-none whitespace-nowrap pointer-events-none opacity-0 group-hover/profile:opacity-100 transition-all duration-150 translate-x-1 group-hover/profile:translate-x-0 z-50"
+          style={{ background: 'var(--panel)', color: 'var(--ink)', border: '1px solid var(--hair)', boxShadow: 'var(--lift-pop)', bottom: '4px' }}>
           Business Profile
         </span>
       </button>

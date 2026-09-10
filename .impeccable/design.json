@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-26T02:15:00Z",
+  "title": "Design System: BureauAI",
+  "extensions": {
+    "colorMeta": {
+      "strategy": "restrained",
+      "ground": "dark",
+      "rationale": "Graphite neutral ramp plus one brand accent. Two further hues are admitted only as functional state and only ever as ink.",
+      "ramps": {
+        "graphite": [
+          "#0e1013",
+          "#16191e",
+          "#1c2027",
+          "#2a2f37",
+          "#3b424d"
+        ],
+        "ink": [
+          "#f2f4f7",
+          "#a8b2bf",
+          "#7d8896"
+        ],
+        "signal": [
+          "#c8ff3c",
+          "#a4d81c",
+          "rgba(200,255,60,0.26)",
+          "rgba(200,255,60,0.07)"
+        ],
+        "warn": [
+          "#f0a93b",
+          "rgba(240,169,59,0.26)",
+          "rgba(240,169,59,0.08)"
+        ],
+        "flag": [
+          "#ff6152",
+          "rgba(255,97,82,0.26)",
+          "rgba(255,97,82,0.08)"
+        ]
+      },
+      "measuredDiscipline": {
+        "surface": "dashboard viewport, saturated pixels (S>0.35, V>0.25)",
+        "signal": "68.9%",
+        "warn": "31.1%",
+        "flag": "0.0%",
+        "note": "warn winning this ratio means it has become decoration rather than state"
+      }
+    },
+    "elevation": {
+      "lift-1": "0 1px 2px rgba(0,0,0,0.45), 0 2px 10px rgba(0,0,0,0.30)",
+      "lift-2": "0 2px 6px rgba(0,0,0,0.50), 0 16px 40px rgba(0,0,0,0.42)",
+      "lift-3": "0 6px 14px rgba(0,0,0,0.55), 0 34px 74px rgba(0,0,0,0.55)",
+      "bevel": "inset 0 1px 0 rgba(255,255,255,0.035)",
+      "rule": "Every shadow carries an offset and a blur. A zero-offset coloured halo is decoration, not depth.",
+      "lift-pop": "0 2px 4px rgba(0,0,0,0.45), 0 8px 20px rgba(0,0,0,0.40)",
+      "scrim": "rgba(0,0,0,0.55)"
+    },
+    "materials": {
+      "machined": {
+        "css": "repeating-linear-gradient(0deg, rgba(255,255,255,0.038) 0px, rgba(255,255,255,0.038) 1px, transparent 1px, transparent 4px)",
+        "floor": "Must remain legible at 1x. Sampled: ruling ~23 against ground ~14 on a clean 4px period. Below ~0.03 alpha the finish stops existing on screen.",
+        "note": "Brushed horizontal machining, deliberately not a square tech grid."
+      },
+      "engraving": "text-shadow: 0 1px 0 rgba(255,255,255,0.07), 0 -1px 0 rgba(0,0,0,0.5) \u2014 light above, shadow below, on the struck grade character only."
+    },
+    "motion": {
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "tokens": {
+        "strike": "0.75s \u2014 the grade plate lands",
+        "ink-in": "0.8s \u2014 the headline resolves from blur",
+        "settle": "0.55s \u2014 ruled rows arrive, staggered 0.42s + 70ms per row"
+      },
+      "rule": "One authored arrival per surface, orchestrated as a sequence \u2014 never scattered per-element effects. prefers-reduced-motion collapses all of it.",
+      "reducedMotion": "animation and transition durations forced to 0.001ms"
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "sheet": "80rem content max-width"
+    },
+    "browserSurfaces": {
+      "selection": "background signal, color void",
+      "focusVisible": "2px solid signal, 2px offset",
+      "caret": "signal",
+      "scrollbar": "thin, hair-bright thumb on void track, 3px void border on thumb",
+      "numerals": "font-variant-numeric: tabular-nums on [data-figure], .tabular and table"
+    },
+    "narrative": {
+      "northStar": "A machined compliance instrument, not a lit screen. The grade plate is the organizing device and it appears on both the marketing and product surfaces, which is what makes them read as one object.",
+      "rules": [
+        "Structure is ruled, not boxed \u2014 hairlines replace cards.",
+        "Depth is milled, never lit \u2014 bevel and offset shadow, no glow.",
+        "Square everywhere; the only curve is a true 50% status dot.",
+        "warn and flag are ink on a figure or status word, never a field.",
+        "Every figure is mono and tabular.",
+        "One type ramp of eight steps, defined once in tailwind.config.ts and overriding Tailwind's defaults; an arbitrary text-[\u2026rem] is off-system.",
+        "Label every synthetic surface on the surface itself."
+      ],
+      "typeRamp": {
+        "note": "Overrides Tailwind defaults deliberately \u2014 text-sm means this project's small, not Tailwind's. Values live as --text-* custom properties in globals.css so Tailwind classes and inline style objects share one source of truth. Consolidated from 143 arbitrary sizes on the marketing surfaces and 134 inline px sizes on the dashboard.",
+        "steps": {
+          "plate": "clamp(8rem, 23vw, 19rem)",
+          "lede": "clamp(2.3rem, 5.4vw, 4.6rem)",
+          "head": "clamp(1.9rem, 4vw, 3.1rem)",
+          "figure": "clamp(1.7rem, 3.2vw, 2.6rem)",
+          "xl": "1.5rem",
+          "lg": "1.2rem",
+          "md": "1.05rem",
+          "base": "0.95rem",
+          "sm": "0.88rem",
+          "xs": "0.8rem",
+          "2xs": "0.7rem",
+          "micro": "0.625rem"
+        }
+      },
+      "notCanonized": [
+        "The dashboard's per-component inline-style constants (BG/CARD/TEXT/MUTED/DIM locals in each file). They resolve to the correct tokens, but the pattern is legacy; new surfaces use Tailwind token classes rather than local style objects.",
+        "The dashboard's bare '\u2192' characters inside link labels. They are text affordances, not icons, and are not a system rule to reproduce.",
+        "The 68px grade figure in the dashboard Overview. A deliberate display one-off between --text-figure and the landing plate scale; not a ramp step, and not to be reused."
+      ]
+    }
+  }
+}

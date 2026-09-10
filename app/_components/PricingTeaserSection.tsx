@@ -1,105 +1,124 @@
-const plans = [
+import { Check } from './Icons'
+
+const PLANS = [
   {
     label: 'Essentials',
     price: '$99',
-    sub: 'per month · cancel anytime',
-    highlight: false,
+    per: 'per month',
+    who: 'Single location, low complexity',
+    lead: false,
     features: [
-      'Compliance monitoring across all NYC agencies',
-      'Deadline management & alerts',
-      'Violation detection & guidance',
-      '1 business location',
+      'Monitoring across every agency you answer to',
+      'Renewal calendar with deadline alerts',
+      'Violation detection and guidance',
+      'One business location',
     ],
-    cta: 'Get started',
-    href: '#waitlist',
   },
   {
     label: 'Full-Service',
     price: '$299',
-    sub: 'per month · cancel anytime',
-    highlight: true,
+    per: 'per month',
+    who: 'Restaurants and retail with active filings',
+    lead: true,
     features: [
       'Everything in Essentials',
-      'Permit filing & license renewals — we handle it',
-      'Violation response & agency communication',
+      'Permit filing and licence renewals, handled by us',
+      'Violation response and agency correspondence',
       'Inspector-ready documents prepared for you',
-      '1 business location',
+      'One business location',
     ],
-    cta: 'Get started',
-    href: '#waitlist',
   },
   {
     label: 'Enterprise',
     price: '$599+',
-    sub: 'per month · contact us',
-    highlight: false,
+    per: 'per month',
+    who: 'Multi-location and complex histories',
+    lead: false,
     features: [
       'Everything in Full-Service',
-      'Multiple locations',
-      'Complex case & violation history handling',
-      'Dedicated compliance agent',
+      'Multiple locations under one department',
+      'Complex case and violation history handling',
+      'A named compliance agent',
     ],
-    cta: 'Contact us',
-    href: '#waitlist',
   },
 ]
 
 export default function PricingTeaserSection() {
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="font-serif text-4xl md:text-5xl text-center mb-4" style={{ color: '#e8e8e0' }}>
-          Replace your compliance consultant
-        </h2>
-        <p className="text-lg mb-14 text-center max-w-xl mx-auto" style={{ color: 'rgba(232,232,224,0.45)' }}>
-          A fraction of what professional services cost — with no surprises.
-        </p>
+    <section id="pricing" className="scroll-mt-20 border-t border-hair px-5 py-20 sm:px-8 lg:py-28">
+      <div className="mx-auto max-w-sheet">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+          <h2 className="display text-balance text-head uppercase text-ink lg:col-span-7">
+            Planned pricing.
+            <br />
+            Not yet open.
+          </h2>
+          <p className="measure text-base font-light leading-relaxed text-ink-2 lg:col-span-5">
+            These tiers model what a NYC business already pays consultants to do
+            the same work. Nothing is for sale today — early access opens to the
+            waitlist first, and these numbers may move before it does.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {plans.map(({ label, price, sub, highlight, features, cta, href }) => (
+        <div className="mt-12 grid gap-px bg-hair lg:grid-cols-3">
+          {PLANS.map(({ label, price, per, who, lead, features }) => (
             <div
               key={label}
-              className="flex flex-col p-8"
-              style={highlight
-                ? { background: '#4dba80', border: '1px solid #4dba80' }
-                : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.09)' }
-              }
+              className={`flex flex-col p-6 sm:p-8 ${lead ? 'bg-panel-hi' : 'bg-void'}`}
             >
-              <div className="text-xs uppercase tracking-widest mb-4" style={{ color: highlight ? 'rgba(6,9,14,0.6)' : 'rgba(232,232,224,0.4)' }}>
-                {label}
+              <div className="flex items-baseline justify-between gap-3">
+                <span
+                  className={`font-mono text-micro uppercase ${lead ? 'text-signal' : 'text-ink-3'}`}
+                >
+                  {label}
+                </span>
+                {lead && (
+                  <span className="tag border-signal text-signal">Most relevant</span>
+                )}
               </div>
-              <div className="font-serif text-5xl mb-1" style={{ color: highlight ? '#06090e' : '#e8e8e0' }}>
-                {price}
+
+              <div className="mt-6 flex items-baseline gap-2">
+                <span className="display text-figure text-ink" data-figure>
+                  {price}
+                </span>
+                <span className="font-mono text-2xs uppercase tracking-[0.08em] text-ink-3">
+                  {per}
+                </span>
               </div>
-              <div className="text-sm mb-8" style={{ color: highlight ? 'rgba(6,9,14,0.55)' : 'rgba(232,232,224,0.45)' }}>
-                {sub}
-              </div>
-              <ul className="space-y-3 mb-10 flex-1">
+              <p className="mt-2 text-xs font-light leading-snug text-ink-2">{who}</p>
+
+              <ul className="mt-7 flex-1 space-y-3.5">
                 {features.map(item => (
-                  <li key={item} className="text-sm flex items-start gap-2" style={{ color: highlight ? 'rgba(6,9,14,0.8)' : 'rgba(232,232,224,0.7)' }}>
-                    <span className="shrink-0 mt-0.5" style={{ color: highlight ? '#06090e' : '#4dba80' }}>✓</span>
-                    {item}
+                  <li key={item} className="flex items-start gap-3">
+                    <Check
+                      size={14}
+                      className={`mt-1 shrink-0 ${lead ? 'text-signal' : 'text-ink-3'}`}
+                    />
+                    <span className="text-sm font-light leading-snug text-ink-2">
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>
+
               <a
-                href={href}
-                className="text-center px-6 py-3 font-medium text-sm transition-all"
-                style={highlight
-                  ? { background: '#06090e', color: '#4dba80' }
-                  : { border: '1px solid rgba(255,255,255,0.15)', color: '#e8e8e0' }
-                }
+                href="#waitlist"
+                className={`mt-8 inline-flex items-center justify-center border px-5 py-3 font-mono text-2xs uppercase tracking-[0.1em] transition-colors ${
+                  lead
+                    ? 'border-signal bg-signal text-void hover:bg-transparent hover:text-signal'
+                    : 'border-hair-bright text-ink hover:border-ink hover:bg-panel'
+                }`}
               >
-                {cta}
+                Join the waitlist
               </a>
             </div>
           ))}
         </div>
 
-        <p className="text-center text-sm" style={{ color: 'rgba(232,232,224,0.4)' }}>
+        <p className="mt-6 text-center font-mono text-2xs uppercase tracking-[0.08em] text-ink-3">
           Multiple locations or a larger operation?{' '}
-          <a href="#waitlist" style={{ color: '#4dba80' }}>
-            Get in touch.
+          <a href="#waitlist" className="text-signal underline">
+            Tell us on the form
           </a>
         </p>
       </div>

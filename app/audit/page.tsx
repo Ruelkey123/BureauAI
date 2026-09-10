@@ -2,8 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { Arrow, Check, Mark } from '../_components/Icons'
+import AuditReport from './_components/AuditReport'
 
 type Step = 1 | 2 | 3 | 4
+type EmailState = 'idle' | 'sending' | 'done' | 'error'
 
 interface FormData {
   businessType: string
@@ -12,7 +15,7 @@ interface FormData {
   situation: string
 }
 
-const BUSINESS_TYPES = ['Restaurant', 'Bar', 'Food Truck', 'Retail', 'Café', 'Other']
+const BUSINESS_TYPES = ['Restaurant', 'Bar', 'Food truck', 'Retail', 'Café', 'Other']
 const BOROUGHS = ['Manhattan', 'Brooklyn', 'Queens', 'The Bronx', 'Staten Island']
 const STAGES = [
   'Opening a new business',
@@ -28,36 +31,51 @@ const SITUATION_CHIPS = [
   'Need a DOB permit',
 ]
 
-const TEXT = { color: '#e8e8e0' }
-const MUTED = { color: 'rgba(232,232,224,0.45)' }
-const CARD_BASE: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.09)',
-  color: '#e8e8e0',
-  padding: '16px 20px',
-  textAlign: 'left' as const,
-  fontSize: '14px',
-  fontWeight: '500',
-  transition: 'all 0.15s ease',
-  width: '100%',
-  display: 'block',
-  cursor: 'pointer',
+const STEP_TITLES: Record<Step, string> = {
+  1: 'What kind of business?',
+  2: 'Where, and at what stage?',
+  3: 'What are you dealing with?',
+  4: 'Your compliance audit',
 }
-const CARD_ACTIVE: React.CSSProperties = {
-  ...CARD_BASE,
-  background: 'rgba(77,186,128,0.1)',
-  border: '1px solid rgba(77,186,128,0.35)',
-  color: '#4dba80',
+
+function Option({
+  selected,
+  onClick,
+  children,
+}: {
+  selected: boolean
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={selected}
+      className={`w-full border px-4 py-3.5 text-left text-sm transition-colors ${
+        selected
+          ? 'border-signal bg-signal-wash text-signal'
+          : 'border-hair-bright bg-panel text-ink hover:border-ink-3 hover:bg-panel-hi'
+      }`}
+    >
+      {children}
+    </button>
+  )
 }
 
 export default function AuditPage() {
   const [step, setStep] = useState<Step>(1)
-  const [form, setForm] = useState<FormData>({ businessType: '', borough: '', stage: '', situation: '' })
+  const [form, setForm] = useState<FormData>({
+    businessType: '',
+    borough: '',
+    stage: '',
+    situation: '',
+  })
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [email, setEmail] = useState('')
-  const [emailSubmitted, setEmailSubmitted] = useState(false)
+  const [emailState, setEmailState] = useState<EmailState>('idle')
 
   async function runAudit() {
     setStep(4)
@@ -72,197 +90,320 @@ export default function AuditPage() {
       })
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
-        throw new Error(data.error || 'Something went wrong. Please try again.')
+        throw new Error(data.error || 'The audit service did not respond.')
       }
-      if (!response.body) throw new Error('No response body')
+      if (!response.body) throw new Error('The audit service returned nothing.')
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
-      while (true) {
+      for (;;) {
         const { done, value } = await reader.read()
         if (done) break
         setResult(prev => prev + decoder.decode(value, { stream: true }))
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setError(err instanceof Error ? err.message : 'The audit service did not respond.')
     } finally {
       setLoading(false)
     }
   }
 
+  async function submitEmail(e: React.FormEvent) {
+    e.preventDefault()
+    if (emailState === 'sending') return
+    setEmailState('sending')
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          source: 'audit',
+          note: `${form.businessType} · ${form.borough} · ${form.stage}${
+            form.situation ? ` — ${form.situation}` : ''
+          }`,
+        }),
+      })
+      if (!res.ok) throw new Error('failed')
+      setEmailState('done')
+    } catch {
+      setEmailState('error')
+    }
+  }
+
+  const canContinue = Boolean(form.borough && form.stage)
+
   return (
-    <main className="min-h-screen dark-grid flex items-start justify-center px-6 py-24">
-      <div className="w-full max-w-xl">
+    <main className="min-h-screen px-5 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto w-full max-w-2xl">
+        {/* Masthead */}
+        <div className="flex items-center justify-between gap-4 border-b border-hair pb-5">
+          <Link
+            href="/"
+            className="group flex items-center gap-2.5"
+            aria-label="Back to BureauAI home"
+          >
+            <Mark size={22} className="text-ink transition-colors group-hover:text-signal" />
+            <span className="display text-base uppercase text-ink">
+              Bureau<span className="text-signal">AI</span>
+            </span>
+          </Link>
+          <span className="font-mono text-micro uppercase text-ink-3" data-figure>
+            {step < 4 ? `Step ${String(step).padStart(2, '0')} / 03` : 'Report'}
+          </span>
+        </div>
 
-        <Link href="/" style={{ ...MUTED, fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '48px', textDecoration: 'none', transition: 'color 0.15s' }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#e8e8e0' }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(232,232,224,0.45)' }}
-        >
-          ← BureauAI
-        </Link>
+        {/* Progress rule */}
+        <div className="h-px w-full bg-hair" aria-hidden="true">
+          <div
+            className="h-px bg-signal transition-[width] duration-500 ease-out"
+            style={{ width: `${(Math.min(step, 4) / 4) * 100}%` }}
+          />
+        </div>
 
-        {/* Step 1 */}
+        <h1 className="display mt-9 text-balance text-head uppercase leading-tight text-ink">
+          {STEP_TITLES[step]}
+        </h1>
+
+        {/* ── Step 1 ── */}
         {step === 1 && (
-          <div>
-            <p style={{ ...MUTED, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>Step 1 of 3</p>
-            <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '32px', lineHeight: 1.2 }}>What type of business?</h1>
-            <div className="grid grid-cols-2 gap-2">
-              {BUSINESS_TYPES.map(type => (
-                <button
-                  key={type}
-                  onClick={() => { setForm(f => ({ ...f, businessType: type })); setStep(2) }}
-                  style={CARD_BASE}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)' }}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
+          <div className="mt-8 grid grid-cols-2 gap-2">
+            {BUSINESS_TYPES.map(type => (
+              <Option
+                key={type}
+                selected={form.businessType === type}
+                onClick={() => {
+                  setForm(f => ({ ...f, businessType: type }))
+                  setStep(2)
+                }}
+              >
+                {type}
+              </Option>
+            ))}
           </div>
         )}
 
-        {/* Step 2 */}
+        {/* ── Step 2 ── */}
         {step === 2 && (
-          <div>
-            <p style={{ ...MUTED, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>Step 2 of 3</p>
-            <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '24px', lineHeight: 1.2 }}>Where in NYC?</h1>
-            <div className="space-y-2 mb-8">
+          <div className="mt-8">
+            <h2 className="font-mono text-micro uppercase text-ink-3">Borough</h2>
+            <div className="mt-3 space-y-2">
               {BOROUGHS.map(b => (
-                <button key={b} onClick={() => setForm(f => ({ ...f, borough: b }))}
-                  style={form.borough === b ? CARD_ACTIVE : CARD_BASE}
-                  onMouseEnter={e => { if (form.borough !== b) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)' }}}
-                  onMouseLeave={e => { if (form.borough !== b) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)' }}}
+                <Option
+                  key={b}
+                  selected={form.borough === b}
+                  onClick={() => setForm(f => ({ ...f, borough: b }))}
                 >
                   {b}
-                </button>
+                </Option>
               ))}
             </div>
 
-            <p style={{ ...MUTED, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>What stage?</p>
-            <div className="space-y-2 mb-8">
+            <h2 className="mt-9 font-mono text-micro uppercase text-ink-3">Stage</h2>
+            <div className="mt-3 space-y-2">
               {STAGES.map(s => (
-                <button key={s} onClick={() => setForm(f => ({ ...f, stage: s }))}
-                  style={form.stage === s ? CARD_ACTIVE : CARD_BASE}
-                  onMouseEnter={e => { if (form.stage !== s) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.2)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)' }}}
-                  onMouseLeave={e => { if (form.stage !== s) { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.09)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)' }}}
+                <Option
+                  key={s}
+                  selected={form.stage === s}
+                  onClick={() => setForm(f => ({ ...f, stage: s }))}
                 >
                   {s}
-                </button>
+                </Option>
               ))}
             </div>
 
-            <button onClick={() => setStep(3)} disabled={!form.borough || !form.stage}
-              style={{ background: '#4dba80', color: '#06090e', padding: '13px 28px', fontWeight: '700', fontSize: '14px', letterSpacing: '0.04em', boxShadow: '0 0 30px rgba(77,186,128,0.25)', opacity: (!form.borough || !form.stage) ? 0.4 : 1, cursor: (!form.borough || !form.stage) ? 'not-allowed' : 'pointer', border: 'none' }}
-            >
-              Continue →
-            </button>
+            <div className="mt-9 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="border border-hair-bright px-5 py-3 font-mono text-2xs uppercase tracking-[0.1em] text-ink transition-colors hover:border-ink"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep(3)}
+                disabled={!canContinue}
+                className="group inline-flex items-center gap-2.5 border border-signal bg-signal px-6 py-3 font-mono text-2xs uppercase tracking-[0.1em] text-void transition-colors hover:bg-transparent hover:text-signal disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-signal disabled:hover:text-void"
+              >
+                Continue
+                <Arrow size={14} className="transition-transform group-hover:translate-x-0.5" />
+              </button>
+              {!canContinue && (
+                <span className="font-mono text-micro uppercase tracking-[0.08em] text-ink-3">
+                  Pick a borough and a stage
+                </span>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Step 3 */}
+        {/* ── Step 3 ── */}
         {step === 3 && (
-          <div>
-            <p style={{ ...MUTED, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>Step 3 of 3</p>
-            <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '8px', lineHeight: 1.2 }}>Describe your situation</h1>
-            <p style={{ ...MUTED, fontSize: '13px', marginBottom: '24px' }}>Optional — helps us tailor your audit.</p>
+          <div className="mt-4">
+            <p className="text-sm font-light text-ink-2">
+              Optional, but it makes the audit far more specific.
+            </p>
 
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mt-6 flex flex-wrap gap-2">
               {SITUATION_CHIPS.map(s => (
-                <button key={s} onClick={() => setForm(f => ({ ...f, situation: s }))}
-                  style={{
-                    fontSize: '12px', padding: '6px 14px',
-                    border: `1px solid ${form.situation === s ? 'rgba(77,186,128,0.4)' : 'rgba(255,255,255,0.1)'}`,
-                    background: form.situation === s ? 'rgba(77,186,128,0.1)' : 'transparent',
-                    color: form.situation === s ? '#4dba80' : 'rgba(232,232,224,0.5)',
-                    cursor: 'pointer', transition: 'all 0.15s',
-                  }}
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setForm(f => ({ ...f, situation: s }))}
+                  aria-pressed={form.situation === s}
+                  className={`border px-3.5 py-2 text-xs transition-colors ${
+                    form.situation === s
+                      ? 'border-signal bg-signal-wash text-signal'
+                      : 'border-hair-bright text-ink-2 hover:border-ink-3 hover:text-ink'
+                  }`}
                 >
                   {s}
                 </button>
               ))}
             </div>
 
+            <label htmlFor="situation" className="mt-7 block font-mono text-micro uppercase text-ink-3">
+              Or describe it yourself
+            </label>
             <textarea
+              id="situation"
               value={form.situation}
               onChange={e => setForm(f => ({ ...f, situation: e.target.value }))}
-              placeholder="Or describe in your own words..."
+              placeholder="Opening in Bushwick. DOHMH permit is in, waiting on FDNY."
               rows={4}
-              style={{
-                width: '100%', padding: '14px 16px', fontSize: '14px',
-                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.09)',
-                color: '#e8e8e0', outline: 'none', resize: 'none', marginBottom: '24px',
-                boxSizing: 'border-box',
-              }}
+              className="mt-2.5 w-full resize-y border border-hair-bright bg-panel px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-signal"
             />
 
-            <button onClick={runAudit}
-              style={{ background: '#4dba80', color: '#06090e', padding: '13px 28px', fontWeight: '700', fontSize: '14px', letterSpacing: '0.04em', boxShadow: '0 0 30px rgba(77,186,128,0.25)', border: 'none', cursor: 'pointer' }}
-            >
-              Get my free audit →
-            </button>
+            <div className="mt-7 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="border border-hair-bright px-5 py-3 font-mono text-2xs uppercase tracking-[0.1em] text-ink transition-colors hover:border-ink"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={runAudit}
+                className="group inline-flex items-center gap-2.5 border border-signal bg-signal px-6 py-3 font-mono text-2xs uppercase tracking-[0.1em] text-void transition-colors hover:bg-transparent hover:text-signal"
+              >
+                Run the audit
+                <Arrow size={14} className="transition-transform group-hover:translate-x-0.5" />
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Step 4 — Results */}
+        {/* ── Step 4: the report ── */}
         {step === 4 && (
-          <div>
-            <div style={{ marginBottom: '24px' }}>
-              <h1 className="font-serif" style={{ fontSize: '2rem', ...TEXT, marginBottom: '6px', lineHeight: 1.2 }}>Your compliance audit</h1>
-              <p style={{ ...MUTED, fontSize: '13px' }}>{form.businessType} · {form.borough} · {form.stage}</p>
-            </div>
+          <div className="mt-5">
+            <p className="font-mono text-2xs uppercase tracking-[0.08em] text-ink-3">
+              {[form.businessType, form.borough, form.stage].filter(Boolean).join(' · ')}
+            </p>
 
             {loading && !result && (
-              <p style={{ ...MUTED, fontSize: '13px', animation: 'pulse 2s infinite' }}>
-                Our team is auditing your business…
-              </p>
+              <div className="panel mt-7 flex items-center gap-3.5 p-6">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-signal"
+                />
+                <p className="text-sm text-ink-2" role="status">
+                  Reading your obligations across every agency…
+                </p>
+              </div>
             )}
 
             {error && (
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.09)', padding: '20px', marginBottom: '24px' }}>
-                <p style={{ color: '#e8e8e0', fontWeight: '600', fontSize: '14px', marginBottom: '6px' }}>Audit unavailable right now</p>
-                <p style={{ ...MUTED, fontSize: '13px', marginBottom: '16px' }}>{error}</p>
-                <button onClick={runAudit}
-                  style={{ background: '#4dba80', color: '#06090e', padding: '10px 20px', fontSize: '13px', fontWeight: '700', border: 'none', cursor: 'pointer' }}
+              <div className="mt-7 border border-flag-hair bg-flag-wash p-6" role="alert">
+                <p className="text-base text-ink">The audit didn't run</p>
+                <p className="mt-2 text-sm font-light leading-relaxed text-ink-2">
+                  {error}
+                </p>
+                <button
+                  type="button"
+                  onClick={runAudit}
+                  className="mt-5 border border-signal px-5 py-2.5 font-mono text-2xs uppercase tracking-[0.1em] text-signal transition-colors hover:bg-signal hover:text-void"
                 >
-                  Try again →
+                  Try again
                 </button>
               </div>
             )}
 
             {result && (
-              <div style={{
-                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.09)',
-                padding: '24px', fontSize: '14px', color: 'rgba(232,232,224,0.85)',
-                lineHeight: '1.75', whiteSpace: 'pre-wrap', marginBottom: '32px',
-              }}>
-                {result}
+              <div className="panel mt-7 p-6 sm:p-8">
+                <AuditReport markdown={result} />
+                {loading && (
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 inline-block h-4 w-2 animate-pulse bg-signal align-middle"
+                  />
+                )}
               </div>
             )}
 
             {!loading && result && (
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '32px' }}>
-                <h2 className="font-serif" style={{ fontSize: '1.4rem', ...TEXT, marginBottom: '8px' }}>Let us handle everything</h2>
-                <p style={{ ...MUTED, fontSize: '13px', marginBottom: '20px' }}>Get a compliance team that files, manages, and defends your business — starting at $99/mo.</p>
-                {emailSubmitted ? (
-                  <p style={{ color: '#4dba80', fontSize: '14px', fontWeight: '500' }}>You're on the list. We'll be in touch.</p>
+              <div className="panel mt-6 p-6 sm:p-8">
+                <h2 className="display text-lg uppercase text-ink">
+                  Want us to handle all of it?
+                </h2>
+                <p className="mt-3 text-sm font-light leading-relaxed text-ink-2">
+                  This is the reading. The service that acts on it opens to the
+                  waitlist first — planned from $99/month. Nothing is for sale yet.
+                </p>
+
+                {emailState === 'done' ? (
+                  <p className="mt-5 flex items-center gap-2.5 text-sm text-signal">
+                    <Check size={16} />
+                    You're on the list — we have your audit answers too.
+                  </p>
                 ) : (
-                  <form onSubmit={e => {
-                    e.preventDefault()
-                    setEmailSubmitted(true)
-                    fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, source: 'audit' }) }).catch(() => {})
-                  }} style={{ display: 'flex', gap: '8px' }}>
-                    <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                      placeholder="your@email.com"
-                      style={{ flex: 1, padding: '12px 16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#e8e8e0', fontSize: '14px', outline: 'none' }}
-                    />
-                    <button type="submit"
-                      style={{ background: '#4dba80', color: '#06090e', padding: '12px 20px', fontSize: '13px', fontWeight: '700', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}
-                    >
-                      Join waitlist
-                    </button>
+                  <form onSubmit={submitEmail} className="mt-5">
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                      <label htmlFor="audit-email" className="sr-only">
+                        Email address
+                      </label>
+                      <input
+                        id="audit-email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        disabled={emailState === 'sending'}
+                        placeholder="you@yourbusiness.com"
+                        className="flex-1 border border-hair-bright bg-void px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-3 focus:border-signal disabled:opacity-50"
+                      />
+                      <button
+                        type="submit"
+                        disabled={emailState === 'sending'}
+                        className="whitespace-nowrap border border-signal bg-signal px-5 py-3 font-mono text-2xs uppercase tracking-[0.1em] text-void transition-colors hover:bg-transparent hover:text-signal disabled:opacity-60"
+                      >
+                        {emailState === 'sending' ? 'Sending…' : 'Request access'}
+                      </button>
+                    </div>
+                    {emailState === 'error' && (
+                      <p role="alert" className="mt-3 text-xs text-flag">
+                        That didn't save. Try again, or email hello@bureauai.com.
+                      </p>
+                    )}
                   </form>
                 )}
               </div>
+            )}
+
+            {!loading && (result || error) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setStep(1)
+                  setResult('')
+                  setError('')
+                  setForm({ businessType: '', borough: '', stage: '', situation: '' })
+                }}
+                className="mt-6 font-mono text-2xs uppercase tracking-[0.1em] text-ink-3 underline transition-colors hover:text-ink"
+              >
+                Run another audit
+              </button>
             )}
           </div>
         )}

@@ -1,0 +1,12 @@
+PROVENANCE — app/opengraph-image.png
+
+Produced, not sourced. Rendered headlessly by Puppeteer at 1200x630 from a
+hand-authored HTML composition using this project's own design tokens and
+typefaces (Archivo / Public Sans / Geist Mono, graphite #0e1013, signal
+#c8ff3c). No stock, no third-party imagery, no generative model involved.
+
+It restates the hero: the compliance grade plate beside the H1. The grade
+plate is BureauAI's own device and is not a reproduction of any government
+record; the "A" is illustrative, not a customer result.
+
+To regenerate: re-render the same composition at 1200x630 and overwrite.

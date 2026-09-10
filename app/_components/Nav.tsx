@@ -1,70 +1,65 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { Mark } from './Icons'
+
+const LINKS = [
+  { href: '/#handled', label: 'Coverage' },
+  { href: '/#audit', label: 'Audit' },
+  { href: '/#pricing', label: 'Pricing' },
+  { href: '/dashboard', label: 'Demo' },
+]
+
 export default function Nav() {
+  // The masthead owns its own scroll state rather than having another
+  // component reach in and mutate its style.
+  const [ruled, setRuled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setRuled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-      <div className="flex items-center gap-3">
-
-        {/* Icon — steely Greek frontage */}
-        <div style={{
-          width: '38px', height: '38px',
-          background: 'linear-gradient(180deg, #111820 0%, #080d12 100%)',
-          border: '1px solid rgba(160,190,220,0.2)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          position: 'relative', overflow: 'hidden',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(200,220,255,0.06)',
-        }}>
-          {/* Subtle top sheen */}
-          <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, height: '40%',
-            background: 'linear-gradient(180deg, rgba(160,190,230,0.05) 0%, transparent 100%)',
-          }} />
-          <svg width="26" height="24" viewBox="0 0 26 24" fill="none" style={{ position: 'relative', zIndex: 1, display: 'block' }}>
-            <defs>
-              <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#e8f2f8"/>
-                <stop offset="40%" stopColor="#b8cedd"/>
-                <stop offset="100%" stopColor="#5a7a90"/>
-              </linearGradient>
-            </defs>
-            {/* Pediment */}
-            <polygon points="13,1.5 22.5,7 3.5,7" fill="none" stroke="url(#steel)" strokeWidth="0.9" strokeLinejoin="miter"/>
-            {/* Entablature */}
-            <rect x="3.5" y="7" width="19" height="1.5" fill="url(#steel)"/>
-            {/* 3 columns — equally spaced */}
-            <rect x="5" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
-            <rect x="11.75" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
-            <rect x="18.5" y="8.5" width="2.5" height="9" fill="url(#steel)"/>
-            {/* Stylobate — 2 steps */}
-            <rect x="3" y="17.5" width="20" height="1.4" fill="url(#steel)" opacity="0.9"/>
-            <rect x="1.5" y="18.9" width="23" height="1.4" fill="url(#steel)" opacity="0.6"/>
-          </svg>
-        </div>
-
-        {/* Wordmark */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '1px', lineHeight: 1 }}>
-          <span style={{
-            fontSize: '17px', fontWeight: '400',
-            letterSpacing: '-0.01em', color: '#e8e8e0',
-            fontFamily: 'var(--font-outfit), sans-serif',
-          }}>
-            Bureau
-          </span>
-          <span style={{
-            fontSize: '17px', fontWeight: '600',
-            letterSpacing: '-0.01em', color: '#4dba80',
-            fontFamily: 'var(--font-outfit), sans-serif',
-          }}>
-            AI
-          </span>
-        </div>
-      </div>
-
-      <a
-        href="#waitlist"
-        className="glow-green text-sm font-medium px-4 py-2 transition-all"
-        style={{ background: '#4dba80', color: '#06090e', letterSpacing: '0.04em', fontWeight: '600' }}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        ruled ? 'border-hair bg-void/90 backdrop-blur-md' : 'border-transparent'
+      }`}
+    >
+      <nav
+        aria-label="Primary"
+        className="mx-auto flex max-w-sheet items-center justify-between gap-6 px-5 py-3.5 sm:px-8"
       >
-        Get early access →
-      </a>
-    </nav>
+        <Link href="/" className="group flex items-center gap-2.5" aria-label="BureauAI home">
+          <Mark size={24} className="text-ink transition-colors group-hover:text-signal" />
+          <span className="display text-md uppercase text-ink">
+            Bureau<span className="text-signal">AI</span>
+          </span>
+        </Link>
+
+        <ul className="hidden items-center gap-8 md:flex">
+          {LINKS.map(({ href, label }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                className="font-mono text-2xs uppercase tracking-[0.12em] text-ink-2 transition-colors hover:text-ink"
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href="/#waitlist"
+          className="shrink-0 border border-signal bg-signal px-4 py-2 font-mono text-2xs uppercase tracking-[0.1em] text-void transition-colors hover:bg-transparent hover:text-signal"
+        >
+          Request access
+        </a>
+      </nav>
+    </header>
   )
 }

@@ -138,18 +138,20 @@ html, body {
 .ic-body { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.6; }
 .ic-body strong { color: var(--sub); font-weight: 400; }
 
-/* ── S5: WHY NOW ── */
+/* ── S5: TEAM ── */
 #s5 .layout { max-width: 1050px; width: 100%; }
 #s5 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(30px, 4vw, 54px); line-height: 1.1; color: var(--white); margin-bottom: .8rem; max-width: 700px; }
-#s5 .headline em { color: var(--green); font-style: italic; }
-#s5 .subhead { font-size: 14px; font-weight: 300; color: var(--body); line-height: 1.7; max-width: 640px; margin-bottom: 2rem; }
-#s5 .pts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 1.5rem; }
-.pt { background: var(--panel); border: 1px solid var(--border); padding: 1.5rem; }
-.pt-n { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--border-s); line-height: 1; margin-bottom: .6rem; }
-.pt-h { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: .4rem; line-height: 1.3; }
-.pt-b { font-size: 12px; font-weight: 300; color: var(--body); line-height: 1.6; }
-#s5 .thesis { border-left: 2px solid var(--green); background: var(--green-dim); padding: 1rem 1.5rem; }
-#s5 .thesis .q { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--text); line-height: 1.5; }
+#s5 .subhead { font-size: 14px; font-weight: 300; color: var(--body); line-height: 1.7; max-width: 700px; margin-bottom: 2rem; }
+#s5 .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 1rem; }
+.tm { background: var(--panel); border: 1px solid var(--border); padding: 1.75rem; position: relative; overflow: hidden; }
+.tm::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--green); }
+.tm-role { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; }
+.tm-name { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--white); margin-bottom: .6rem; }
+.tm-body { font-size: 13px; font-weight: 300; color: var(--body); line-height: 1.65; }
+.tm-body strong { color: var(--sub); font-weight: 400; }
+#s5 .fit-bar { background: var(--green-dim); border: 1px solid var(--green-b); border-left: 2px solid var(--green); padding: 1rem 1.5rem; }
+#s5 .fit-bar p { font-size: 13px; font-weight: 300; color: var(--sub); line-height: 1.65; }
+#s5 .fit-bar strong { color: var(--text); font-weight: 400; }
 
 /* ── S6: SOLUTION ── */
 #s6 .layout { max-width: 1050px; width: 100%; text-align: center; }
@@ -211,13 +213,19 @@ html, body {
 #s9 .headline { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 60px); line-height: 1.0; color: var(--white); margin-bottom: .6rem; }
 #s9 .headline em { color: var(--green); font-style: italic; }
 #s9 .sub { font-size: 14px; font-weight: 300; color: var(--body); margin-bottom: 2rem; line-height: 1.65; max-width: 620px; }
-#s9 .tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 1.5rem; }
+#s9 .tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 1rem; }
 .tc { background: var(--panel); border: 1px solid var(--border); padding: 1.6rem 1.4rem; }
 .tn { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 3.5vw, 48px); line-height: 1; color: var(--green); margin-bottom: .4rem; }
 .tl { font-size: 12px; color: var(--muted); line-height: 1.4; }
+#s9 .trow { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 #s9 .qcard { background: var(--panel); border: 1px solid var(--border); border-left: 2px solid var(--green); padding: 1.4rem 1.75rem; }
 #s9 .qt { font-size: 14px; font-weight: 300; font-style: italic; color: var(--sub); line-height: 1.65; margin-bottom: .6rem; }
 #s9 .qa { font-size: 11px; color: var(--muted); letter-spacing: .06em; }
+#s9 .milestone { background: var(--green-dim); border: 1px solid var(--green-b); padding: 1.4rem 1.75rem; }
+#s9 .ml-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; }
+#s9 .ml-list { display: flex; flex-direction: column; gap: 6px; }
+#s9 .ml-item { font-size: 13px; font-weight: 300; color: var(--sub); line-height: 1.5; display: flex; gap: 8px; }
+#s9 .ml-item::before { content: '✓'; color: var(--green); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
 /* ── S10: ASK ── */
 #s10 .layout { max-width: 880px; width: 100%; text-align: center; }
@@ -247,9 +255,9 @@ html, body {
   <div class="inner">
     <div class="name a1">Bureau<span class="g">AI</span></div>
     <p class="tagline a3">
-      The AI compliance department for NYC businesses.<br>
-      We file permits. Manage renewals. Handle violations.<br>
-      Across every agency — completely automatically.
+      NYC restaurants get critical DOH violations every week<br>
+      and have no idea what to do next.<br>
+      BureauAI is the compliance team they couldn't afford.
     </p>
     <div class="agency-row a4">
       <span class="pill">DOH</span>
@@ -268,9 +276,9 @@ html, body {
     <div>
       <div class="overline a1">The Problem</div>
       <h2 class="headline a2">Every NYC business navigates a compliance maze. <em>Alone.</em></h2>
-      <p class="body-text a3">When a DOH inspector leaves, an owner receives a paper notice listing violations. After that — nothing. No guidance, no deadlines, no roadmap. And DOH is just one of the agencies most businesses must navigate.</p>
+      <p class="body-text a3">When a DOH inspector leaves, an owner receives a paper notice listing violations. After that — nothing. No guidance, no deadlines, no roadmap. And DOH is just one of the agencies most businesses must navigate simultaneously.</p>
       <div class="pain-list a4">
-        <div class="pain-item">Re-inspection can happen within days — owners don't know when</div>
+        <div class="pain-item">Re-inspection can happen within 7 days — owners don't know when</div>
         <div class="pain-item">Critical violations carry fines up to $1,000 each, and they stack</div>
         <div class="pain-item">Missing a remediation deadline escalates the fine automatically</div>
         <div class="pain-item">No service handles this end-to-end for a small business</div>
@@ -294,13 +302,13 @@ html, body {
 <!-- S3: SCALE -->
 <div class="slide" id="s3">
   <div class="layout">
-    <div class="overline a1">The Scale · NYC 2025 · Live Data</div>
+    <div class="overline a1">The Scale · NYC 2026 · Live Data</div>
     <h2 class="headline a2">This isn't a niche problem. It's the whole city.</h2>
     <p class="subhead a3">Every business in New York City answers to multiple regulatory agencies. The figures below are from DOH alone — one of eight or more agencies most businesses must simultaneously navigate.</p>
     <div class="sgrid a4">
       <div class="sblock">
         <div class="sn red">131K</div>
-        <div class="sl">DOH violation citations issued in 2025 YTD</div>
+        <div class="sl">DOH violation citations issued in 2025 alone</div>
         <div class="ss">NYC Open Data · DOHMH</div>
       </div>
       <div class="sblock">
@@ -356,34 +364,6 @@ html, body {
   </div>
 </div>
 
-<!-- S5: WHY NOW -->
-<div class="slide" id="s5">
-  <div class="layout">
-    <div class="overline a1">The Moment</div>
-    <h2 class="headline a2">AI is replacing compliance consultants — the same way software replaced <em>bookkeepers.</em></h2>
-    <p class="subhead a3">The last decade was about tools that help humans do compliance faster. The next category is companies that skip the human entirely and just do the work. Compliance is ready — it's already outsourced, heavily rule-based, and deeply painful.</p>
-    <div class="pts a4">
-      <div class="pt">
-        <div class="pt-n">10×</div>
-        <div class="pt-h">Services market dwarfs software</div>
-        <div class="pt-b">Total spend on compliance services is 10× larger than spend on compliance software. We're replacing a service, not improving a tool.</div>
-      </div>
-      <div class="pt">
-        <div class="pt-n">→</div>
-        <div class="pt-h">Already outsourced</div>
-        <div class="pt-b">Compliance is already delegated to consultants and expeditors. Replacing an incumbent service is structurally simpler than replacing entrenched software.</div>
-      </div>
-      <div class="pt">
-        <div class="pt-n">Now</div>
-        <div class="pt-h">AI can do the full workflow</div>
-        <div class="pt-b">For the first time, AI can read agency notices, draft responses, file forms, and track deadlines — at human level, at a fraction of the cost.</div>
-      </div>
-    </div>
-    <div class="thesis a5">
-      <div class="q">"We're not building a tool that helps owners manage compliance. We're building the compliance team."</div>
-    </div>
-  </div>
-</div>
 
 <!-- S6: SOLUTION -->
 <div class="slide" id="s6">
@@ -394,18 +374,18 @@ html, body {
     <div class="pillars a4">
       <div class="pillar">
         <div class="p-num">01</div>
-        <div class="p-head">We File</div>
-        <div class="p-body">Permits, license applications, and renewals submitted directly to NYC agencies on your behalf. DOH, DOB, FDNY, DCWP, SLA — we handle all of it. You never touch a form.</div>
+        <div class="p-head">We Watch</div>
+        <div class="p-body">Continuous monitoring across every relevant agency. We surface violations, upcoming deadlines, and inspection risk before they become emergencies. Owners get a clear dashboard — not a pile of paper.</div>
       </div>
       <div class="pillar">
         <div class="p-num">02</div>
         <div class="p-head">We Respond</div>
-        <div class="p-body">Violation notices handled the same day. We draft responses, coordinate re-inspections, and manage appeals with the relevant agency on your behalf.</div>
+        <div class="p-body">Violation notice received? We draft the response, coordinate the re-inspection, and manage appeals with the relevant agency on the owner's behalf — same business day.</div>
       </div>
       <div class="pillar">
         <div class="p-num">03</div>
-        <div class="p-head">We Watch</div>
-        <div class="p-body">Proactive monitoring across every agency. Alerts before deadlines hit. Inspection prep delivered automatically. Nothing falls through the cracks.</div>
+        <div class="p-head">We File</div>
+        <div class="p-body">Permits, license applications, and renewals submitted directly to NYC agencies — DOH, DOB, FDNY, DCWP, SLA and more. The owner never touches a form.</div>
       </div>
     </div>
   </div>
@@ -415,38 +395,29 @@ html, body {
 <div class="slide" id="s7">
   <div class="layout">
     <div class="overline a1">How It Works</div>
-    <h2 class="headline a2">Five minutes to set up. Then we handle everything.</h2>
-    <p class="sub a3">You tell us about your business once. We map every compliance obligation across every relevant agency. Then we own it.</p>
+    <h2 class="headline a2">Five minutes to onboard. Then we own it.</h2>
+    <p class="sub a3">We pull your full agency history from NYC Open Data the moment you sign up. No forms, no uploads. We already know what you owe.</p>
     <div class="steps a4">
       <div class="step">
         <div class="step-n">1</div>
-        <div class="step-h">Tell Us</div>
-        <div class="step-b">Business name, type, and borough. We pull your full agency history from NYC Open Data and map every outstanding obligation.</div>
+        <div class="step-h">You Tell Us Once</div>
+        <div class="step-b">Business name, type, and borough. We cross-reference NYC Open Data, pull your violation history, active permits, and outstanding filings across every agency automatically.</div>
       </div>
       <div class="step">
         <div class="step-n">2</div>
-        <div class="step-h">We Map It</div>
-        <div class="step-b">Our AI reads every permit, license, and filing requirement across DOH, DOB, FDNY, DCWP, SLA, and more. A full compliance picture in seconds.</div>
+        <div class="step-h">We Map Every Obligation</div>
+        <div class="step-b">Our AI reads every permit, license, and filing requirement across DOH, DOB, FDNY, DCWP, SLA, and more. A complete compliance picture in under 60 seconds — for free.</div>
       </div>
       <div class="step">
         <div class="step-n">3</div>
-        <div class="step-h">We Handle It</div>
-        <div class="step-b">Filings submitted. Violations responded to. Renewals filed. Your dashboard shows exactly what we're handling in real time.</div>
+        <div class="step-h">We Handle Everything</div>
+        <div class="step-b">Filings submitted. Violations responded to. Renewals filed on time. Your dashboard shows exactly what we're handling in real time. You run your restaurant.</div>
       </div>
     </div>
-    <div class="pricing a5">
-      <div class="price">
-        <div><div class="ptier">Essentials</div><div class="pval">$99<span style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
-        <div class="pdesc">Monitoring, deadline alerts, violation guidance — 1 location</div>
-      </div>
-      <div class="price ft">
-        <div><div class="ptier">Full-Service</div><div class="pval">$299<span style="font-size:13px;font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
-        <div class="pdesc" style="color:var(--green);opacity:.7">Active filing, renewals, violation response — 1 location</div>
-      </div>
-      <div class="price">
-        <div><div class="ptier">Enterprise</div><div class="pval">$599+<span style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300"> /mo</span></div></div>
-        <div class="pdesc">Multi-location, dedicated compliance agent, complex cases</div>
-      </div>
+    <div class="fit-bar a5" style="background:var(--green-dim);border:1px solid var(--green-b);border-left:2px solid var(--green);padding:1rem 1.5rem;">
+      <p style="font-size:13px;font-weight:300;color:var(--sub);line-height:1.65;">
+        <strong style="color:var(--text);font-weight:400;">The business model is simple:</strong> monthly software subscription per location. The compliance work that costs businesses $5K–$20K/year in consultant fees — we deliver for a fraction of that, automatically, with no human in the loop.
+      </p>
     </div>
   </div>
 </div>
@@ -457,7 +428,7 @@ html, body {
     <div>
       <div class="overline a1">Market Size</div>
       <h2 class="headline a2">Every business in every city. Starting with <em>NYC.</em></h2>
-      <p class="bt a3">New York City has 200,000+ businesses regulated by multiple agencies. It's the most-inspected, most-fined business environment in the country — and the ideal proving ground for national expansion.</p>
+      <p class="bt a3">New York City has 200,000+ businesses regulated by multiple agencies. It's the most-inspected, most-fined business environment in the country — and the ideal proving ground for a playbook we can take to every major US city.</p>
       <div class="mbars a4">
         <div class="mrow"><span class="mlbl">TAM</span><div class="mtrack"><div class="mbar tam"></div></div><span class="mval">$8B</span></div>
         <div class="mrow"><span class="mlbl">SAM</span><div class="mtrack"><div class="mbar sam"></div></div><span class="mval">$1.1B</span></div>
@@ -489,17 +460,28 @@ html, body {
 <div class="slide" id="s9">
   <div class="layout">
     <div class="overline a1">Early Traction</div>
-    <h2 class="headline a2">We found our customers before building the <em>product.</em></h2>
-    <p class="sub a3">Using live DOH violation data, we built a targeted outreach list of NYC businesses with active critical violations — and started conversations with real operators before a single sales hire.</p>
+    <h2 class="headline a2">We found our customers <em>before</em> building the product.</h2>
+    <p class="sub a3">Using live DOH violation data, we built a targeted outreach pipeline of NYC restaurants with active critical violations — and started real conversations before a single sales hire or dollar of ad spend.</p>
     <div class="tgrid a4">
-      <div class="tc"><div class="tn">65+</div><div class="tl">Verified email leads enriched from live DOH violation data</div></div>
-      <div class="tc"><div class="tn">185</div><div class="tl">Independent businesses in active outreach pipeline</div></div>
-      <div class="tc"><div class="tn">~50%</div><div class="tl">Email-findable rate on targeted violation leads</div></div>
-      <div class="tc"><div class="tn">Live</div><div class="tl">Product at bureauai.vercel.app — free audit available today</div></div>
+      <div class="tc"><div class="tn">70+</div><div class="tl">Verified email leads enriched directly from DOH violation data</div></div>
+      <div class="tc"><div class="tn">185+</div><div class="tl">Independent restaurants in active outreach pipeline</div></div>
+      <div class="tc"><div class="tn">$0</div><div class="tl">Ad spend to build the entire lead pipeline — pure data advantage</div></div>
+      <div class="tc"><div class="tn">Live</div><div class="tl">Free compliance audit at bureauai.vercel.app — running today</div></div>
     </div>
-    <div class="qcard a5">
-      <div class="qt">"I noticed your restaurant received a critical DOH violation on May 30th. I'm building BureauAI — it handles NYC compliance so you don't have to. Up for a 15-min call? No pitch."</div>
-      <div class="qa">— Cold outreach message generating active replies</div>
+    <div class="trow a5">
+      <div class="qcard">
+        <div class="qt">"I noticed your restaurant received a critical DOH violation on [date]. I'm building BureauAI — it handles NYC compliance so you don't have to. Up for a 15-min call?"</div>
+        <div class="qa">— Cold outreach template · first inbound reply received within 48 hours of sending</div>
+      </div>
+      <div class="milestone">
+        <div class="ml-label">Proof Points</div>
+        <div class="ml-list">
+          <div class="ml-item">Discovery call completed with active violation holder</div>
+          <div class="ml-item">~50% email-findable rate on targeted DOH leads</div>
+          <div class="ml-item">Live product · free audit available at launch URL</div>
+          <div class="ml-item">Pipeline refreshes daily as new violations post</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -509,14 +491,8 @@ html, body {
   <div class="layout">
     <div class="overline a1">The Ask</div>
     <h2 class="headline a2">Join us<br>before the<br><em>C grade.</em></h2>
-    <p class="sub a3">We're raising a pre-seed round to build the compliance infrastructure every NYC business needs — and nobody has built yet.</p>
-    <div class="agrid a4">
-      <div class="ac"><div class="al">Raise</div><div class="av">$350K</div><div class="ad">Pre-seed · SAFE note · 18-month runway for product build and first 500 customers</div></div>
-      <div class="ac"><div class="al">Use of Funds</div><div class="av">3 Hires</div><div class="ad">Full-stack engineer · Founding sales rep · Compliance advisor (former DOH inspector)</div></div>
-      <div class="ac"><div class="al">12-Month Target</div><div class="av">500</div><div class="ad">Paying businesses in NYC · avg $149/mo ARPU · ~$890K ARR run rate · proof of unit economics</div></div>
-      <div class="ac"><div class="al">The Moat</div><div class="av">Data</div><div class="ad">Proprietary NYC regulatory database + remediation outcomes. Every inspection cycle makes it stronger.</div></div>
-    </div>
-    <div class="contact a5">Get in touch &nbsp;·&nbsp; <a href="mailto:arulke01@gmail.com">arulke01@gmail.com</a> &nbsp;·&nbsp; <a href="https://bureauai.vercel.app">bureauai.vercel.app</a></div>
+
+    <div class="contact a4">Get in touch &nbsp;·&nbsp; <a href="mailto:arulke01@gmail.com">arulke01@gmail.com</a> &nbsp;·&nbsp; <a href="https://bureauai.vercel.app">bureauai.vercel.app</a></div>
   </div>
 </div>
 
