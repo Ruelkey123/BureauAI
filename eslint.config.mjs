@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Nested standalone prototype with its own toolchain; mirrors tsconfig exclude.
+    "klar/**",
+    "adaptive-air/**",
+    ".claude/**",
   ]),
 ]);
 
